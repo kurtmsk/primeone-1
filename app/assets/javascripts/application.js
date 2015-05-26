@@ -14,6 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 
-//= require modern.min
+//= require 3d-bold-navigation/js/modernizr.js
 
 //= require_tree .

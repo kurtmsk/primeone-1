@@ -11,3 +11,17 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.paths << Rails.root.join("vendor", "assets", "plugins")
 Rails.application.config.assets.paths << Rails.root.join("vendor", "assets", "images")
+
+# Template Assets (all pages) (js)
+Rails.application.config.assets.precompile += %w( pace-master/pace.min.js
+jquery-blockui/jquery.blockui.js bootstrap/js/bootstrap.min.js
+jquery-slimscroll/jquery.slimscroll.min.js switchery/switchery.min.js
+uniform/jquery.uniform.min.js classie/classie.js waves/waves.min.js
+3d-bold-navigation/js/main.js modern.min.js)
+
+# Index Page Assets (css & js)
+Rails.application.config.assets.precompile += %w( datatables/css/jquery.datatables.min.css
+datatables/css/jquery.datatables_themeroller.css x-editable/bootstrap3-editable/css/bootstrap-editable.css
+bootstrap-datepicker/css/datepicker3.css jquery-mockjax-master/jquery.mockjax.js
+moment/moment.js datatables/js/jquery.datatables.min.js x-editable/bootstrap3-editable/js/bootstrap-editable.js
+bootstrap-datepicker/js/bootstrap-datepicker.js pages/table-data.js )
