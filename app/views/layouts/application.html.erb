@@ -32,12 +32,17 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body>
+<body class="page-header-fixed compact-menu page-horizontal-bar page-sidebar-fixed">
+
+  <%= render partial: 'layouts/header' %>
 
   <%= yield %>
 
-
   <%#= javascript_include_tag 'jquery/jquery-2.1.3.min.js' %>
+
+
+  <%= render partial: 'layouts/footer' %>
+
   <%= javascript_include_tag 'jquery-ui/jquery-ui.min.js' %>
   <%= javascript_include_tag 'pace-master/pace.min.js' %>
   <%= javascript_include_tag 'jquery-blockui/jquery.blockui.js' %>
@@ -48,6 +53,9 @@
   <%= javascript_include_tag 'classie/classie.js' %>
   <%= javascript_include_tag 'waves/waves.min.js' %>
   <%= javascript_include_tag '3d-bold-navigation/js/main.js' %>
-  <%= javascript_include_tag 'modern.min.js' %>
+  <%= javascript_include_tag 'modern.js' %>
+
+  <%= yield :js_includes %>
+
 </body>
 </html>

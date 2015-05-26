@@ -1,0 +1,68 @@
+<div class="overlay"></div>
+<form class="search-form" action="#" method="GET">
+  <div class="input-group">
+    <input type="text" name="search" class="form-control search-input" placeholder="Search...">
+    <span class="input-group-btn">
+      <button class="btn btn-default close-search waves-effect waves-button waves-classic" type="button"><i class="fa fa-times"></i></button>
+    </span>
+  </div><!-- Input Group -->
+</form><!-- Search Form -->
+
+
+<main class="page-content content-wrap">
+  <div class="navbar">
+    <div class="navbar-inner container">
+      <div class="logo-box">
+        <%= link_to root_path, class: 'logo-text' do %>
+          <span>Prime One Insurance Console</span>
+        <% end %>
+      </div><!-- Logo Box -->
+      <div class="search-button">
+        <a href="javascript:void(0);" class="waves-effect waves-button waves-classic show-search"><i class="fa fa-search"></i></a>
+      </div>
+
+      <div class="topmenu-outer">
+        <div class="top-menu">
+          <ul class="nav navbar-nav navbar-left">
+
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <!--<a href="#cd-nav" class="waves-effect waves-button waves-classic cd-nav-trigger"><i class="fa fa-diamond"></i></a>-->
+            </li>
+            <li>
+              <a href="javascript:void(0);" class="waves-effect waves-button waves-classic show-search"><i class="fa fa-search"></i></a>
+            </li>
+          </ul><!-- Nav -->
+        </div><!-- Top Menu -->
+
+      </div>
+    </div>
+  </div><!-- Navbar -->
+
+  <div class="page-sidebar sidebar horizontal-bar">
+    <div class="page-sidebar-inner">
+      <ul class="menu accordion-menu">
+        <!-- <li class="nav-heading"><span>Navigation</span></li> -->
+        <li class="active">
+          <%= link_to policies_path do %>
+            <span class="menu-icon icon-docs"></span>
+            <p>Policies</p>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "#" do %>
+            <span class="menu-icon icon-briefcase"></span>
+            <p>Quotes</p>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "#" do %>
+            <span class="menu-icon icon-users"></span>
+            <p>Brokers</p><span class="arrow"></span>
+          <% end %>
+        </li>
+        <!-- <li class="nav-heading"><span>Features</span></li> -->
+      </ul>
+    </div><!-- Page Sidebar Inner -->
+  </div><!-- Page Sidebar -->

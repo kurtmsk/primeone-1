@@ -20,7 +20,7 @@ uniform/jquery.uniform.min.js classie/classie.js waves/waves.min.js
 3d-bold-navigation/js/main.js modern.min.js jquery-ui/jquery-ui.min.js)
 
 # Index Page Assets (css & js)
-Rails.application.config.assets.precompile += %w( datatables/css/jquery.datatables.min.css
+Rails.application.config.assets.precompile += %w( datatables/css/jquery.datatables.css
 datatables/css/jquery.datatables_themeroller.css
 jquery-mockjax-master/jquery.mockjax.js moment/moment.js
 datatables/js/jquery.datatables.min.js pages/table-data.js )

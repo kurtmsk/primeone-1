@@ -1,78 +1,10 @@
 <%= content_for :head do %>
-  <%= stylesheet_link_tag 'datatables/css/jquery.datatables.min.css' %>
+  <%= stylesheet_link_tag 'datatables/css/jquery.datatables.css' %>
   <%= stylesheet_link_tag 'datatables/css/jquery.datatables_themeroller.css' %>
   <%#= stylesheet_link_tag 'x-editable/bootstrap3-editable/css/bootstrap-editable.css' %>
   <%#= stylesheet_link_tag 'bootstrap-datepicker/css/datepicker3.css' %>
-
-  <script type="text/javascript">
-    $(function() {
-      $('body').addClass("page-header-fixed compact-menu page-horizontal-bar page-sidebar-fixed");
-    });
-  </script>
 <% end %>
 
-  <div class="overlay"></div>
-  <form class="search-form" action="#" method="GET">
-    <div class="input-group">
-      <input type="text" name="search" class="form-control search-input" placeholder="Search...">
-      <span class="input-group-btn">
-        <button class="btn btn-default close-search waves-effect waves-button waves-classic" type="button"><i class="fa fa-times"></i></button>
-      </span>
-    </div><!-- Input Group -->
-  </form><!-- Search Form -->
-  <main class="page-content content-wrap">
-    <div class="navbar">
-      <div class="navbar-inner container">
-        <div class="logo-box">
-          <%= link_to root_path, class: 'logo-text' do %>
-            <span>Prime One Insurance Console</span>
-          <% end %>
-        </div><!-- Logo Box -->
-        <div class="search-button">
-          <a href="javascript:void(0);" class="waves-effect waves-button waves-classic show-search"><i class="fa fa-search"></i></a>
-        </div>
-
-        <div class="topmenu-outer">
-          <div class="top-menu">
-            <ul class="nav navbar-nav navbar-left">
-
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li>
-                <a href="#cd-nav" class="waves-effect waves-button waves-classic cd-nav-trigger"><i class="fa fa-diamond"></i></a>
-              </li>
-              <li>
-                <a href="javascript:void(0);" class="waves-effect waves-button waves-classic show-search"><i class="fa fa-search"></i></a>
-              </li>
-            </ul><!-- Nav -->
-          </div><!-- Top Menu -->
-
-        </div>
-      </div>
-    </div><!-- Navbar -->
-
-    <div class="page-sidebar sidebar horizontal-bar">
-      <div class="page-sidebar-inner">
-        <ul class="menu accordion-menu">
-          <!-- <li class="nav-heading"><span>Navigation</span></li> -->
-          <li class="active">
-            <%= link_to policies_path do %>
-              <span class="menu-icon icon-docs"></span>
-              <p>Policies</p>
-            <% end %>
-          </li>
-          <li><a href="profile.html"><span class="menu-icon icon-briefcase"></span><p>Quotes</p></a></li>
-          <li class="droplink"><a href="#"><span class="menu-icon icon-users"></span><p>Brokers</p><span class="arrow"></span></a>
-            <ul class="sub-menu">
-              <li><a href="inbox.html">Inbox</a></li>
-              <li><a href="message-view.html">View Message</a></li>
-              <li><a href="compose.html">Compose</a></li>
-            </ul>
-          </li>
-          <!-- <li class="nav-heading"><span>Features</span></li> -->
-        </ul>
-      </div><!-- Page Sidebar Inner -->
-    </div><!-- Page Sidebar -->
 
     <div class="page-inner">
       <div class="page-breadcrumb">
@@ -98,22 +30,22 @@
                   <table id="example" class="display table dataTable" style="width: 100%; cellspacing: 0;">
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th>Policy Number</th>
+                        <th>Client Code</th>
+                        <th>Insured Name</th>
+                        <th>Effective Date</th>
+                        <th>Broker</th>
+                        <th>Status</th>
                       </tr>
                     </thead>
                     <tfoot>
                       <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th>Policy Number</th>
+                        <th>Client Code</th>
+                        <th>Insured Name</th>
+                        <th>Effective Date</th>
+                        <th>Broker</th>
+                        <th>Status</th>
                       </tr>
                     </tfoot>
                     <tbody>
@@ -582,76 +514,13 @@
           </div>
         </div><!-- Row -->
       </div><!-- Main Wrapper -->
-      <div class="page-footer">
-        <div class="container">
-          <p class="no-s">2015 &copy; by Matthew Vasseur</p>
-        </div>
-      </div>
-    </div><!-- Page Inner -->
-  </main><!-- Page Content -->
-  <nav class="cd-nav-container" id="cd-nav">
-    <header>
-      <h3>Navigation</h3>
-      <a href="#0" class="cd-close-nav">Close</a>
-    </header>
-    <ul class="cd-nav list-unstyled">
-      <li class="cd-selected" data-menu="index">
-        <a href="javsacript:void(0);">
-          <span>
-            <i class="glyphicon glyphicon-home"></i>
-          </span>
-          <p>Dashboard</p>
-        </a>
-      </li>
-      <li data-menu="profile">
-        <a href="javsacript:void(0);">
-          <span>
-            <i class="glyphicon glyphicon-user"></i>
-          </span>
-          <p>Profile</p>
-        </a>
-      </li>
-      <li data-menu="inbox">
-        <a href="javsacript:void(0);">
-          <span>
-            <i class="glyphicon glyphicon-envelope"></i>
-          </span>
-          <p>Mailbox</p>
-        </a>
-      </li>
-      <li data-menu="#">
-        <a href="javsacript:void(0);">
-          <span>
-            <i class="glyphicon glyphicon-tasks"></i>
-          </span>
-          <p>Tasks</p>
-        </a>
-      </li>
-      <li data-menu="#">
-        <a href="javsacript:void(0);">
-          <span>
-            <i class="glyphicon glyphicon-cog"></i>
-          </span>
-          <p>Settings</p>
-        </a>
-      </li>
-      <li data-menu="calendar">
-        <a href="javsacript:void(0);">
-          <span>
-            <i class="glyphicon glyphicon-calendar"></i>
-          </span>
-          <p>Calendar</p>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <div class="cd-overlay"></div>
 
-
-  <!-- Javascripts -->
+<!-- Javascripts -->
+<%= content_for :js_includes do %>
   <%= javascript_include_tag 'jquery-mockjax-master/jquery.mockjax.js' %>
   <%= javascript_include_tag 'moment/moment.js' %>
   <%= javascript_include_tag 'datatables/js/jquery.datatables.min.js' %>
   <%#= javascript_include_tag 'x-editable/bootstrap3-editable/js/bootstrap-editable.js' %>
   <%#= javascript_include_tag 'bootstrap-datepicker/js/bootstrap-datepicker.js' %>
   <%= javascript_include_tag 'pages/table-data.js' %>
+<% end %>
