@@ -1,1 +1,1 @@
-json.extract! @policy, :id, :policy_number, :created_at, :updated_at
+json.extract! @policy, :id, :policy_number, :client_code, :created_at, :updated_at

@@ -2,17 +2,17 @@
 
 <p>
   <strong>Insured:</strong>
-  <%= @policy.insured %>
+  <%= @policy.name %>
 </p>
 
 <p>
   <strong>Mailing address:</strong>
-  <%= @policy.mailing_address %>
+  <%= @policy.street %>
 </p>
 
 <p>
-  <strong>Agency:</strong>
-  <%= @policy.agency %>
+  <strong>Broker:</strong>
+  <%= @policy.broker.try(:name) %>
 </p>
 
 <p>

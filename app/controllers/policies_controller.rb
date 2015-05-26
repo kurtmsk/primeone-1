@@ -76,4 +76,9 @@ class PoliciesController < ApplicationController
       @policy = Policy.find(params[:id])
       #@broker = @policy.broker
     end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def policy_params
+      params.require(:policy).permit(:policy_number, :client_code, :effective_date, :expiration_date)
+    end
 end
