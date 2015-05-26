@@ -1,6 +1,6 @@
 <%= content_for :head do %>
   <%= stylesheet_link_tag 'datatables/css/jquery.datatables.min.css' %>
-  <%#= stylesheet_link_tag 'datatables/css/jquery.datatables_themeroller.css' %>
+  <%= stylesheet_link_tag 'datatables/css/jquery.datatables_themeroller.css' %>
   <%#= stylesheet_link_tag 'x-editable/bootstrap3-editable/css/bootstrap-editable.css' %>
   <%#= stylesheet_link_tag 'bootstrap-datepicker/css/datepicker3.css' %>
 
@@ -95,7 +95,7 @@
               </div>
               <div class="panel-body">
                 <div class="table-responsive">
-                  <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                  <table id="example" class="display table dataTable" style="width: 100%; cellspacing: 0;">
                     <thead>
                       <tr>
                         <th>Name</th>
@@ -652,6 +652,6 @@
   <%= javascript_include_tag 'jquery-mockjax-master/jquery.mockjax.js' %>
   <%= javascript_include_tag 'moment/moment.js' %>
   <%= javascript_include_tag 'datatables/js/jquery.datatables.min.js' %>
-  <%= javascript_include_tag 'x-editable/bootstrap3-editable/js/bootstrap-editable.js' %>
-  <%= javascript_include_tag 'bootstrap-datepicker/js/bootstrap-datepicker.js' %>
+  <%#= javascript_include_tag 'x-editable/bootstrap3-editable/js/bootstrap-editable.js' %>
+  <%#= javascript_include_tag 'bootstrap-datepicker/js/bootstrap-datepicker.js' %>
   <%= javascript_include_tag 'pages/table-data.js' %>

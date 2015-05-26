@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    
+
     //ajax mocks
-    $.mockjaxSettings.responseTime = 500; 
-    
+    $.mockjaxSettings.responseTime = 500;
+
     $.mockjax({
         url: '/post',
         response: function(settings) {
@@ -15,24 +15,24 @@ $(document).ready(function() {
         status: 400,
         statusText: 'Bad Request',
         response: function(settings) {
-            this.responseText = 'Please input correct value'; 
+            this.responseText = 'Please input correct value';
             log(settings, this);
-        }        
+        }
     });
-    
+
     $.mockjax({
         url: '/status',
         status: 500,
         response: function(settings) {
             this.responseText = 'Internal Server Error';
             log(settings, this);
-        }        
+        }
     });
-  
+
     $.mockjax({
         url: '/groups',
         response: function(settings) {
-            this.responseText = [ 
+            this.responseText = [
              {value: 0, text: 'Guest'},
              {value: 1, text: 'Service'},
              {value: 2, text: 'Customer'},
@@ -41,9 +41,9 @@ $(document).ready(function() {
              {value: 5, text: 'Admin'}
            ];
            log(settings, this);
-        }        
+        }
     });
-    
+
     function log(settings, response) {
             var s = [], str;
             s.push(settings.type.toUpperCase() + ' url = "' + settings.url + '"');
@@ -64,7 +64,7 @@ $(document).ready(function() {
                     s.push('[');
                     $.each(response.responseText, function(i, v){
                        s.push('{value: ' + v.value+', text: "'+v.text+'"}');
-                    }); 
+                    });
                     s.push(']');
                 } else {
                    s.push($.trim(response.responseText));
@@ -72,12 +72,13 @@ $(document).ready(function() {
             }
             s.push('--------------------------------------\n');
             $('#console').val(s.join('\n') + $('#console').val());
-    }   
-    
+    }
+
+    /*
     //turn to inline mode
     $.fn.editable.defaults.mode = 'inline';
-    
-    //editables 
+
+    //editables
     $('#example-editable td a').editable({
            url: '/post',
            type: 'text',
@@ -85,11 +86,13 @@ $(document).ready(function() {
            name: 'username',
            title: 'Enter username'
     });
-    
+
+    */
+
     // Datatables
     $('#example').DataTable();
-    $('#example-editable').DataTable();
-    
+    //$('#example-editable').DataTable();
+
     var table = $('#example2').DataTable({
         "columnDefs": [
             { "visible": false, "targets": 2 }
@@ -100,19 +103,20 @@ $(document).ready(function() {
             var api = this.api();
             var rows = api.rows( {page:'current'} ).nodes();
             var last=null;
- 
+
             api.column(2, {page:'current'} ).data().each( function ( group, i ) {
                 if ( last !== group ) {
                     $(rows).eq( i ).before(
                         '<tr class="group"><td colspan="5">'+group+'</td></tr>'
                     );
- 
+
                     last = group;
                 }
             } );
         }
     } );
- 
+
+    /*
     // Order by the grouping
     $('#example2 tbody').on( 'click', 'tr.group', function () {
         var currentOrder = table.order()[0];
@@ -123,13 +127,16 @@ $(document).ready(function() {
             table.order( [ 2, 'asc' ] ).draw();
         }
     } );
-    
+    */
+
     $.fn.isValid = function(){
         return this[0].checkValidity()
     }
-    
+
+    /*
     var t = $('#example3').DataTable();
- 
+
+
     $('#add-row').on( 'click', function () {
         if($("#add-row-form").isValid()) {
             var name = $('#name-input').val(),
@@ -144,15 +151,16 @@ $(document).ready(function() {
                 date,
                 '$' + salary
             ] ).draw();
-            
+
             $('.modal').modal('hide');
-            
+
             return false;
         }
     });
-    
+
     $('.date-picker').datepicker({
         orientation: "top auto",
         autoclose: true
     });
+    */
 });
