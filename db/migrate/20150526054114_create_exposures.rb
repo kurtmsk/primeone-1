@@ -1,6 +1,8 @@
+# Exposures for Crime & Property
 class CreateExposures < ActiveRecord::Migration
   def change
     create_table :exposures do |t|
+
       t.string :name, default: ""
       t.string :valuation, default: 0
       t.integer :limit, default: 0
@@ -13,5 +15,6 @@ class CreateExposures < ActiveRecord::Migration
     end
 
     add_reference :exposures, :location, index: true, foreign_key: true
+    add_reference :exposures, :crime, index: true, foreign_key: true
   end
 end

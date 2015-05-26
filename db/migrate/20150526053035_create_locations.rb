@@ -16,45 +16,45 @@ class CreateLocations < ActiveRecord::Migration
       t.string :zip, default: ""
 
       # Building Exposure
-      t.string :bldg_exp__business_type, default: ""
-      t.string :bldg_exp__coverage_type, default: ""
-      t.string :bldg_exp__construction_type, default: ""
-      t.string :bldg_exp__protection_class, default: ""
-      t.string :bldg_exp__updates, default: ""
-      t.string :bldg_exp__year_built, default: ""
-      t.integer :bldg_exp__stories, default: ""
-      t.integer :bldg_exp__square_feet, default: ""
-      t.integer :bldg_exp__parking_lot, default: ""
+      t.string :business_type, default: ""
+      t.string :coverage_type, default: ""
+      t.string :construction_type, default: ""
+      t.string :protection_class, default: ""
+      t.string :updates, default: ""
+      t.string :year_built, default: ""
+      t.integer :stories, default: ""
+      t.integer :square_feet, default: ""
+      t.integer :parking_lot, default: ""
 
       # Food Spoilage
-      t.string :food__facticity, default: ""
-      t.integer :food__limit, default: ""
-      t.integer :food__rate, default: ""
-      t.integer :food__premium, default: ""
+      #t.string :food_facticity, default: ""
+      t.integer :food_limit, default: ""
+      t.integer :food_rate, default: ""
+      t.integer :food_premium, default: ""
 
       # Theft
-      t.string :theft__facticity, default: ""
-      t.integer :theft__limit, default: ""
-      t.integer :theft__rate, default: ""
-      t.integer :theft__premium, default: ""
+      #t.string :theft_facticity, default: ""
+      t.integer :theft_limit, default: ""
+      t.integer :theft_rate, default: ""
+      t.integer :theft_premium, default: ""
 
       # Property Enhancement
-      t.string :enhc__facticity, default: ""
-      t.integer :enhc__limit, default: ""
-      t.integer :enhc__rate, default: ""
-      t.integer :enhc__premium, default: ""
+      #t.string :enhc_facticity, default: ""
+      t.integer :enhc_limit, default: ""
+      t.integer :enhc_rate, default: ""
+      t.integer :enhc_premium, default: ""
 
       # Mechanical Breakdown
-      t.string :mech__facticity, default: ""
-      t.integer :mech__limit, default: ""
-      t.integer :mech__rate, default: ""
-      t.integer :mech__premium, default: ""
+      #t.string :mech_facticity, default: ""
+      t.integer :mech_limit, default: ""
+      t.integer :mech_rate, default: ""
+      t.integer :mech_premium, default: ""
 
       # has_many Exposures
 
       t.timestamps null: false
     end
 
-    add_reference :locations, :policy, index: true, foreign_key: true
+    add_reference :locations, :property, index: true, foreign_key: true
   end
 end

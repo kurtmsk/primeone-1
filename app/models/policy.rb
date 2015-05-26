@@ -5,4 +5,8 @@ class Policy < ActiveRecord::Base
   # Associations
   belongs_to :broker
   has_many :locations
+  has_one :property
+  has_one :crime
+  has_one :gl
+  has_one :auto
 end
