@@ -1,0 +1,19 @@
+class CreateBrokers < ActiveRecord::Migration
+  def change
+    create_table :brokers do |t|
+      t.string :name, default: ""
+      t.string :agency_name, default: ""
+      t.string :email, default: ""
+      t.string :phone, default: ""
+      t.text :notes, default: ""
+
+      t.string :street, default: ""
+      t.string :city, default: ""
+      t.string :state, default: ""
+      t.string :zip, default: ""
+
+      t.timestamps null: false
+    end
+    add_index :brokers, :name, unique: true
+  end
+end

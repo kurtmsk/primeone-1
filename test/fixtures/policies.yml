@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total_package_premium: MyString
+  client_code: MyString
+
+two:
+  total_package_premium: MyString
+  client_code: MyString
