@@ -15,7 +15,7 @@ class CreatePolicies < ActiveRecord::Migration
       t.string :crime_forms, default: ""
       t.string :auto_forms, default: ""
 
-      t.string :total_package_premium, default: ""
+      t.integer :package_premium_total, default: 0
 
       t.timestamps null: false
     end
