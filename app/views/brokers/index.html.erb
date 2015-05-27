@@ -1,4 +1,4 @@
-<%# Policies Index %>
+<%# Brokers Index %>
 <%= content_for :head do %>
   <%= stylesheet_link_tag 'datatables/css/jquery.datatables.css' %>
   <%= stylesheet_link_tag 'datatables/css/jquery.datatables_themeroller.css' %>
@@ -11,7 +11,7 @@
       <div class="page-breadcrumb">
         <ol class="breadcrumb container">
           <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Policies", policies_path, class: 'active' %></li>
+          <li><%= link_to "Brokers", brokers_path, class: 'active' %></li>
         </ol>
       </div>
       <div class="page-title">
@@ -31,33 +31,55 @@
                   <table id="example" class="display table dataTable" style="width: 100%; cellspacing: 0;">
                     <thead>
                       <tr>
-                        <th>Policy Number</th>
-                        <th>Client Code</th>
-                        <th>Insured Name</th>
-                        <th>Effective Date</th>
-                        <th>Broker</th>
-                        <th>Status</th>
+                        <th>Name</th>
+                        <th>DBA</th>
+                        <th>Contact Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Commission</th>
+                        <th>Agreement Sent</th>
+                        <th>Agreement Complete</th>
+                        <th>Pac Risk Fee Schedule</th>
+                        <th>Target Premium</th>
+                        <th>Address</th>
+                        <th>Notes</th>
                       </tr>
                     </thead>
                     <tfoot>
                       <tr>
-                        <th>Policy Number</th>
-                        <th>Client Code</th>
-                        <th>Insured Name</th>
-                        <th>Effective Date</th>
-                        <th>Broker</th>
-                        <th>Status</th>
+                        <th>Name</th>
+                        <th>Agency</th>
+                        <th>Contact Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Commission</th>
+                        <th>Agreement Sent</th>
+                        <th>Agreement Complete</th>
+                        <th>PAC Risk Fee Schedule</th>
+                        <th>Target Premium</th>
+                        <th>Address</th>
+                        <th>Notes</th>
                       </tr>
                     </tfoot>
                     <tbody>
-                      <% @policies.each do |policy| %>
+                      <% @brokers.each do |broker| %>
                         <tr>
-                            <td><%= link_to policy.policy_number, policy_path(policy) %></td>
-                            <td><%= policy.client_code %></td>
-                            <td><%= policy.name %></td>
-                            <td><%= policy.effective_date %></td>
-                            <td><%= policy.broker.try(:name) || "None" %></td>
-                            <td><%= policy.status %></td>
+                            <td><%= broker.name %></td>
+                            <td><%= broker.dba %></td>
+                            <td><%= broker.contact_name %></td>
+                            <td><%= broker.email %></td>
+                            <td><%= broker.phone %></td>
+                            <td><%= broker.commission.to_s + "%" %></td>
+                            <td><%= broker.agreement_sent %></td>
+                            <td><%= broker.agreement_completed %></td>
+                            <td><%= broker.pac_risk_fee_schedule.to_s + "%" %></td>
+                            <td><%= broker.target_premium %></td>
+                            <td>
+                              <%= broker.street %>
+                              <br />
+                              <%= broker.city + ", " + broker.state + ". " + broker.zip %>
+                            </td>
+                            <td><%= broker.notes %></td>
                         </tr>
                       <% end %>
                     </tbody>
