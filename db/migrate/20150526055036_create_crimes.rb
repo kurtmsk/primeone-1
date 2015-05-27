@@ -1,7 +1,7 @@
 class CreateCrimes < ActiveRecord::Migration
   def change
     create_table :crimes do |t|
-      
+
       t.integer :premium_total, default: 0
       t.integer :premium_subtotal, default: 0
       t.integer :schedule_rating, default: 0

@@ -73,6 +73,3 @@ gem 'puma'
 
 # PDF Combination
 gem 'combine_pdf'
-
-# In-place edits
-gem 'best_in_place', '~> 3.0.1'

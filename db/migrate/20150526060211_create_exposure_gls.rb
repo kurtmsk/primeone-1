@@ -2,6 +2,7 @@ class CreateExposureGls < ActiveRecord::Migration
   def change
     create_table :exposure_gls do |t|
 
+      t.string :name, default: ""
       t.integer :loc_number, default: 0
       t.string :description, default: ""
       t.string :cov, default: ""

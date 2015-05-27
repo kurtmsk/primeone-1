@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Insured:</strong>
+  <%= @policy.name %>
+</p>
+
+<p>
+  <strong>Mailing address:</strong>
+  <%= @policy.street %>
+</p>
+
+<p>
+  <strong>Broker:</strong>
+  <%= @policy.broker.try(:name) %>
+</p>
+
+<p>
+  <%= @policy.forms %>
+</p>
+
+<p>
+  <%= @policy.property_forms %>
+</p>
+
+<p>
+  <%= @policy.gl_forms %>
+</p>
+
+<p>
+  <%= @policy.crime_forms %>
+</p>
+
+<p>
+  <%= @policy.auto_forms %>
+</p>
+
+<%= link_to 'Edit', edit_policy_path(@policy) %> |
+<%= link_to 'Back', policies_path %>

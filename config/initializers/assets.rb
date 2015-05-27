@@ -19,13 +19,28 @@ jquery-slimscroll/jquery.slimscroll.min.js switchery/switchery.min.js
 uniform/jquery.uniform.min.js classie/classie.js waves/waves.min.js
 3d-bold-navigation/js/main.js modern.min.js jquery-ui/jquery-ui.min.js)
 
-# Index Page Assets (css & js)
-Rails.application.config.assets.precompile += %w( datatables/css/jquery.datatables.css
+# Index Page Assets (broker & policies) (css & js)
+Rails.application.config.assets.precompile += %w( datatables/css/jquery.datatables.min.css
 datatables/css/jquery.datatables_themeroller.css
-jquery-mockjax-master/jquery.mockjax.js moment/moment.js
-datatables/js/jquery.datatables.min.js pages/table-data.js )
+jquery-mockjax-master/jquery.mockjax.js
+moment/moment.js
+datatables/js/jquery.datatables.min.js
+pages/table-data.js )
 
-#x-editable/bootstrap3-editable/css/bootstrap-editable.css
-#bootstrap-datepicker/css/datepicker3.css
-#x-editable/bootstrap3-editable/js/bootstrap-editable.js
-#bootstrap-datepicker/js/bootstrap-datepicker.js
+# Show Page Assets (policies) (css & js)
+Rails.application.config.assets.precompile += %w( x-editable/bootstrap3-editable/css/bootstrap-editable.css
+x-editable/inputs-ext/typeaheadjs/lib/typeahead.js-bootstrap.css
+x-editable/inputs-ext/address/address.css
+select2/css/select2.min.css
+bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css
+dropzone/dropzone.min.css
+
+x-editable/bootstrap3-editable/js/bootstrap-editable.js
+x-editable/inputs-ext/typeaheadjs/lib/typeahead.js
+x-editable/inputs-ext/typeaheadjs/typeaheadjs.js
+x-editable/inputs-ext/address/address.js
+select2/js/select2.full.min.js
+bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js
+pages/form-x-editable.js
+dropzone/dropzone.min.js
+)

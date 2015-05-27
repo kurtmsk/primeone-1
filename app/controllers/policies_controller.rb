@@ -14,9 +14,9 @@ class PoliciesController < ApplicationController
 
     respond_to do |format|
       format.html
-      #format.pdf do
-      #  render pdf: "Policy_#{@policy.policy_number}", :layout => 'pdf.html.erb'
-      #end
+      format.pdf do
+        render pdf: "Policy_#{@policy.policy_number}", :layout => 'pdf.html.erb'
+      end
       format.json
     end
   end
@@ -51,7 +51,7 @@ class PoliciesController < ApplicationController
   def update
     respond_to do |format|
       if @policy.update(policy_params)
-        format.html { redirect_to @policy, notice: 'Policy was successfully updated.' }
+        format.html { render :show, notice: 'Policy was successfully updated' }
         format.json { render :show, status: :ok, location: @policy }
       else
         format.html { render :edit }
@@ -74,7 +74,7 @@ class PoliciesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_policy
       @policy = Policy.find(params[:id])
-      #@broker = @policy.broker
+      @broker = @policy.broker
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
