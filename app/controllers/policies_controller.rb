@@ -80,6 +80,7 @@ class PoliciesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def policy_params
       params.require(:policy).permit(:policy_number, :client_code, :effective_date, :expiration_date,
-      :status)
+      :status, :package_premium_total, :name, :business_type, :type, :mortgagee, :quoted_by,
+      :street, :city, :state, :zip)
     end
 end

@@ -139,7 +139,7 @@ $('#status').editable({
     data[params.name] = params.value
 
     return data;
-  },
+  }/*
 
   prepend: "not selected",
   source: [
@@ -157,10 +157,27 @@ $('#status').editable({
     } else {
       $(this).empty();
     }
+  }*/
+});
+
+$('#effective_date').editable({
+
+  params: function(params) {
+    var data = {};
+    data['policy'] = {};
+    data['policy'][params.name] = params.value
+    data['id'] = params.pk;
+    data[params.name] = params.value
+
+    return data;
+  },
+
+  success: function(response, newValue) {
+    //$('.client_code_display').text(newValue);
   }
 });
 
-$('.editable.generic').editable({
+$('#expiration_date').editable({
   params: function(params) {
     var data = {};
     data['policy'] = {};
@@ -170,12 +187,20 @@ $('.editable.generic').editable({
 
     return data;
   }
+
 });
 
-$('#vacation').editable({
-  datepicker: {
-    todayBtn: 'linked'
+$('#package_premium_total').editable({
+  params: function(params) {
+    var data = {};
+    data['policy'] = {};
+    data['policy'][params.name] = params.value
+    data['id'] = params.pk;
+    data[params.name] = params.value
+
+    return data;
   }
+
 });
 
 $('#dob').editable();
