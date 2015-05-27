@@ -22,15 +22,11 @@
     </div>
   </div>
   <div id="main-wrapper" class="container">
-    <div class="row">
+    <!--<div class="row">
       <div class="col-md-12">
         <div class="panel panel-white">
           <div class="panel-body">
-            <form action="/file-upload" class="dropzone">
-              <div class="fallback">
-                <input name="file" type="file" multiple />
-              </div>
-            </form>
+
           </div>
         </div>
       </div>
@@ -40,6 +36,14 @@
         <div class="panel panel-white">
           <div class="panel-body">
             <h2 class="no-m m-b-lg">Policy Information</h2>
+
+            <hr>
+
+            <!--<form action="/file-upload" class="dropzone">
+              <div class="fallback">
+                <input name="file" type="file" multiple />
+              </div>
+            </form>-->
 
             <hr>
 
@@ -53,16 +57,41 @@
                 <tr>
                   <td style="width: 35%;">Policy Number</td>
                   <td style="width: 65%;">
-                    <%= link_to @policy.policy_number, "#", id:'policy_number', class: "editable editable-click", style: "display: inline;", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Policy Number" } %>
+                    <%= link_to @policy.policy_number, "#", id:'policy_number', class: "editable editable-click", style: "display: inline;", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Policy Number", type: "text" } %>
                   </td>
                 </tr>
                 <tr>
                   <td>Client Code</td>
                   <td>
-                    <%= link_to @policy.client_code, "#", id:'client_code', class: "editable editable-click", style: "display: inline;", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Client Code" } %>
+                    <%= link_to @policy.client_code, "#", id:'client_code', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Client Code", type: "text" } %>
                     <!--<a href="#" id="firstname" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title="Enter your firstname" class="editable editable-click editable-empty">Empty</a>-->
                   </td>
                 </tr>
+                <tr>
+                  <td>Status</td>
+                  <td>
+                    <%= link_to @policy.status, "#", id:'status', class: "editable editable-click", style: "color: gray;", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Status", type: "select" } %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Effective Date</td>
+                  <td>
+                    <%= link_to @policy.effective_date, "#", id:'effective_date', class: "editable generic editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Effective Date", type: "text" } %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Expiration Date</td>
+                  <td>
+                    <%= link_to @policy.expiration_date, "#", id:'expiration_date', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Expiration Date", type: "text" } %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Package Premium Total</td>
+                  <td>
+                    <%= link_to @policy.package_premium_total, "#", id:'package_premium_total', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Package Premium Total", type: "text" } %>
+                  </td>
+                </tr>
+                <!--
                 <tr>
                   <td>Select, local array, custom display</td>
                   <td><a href="#" id="sex" data-type="select" data-pk="1" data-value="" data-title="Select sex" class="editable editable-click" style="color: gray;">not selected</a></td>
@@ -115,6 +144,7 @@
                     <td>Custom input, several fields</td>
                     <td><a href="#" id="address" data-type="address" data-pk="1" data-title="Please, fill address" class="editable editable-click"><b>Moscow</b>, Lenina st., bld. 12</a></td>
                   </tr>
+                -->
                 </tbody>
               </table>
             </div>

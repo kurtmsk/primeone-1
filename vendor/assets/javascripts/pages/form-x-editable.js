@@ -79,7 +79,8 @@ $(function(){
   $.fn.editable.defaults.ajaxOptions = {type: "PATCH"};
 
   //editables
-  $('.editable').editable({
+
+  $('#policy_number').editable({
 
     params: function(params) {
       var data = {};
@@ -92,18 +93,22 @@ $(function(){
     },
 
     success: function(response, newValue) {
-      $("." + $(this)[0].id+"_display").text(newValue);
-    }
-  });
-
-  /*
-  $('#policy_number').editable({
-    success: function(response, newValue) {
       $('.policy_number_display').text(newValue);
     }
   });
 
   $('#client_code').editable({
+
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy'][params.name] = params.value
+      data['id'] = params.pk;
+      data[params.name] = params.value
+
+      return data;
+    },
+
     success: function(response, newValue) {
       $('.client_code_display').text(newValue);
     }
@@ -115,22 +120,36 @@ $(function(){
   pk: 1,
   name: 'username',
   title: 'Enter username'
-});*/
+});
 
 $('#firstname').editable({
   validate: function(value) {
     if($.trim(value) == '') return 'This field is required';
   }
 });
+*/
 
-$('#sex').editable({
+$('#status').editable({
+
+  params: function(params) {
+    var data = {};
+    data['policy'] = {};
+    data['policy'][params.name] = params.value
+    data['id'] = params.pk;
+    data[params.name] = params.value
+
+    return data;
+  },
+
   prepend: "not selected",
   source: [
-    {value: 1, text: 'Male'},
-    {value: 2, text: 'Female'}
+    {value: 'Upcoming', text: 'Upcoming'},
+    {value: 'Generated', text: 'Generated'},
+    {value: 'Reviewed', text: 'Reviewed'},
+    {value: 'Issued', text: 'Issued'}
   ],
   display: function(value, sourceData) {
-    var colors = {"": "gray", 1: "green", 2: "blue"},
+    var colors = {"": "gray", 1: "green", 2: "blue", 3: "red", 4: "orange"},
     elem = $.grep(sourceData, function(o){return o.value == value;});
 
     if(elem.length) {
@@ -141,10 +160,16 @@ $('#sex').editable({
   }
 });
 
-$('#status').editable();
+$('.editable.generic').editable({
+  params: function(params) {
+    var data = {};
+    data['policy'] = {};
+    data['policy'][params.name] = params.value
+    data['id'] = params.pk;
+    data[params.name] = params.value
 
-$('#group').editable({
-  showbuttons: false
+    return data;
+  }
 });
 
 $('#vacation').editable({
