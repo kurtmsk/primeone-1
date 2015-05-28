@@ -17,7 +17,7 @@ Rails.application.config.assets.precompile += %w( pace-master/pace.min.js
 jquery-blockui/jquery.blockui.js bootstrap/js/bootstrap.min.js
 jquery-slimscroll/jquery.slimscroll.min.js switchery/switchery.min.js
 uniform/jquery.uniform.min.js classie/classie.js waves/waves.min.js
-3d-bold-navigation/js/main.js modern.min.js jquery-ui/jquery-ui.min.js)
+3d-bold-navigation/js/main.js modern.min.js jquery-ui/jquery-ui.min.js )
 
 # Index Page Assets (broker & policies) (css & js)
 Rails.application.config.assets.precompile += %w( datatables/css/jquery.datatables.min.css
@@ -43,4 +43,5 @@ select2/js/select2.full.min.js
 bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js
 pages/form-x-editable.js
 dropzone/dropzone.min.js
+dropzone/upload.png
 )

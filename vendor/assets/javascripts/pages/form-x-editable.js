@@ -193,39 +193,15 @@ $('#address').editable({
     data['id'] = params.pk;
 
     return data;
-  }
-});
-
-/*$('#address').editable({
-  params: function(params) {
-    var data = {};
-    data['policy'] = {};
-    data['policy']['street'] = params.value.street;
-    data['policy']['city'] = params.value.city;
-    data['policy']['state'] = params.value.state;
-    data['policy']['zip'] = params.value.zip;
-    data['id'] = params.pk;
-
-    console.log(params);
-    console.log('hi');
-
-    return data;
   },
-
 
   validate: function(value) {
-    if(value.city == '') return 'city is required!';
-  },
-
-  display: function(value) {
-    if(!value) {
-      $(this).empty();
-      return;
-    }
-    var html = $('<div>').text(value.street).html() + '<br />' + $('<div>').text(value.city).html() + ', ' + $('<div>').text(value.state).html() + '. ' + $('<div>').text(value.zip).html();
-    $(this).html(html);
+    if(value.city == '') return 'City is required!';
+    if(value.state == '') return 'State is required!';
+    if(value.zip == '') return 'Zip Code is required!';
+    if(value.street == '') return 'Street is required!';
   }
-});*/
+});
 
 $('.editable').editable({
   params: function(params) {
