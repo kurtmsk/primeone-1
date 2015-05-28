@@ -28,7 +28,8 @@ waves/waves.min.js
 3d-bold-navigation/js/main.js
 modern.min.js
 jquery-ui/jquery-ui.min.js
-policies.css )
+policies.css
+bootstrap/css/bootstrap.min.css )
 
 # Index Page Assets (broker & policies) (css & js)
 Rails.application.config.assets.precompile += %w( datatables/css/jquery.datatables.css
