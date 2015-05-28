@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20150526060651) do
   add_index "crimes", ["policy_id"], name: "index_crimes_on_policy_id", using: :btree
 
   create_table "exposure_gls", force: :cascade do |t|
+    t.string   "name",          default: ""
     t.integer  "loc_number",    default: 0
     t.string   "description",   default: ""
     t.string   "cov",           default: ""
@@ -180,7 +181,7 @@ ActiveRecord::Schema.define(version: 20150526060651) do
     t.string   "quoted_by",             default: ""
     t.string   "business_type",         default: ""
     t.string   "mortgagee",             default: ""
-    t.string   "type",                  default: ""
+    t.string   "insured_type",          default: ""
     t.string   "street",                default: ""
     t.string   "city",                  default: ""
     t.string   "state",                 default: ""

@@ -34,6 +34,10 @@ class PoliciesController < ApplicationController
   # POST /policies.json
   def create
     @policy = Policy.new(policy_params)
+    @policy.build_property()
+    @policy.build_gl()
+    @policy.build_crime()
+    @policy.build_auto()
 
     respond_to do |format|
       if @policy.save
@@ -44,6 +48,10 @@ class PoliciesController < ApplicationController
         format.json { render json: @policy.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def upload
+
   end
 
   # PATCH/PUT /policies/1
@@ -81,6 +89,7 @@ class PoliciesController < ApplicationController
     def policy_params
       params.require(:policy).permit(:policy_number, :client_code, :effective_date, :expiration_date,
       :status, :package_premium_total, :name, :business_type, :type, :mortgagee, :quoted_by,
-      :street, :city, :state, :zip)
+      :street, :city, :state, :zip, property_attributes: [:premium_total,
+      :schedule_rating_pct, :premium_subtotal] )
     end
 end

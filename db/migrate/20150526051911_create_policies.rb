@@ -6,8 +6,8 @@ class CreatePolicies < ActiveRecord::Migration
       t.string :status, default: ""
       t.string :client_code, default: ""
 
-      t.date :effective_date
-      t.date :expiration_date
+      t.date :effective_date, default: '1995-11-08'
+      t.date :expiration_date, default: '1995-11-08'
 
       t.string :forms, default: ""
       t.string :property_forms, default: ""

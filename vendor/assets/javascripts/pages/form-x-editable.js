@@ -1,4 +1,5 @@
 $(function(){
+  /*
   //ajax mocks
   $.mockjaxSettings.responseTime = 500;
 
@@ -73,15 +74,24 @@ $(function(){
     $('#console').val(s.join('\n') + $('#console').val());
   }
 
+  */
+  /*
+  $('#firstname').editable({
+    validate: function(value) {
+      if($.trim(value) == '') return 'This field is required';
+    }
+  });
+  */
+
+
   //defaults
-  //$.fn.editable.defaults.url = '/policy';
+  $.fn.editable.defaults.url = '/policy';
   $.fn.editable.defaults.mode = 'inline';
   $.fn.editable.defaults.ajaxOptions = {type: "PATCH"};
 
   //editables
 
   $('#policy_number').editable({
-
     params: function(params) {
       var data = {};
       data['policy'] = {};
@@ -98,7 +108,6 @@ $(function(){
   });
 
   $('#client_code').editable({
-
     params: function(params) {
       var data = {};
       data['policy'] = {};
@@ -114,54 +123,7 @@ $(function(){
     }
   });
 
-  /*{
-  url: '/post',
-  type: 'text',
-  pk: 1,
-  name: 'username',
-  title: 'Enter username'
-});
-
-$('#firstname').editable({
-  validate: function(value) {
-    if($.trim(value) == '') return 'This field is required';
-  }
-});
-*/
-
 $('#status').editable({
-
-  params: function(params) {
-    var data = {};
-    data['policy'] = {};
-    data['policy'][params.name] = params.value
-    data['id'] = params.pk;
-    data[params.name] = params.value
-
-    return data;
-  }/*
-
-  prepend: "not selected",
-  source: [
-    {value: 'Upcoming', text: 'Upcoming'},
-    {value: 'Generated', text: 'Generated'},
-    {value: 'Reviewed', text: 'Reviewed'},
-    {value: 'Issued', text: 'Issued'}
-  ],
-  display: function(value, sourceData) {
-    var colors = {"": "gray", 1: "green", 2: "blue", 3: "red", 4: "orange"},
-    elem = $.grep(sourceData, function(o){return o.value == value;});
-
-    if(elem.length) {
-      $(this).text(elem[0].text).css("color", colors[value]);
-    } else {
-      $(this).empty();
-    }
-  }*/
-});
-
-$('#effective_date').editable({
-
   params: function(params) {
     var data = {};
     data['policy'] = {};
@@ -172,9 +134,12 @@ $('#effective_date').editable({
     return data;
   },
 
-  success: function(response, newValue) {
-    //$('.client_code_display').text(newValue);
-  }
+  source: [
+    {value: 'Upcoming', text: 'Upcoming'},
+    {value: 'Generated', text: 'Generated'},
+    {value: 'Reviewed', text: 'Reviewed'},
+    {value: 'Issued', text: 'Issued'}
+  ],
 });
 
 $('#expiration_date').editable({
@@ -186,11 +151,83 @@ $('#expiration_date').editable({
     data[params.name] = params.value
 
     return data;
-  }
+  },
 
+  viewformat: 'MM/DD/YYYY',
+  template: 'D / MMMM / YYYY',
+  combodate: {
+    minYear: 1950,
+    maxYear: 2050,
+    minuteStep: 1
+  }
 });
 
-$('#package_premium_total').editable({
+$('#effective_date').editable({
+  params: function(params) {
+    var data = {};
+    data['policy'] = {};
+    data['policy'][params.name] = params.value
+    data['id'] = params.pk;
+    data[params.name] = params.value
+
+    return data;
+  },
+
+  viewformat: 'MM/DD/YYYY',
+  template: 'MMM / D / YYYY',
+  combodate: {
+    minYear: 1950,
+    maxYear: 2050,
+    minuteStep: 1
+  }
+});
+
+$('#address').editable({
+  params: function(params) {
+    var data = {};
+    data['policy'] = {};
+    data['policy']['street'] = params.value.street;
+    data['policy']['city'] = params.value.city;
+    data['policy']['state'] = params.value.state;
+    data['policy']['zip'] = params.value.zip;
+    data['id'] = params.pk;
+
+    return data;
+  }
+});
+
+/*$('#address').editable({
+  params: function(params) {
+    var data = {};
+    data['policy'] = {};
+    data['policy']['street'] = params.value.street;
+    data['policy']['city'] = params.value.city;
+    data['policy']['state'] = params.value.state;
+    data['policy']['zip'] = params.value.zip;
+    data['id'] = params.pk;
+
+    console.log(params);
+    console.log('hi');
+
+    return data;
+  },
+
+
+  validate: function(value) {
+    if(value.city == '') return 'city is required!';
+  },
+
+  display: function(value) {
+    if(!value) {
+      $(this).empty();
+      return;
+    }
+    var html = $('<div>').text(value.street).html() + '<br />' + $('<div>').text(value.city).html() + ', ' + $('<div>').text(value.state).html() + '. ' + $('<div>').text(value.zip).html();
+    $(this).html(html);
+  }
+});*/
+
+$('.editable').editable({
   params: function(params) {
     var data = {};
     data['policy'] = {};
@@ -200,7 +237,6 @@ $('#package_premium_total').editable({
 
     return data;
   }
-
 });
 
 $('#dob').editable();
@@ -281,26 +317,6 @@ $('#country').editable({
 });
 
 
-
-$('#address').editable({
-  url: '/post',
-  value: {
-    city: "Moscow",
-    street: "Lenina",
-    building: "12"
-  },
-  validate: function(value) {
-    if(value.city == '') return 'city is required!';
-  },
-  display: function(value) {
-    if(!value) {
-      $(this).empty();
-      return;
-    }
-    var html = '<b>' + $('<div>').text(value.city).html() + '</b>, ' + $('<div>').text(value.street).html() + ' st., bld. ' + $('<div>').text(value.building).html();
-    $(this).html(html);
-  }
-});
 
 $('#policy .editable').on('hidden', function(e, reason){
   if(reason === 'save' || reason === 'nochange') {

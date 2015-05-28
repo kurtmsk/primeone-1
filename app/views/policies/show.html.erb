@@ -6,6 +6,12 @@
   <%= stylesheet_link_tag 'select2/css/select2.min.css' %>
   <%= stylesheet_link_tag 'bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %>
   <%= stylesheet_link_tag 'dropzone/dropzone.min.css' %>'
+  <style>
+    /* not sure why this is necessary */
+    main.page-content div.navbar {
+      top: 0px;
+    }
+  </style>
 <% end %>
 
 <div class="page-inner">
@@ -22,34 +28,31 @@
     </div>
   </div>
   <div id="main-wrapper" class="container">
-    <!--<div class="row">
+    <div class="row">
       <div class="col-md-12">
         <div class="panel panel-white">
           <div class="panel-body">
-
+            <form action="/file-upload" class="dropzone">
+              <div class="fallback">
+                <input name="file" type="file" multiple />
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div><!-- Row -->
+  </div><!-- Main Wrapper -->
+  <div id="main-wrapper" class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="panel panel-white">
           <div class="panel-body">
             <h2 class="no-m m-b-lg">Policy Information</h2>
-
-            <hr>
-
-            <!--<form action="/file-upload" class="dropzone">
-              <div class="fallback">
-                <input name="file" type="file" multiple />
-              </div>
-            </form>-->
-
             <hr>
 
             <h2 class="client_code_display"><%= @policy.client_code %></h2>
             <div style="float: right; margin-bottom: 10px">
-                <button id="enable" class="btn btn-default"></button>
+              <button id="enable" class="btn btn-default"></button>
             </div>
             <p>Click to edit</p>
             <table id="policy" class="table table-bordered table-striped" style="clear: both">
@@ -64,55 +67,74 @@
                   <td>Client Code</td>
                   <td>
                     <%= link_to @policy.client_code, "#", id:'client_code', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Client Code", type: "text" } %>
-                    <!--<a href="#" id="firstname" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title="Enter your firstname" class="editable editable-click editable-empty">Empty</a>-->
                   </td>
                 </tr>
                 <tr>
                   <td>Status</td>
                   <td>
-                    <%= link_to @policy.status, "#", id:'status', class: "editable editable-click", style: "color: gray;", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Status", type: "select" } %>
+                    <%= link_to @policy.status, "#", id:'status', class: "editable editable-clickaaa",
+                    data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+                    title: "Enter Status", type: "select", value: @policy.status } %>
                   </td>
                 </tr>
                 <tr>
                   <td>Effective Date</td>
                   <td>
-                    <%= link_to @policy.effective_date, "#", id:'effective_date', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Effective Date", type: "text" } %>
-                  </td>
+                    <%= link_to @policy.effective_date.strftime("%_m/%d/%Y"), "#", id:'effective_date',
+                    class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
+                      pk: "#{@policy.id}", title: "Select Effective Date", type: "combodate",
+                      value: "#{@policy.expiration_date}" } %></td>
                 </tr>
                 <tr>
                   <td>Expiration Date</td>
                   <td>
-                    <%= link_to @policy.expiration_date, "#", id:'expiration_date', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Expiration Date", type: "text" } %>
+                    <%= link_to @policy.expiration_date.strftime("%_m/%d/%Y"), "#", id:'expiration_date',
+                    class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
+                      pk: "#{@policy.id}", title: "Select Expiration Date", type: "combodate",
+                      value: "#{@policy.expiration_date}" } %>
                   </td>
                 </tr>
                 <tr>
                   <td>Package Premium Total</td>
                   <td>
-                    <%= link_to @policy.package_premium_total, "#", id:'package_premium_total', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Package Premium Total", type: "text" } %>
+                    <%= link_to @policy.package_premium_total, "#", id:'package_premium_total',
+                    class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
+                      pk: "#{@policy.id}", title: "Enter Package Premium Total", type: "number" } %>
                   </td>
                 </tr>
                 <tr>
                   <td>Insured Name</td>
                   <td>
-                    <%= link_to @policy.name, "#", id:'name', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Insured Name", type: "text" } %>
+                    <%= link_to @policy.name, "#", id:'name', class: "editable editable-click editable-generic",
+                    data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+                    title: "Enter Insured Name", type: "text" } %>
                   </td>
                 </tr>
                 <tr>
                   <td>Business Type</td>
                   <td>
-                    <%= link_to @policy.business_type, "#", id:'business_type', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Business Type", type: "text" } %>
+                    <%= link_to @policy.business_type, "#", id:'business_type',
+                    class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
+                      pk: "#{@policy.id}", title: "Enter Business Type", type: "text" } %>
                   </td>
                 </tr>
                 <tr>
-                  <td>Type</td>
+                  <td>Insured Type</td>
                   <td>
-                    <%= link_to @policy.type, "#", id:'type', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Insured Type", type: "text" } %>
+                    <%= link_to @policy.insured_type, "#", id:'insured_type',
+                    class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
+                      pk: "#{@policy.id}", title: "Enter Insured Type", type: "text" } %>
                   </td>
                 </tr>
                 <tr>
-                  <td>Mortgagee</td>
+                  <td>Address</td>
                   <td>
-                    <%= link_to @policy.mortgagee, "#", id:'mortgagee', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Mortgagee", type: "text" } %>
+                    <%= link_to "#{@policy.street} <br /> #{@policy.city}, #{@policy.state}. #{@policy.zip}".html_safe,
+                    "#", id:'address', class: "editable editable-click",
+                    data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+                    title: "Enter Address", type: "address", value: {
+                      street: @policy.street, city: @policy.city, state: @policy.state,
+                      zip: @policy.zip } } %>
                   </td>
                 </tr>
                 <tr>
@@ -122,33 +144,29 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Street</td>
+                  <td>Mortgagee</td>
                   <td>
-                    <%= link_to @policy.street, "#", id:'street', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Street", type: "text" } %>
+                    <%= link_to @policy.mortgagee, "#", id:'mortgagee', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Mortgagee", type: "text" } %>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <b>Property</b>
                   </td>
                 </tr>
                 <tr>
-                  <td>City</td>
+                  <td>Property Schedule Rating Percentage</td>
                   <td>
-                    <%= link_to @policy.city, "#", id:'city', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter City", type: "text" } %>
+                    <%#= link_to @policy.property.schedule_rating_pct, "#", id:'schedule_rating_pct', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Schedule Rating Percentage", type: "text" } %>
                   </td>
                 </tr>
-                <tr>
-                  <td>State</td>
-                  <td>
-                    <%= link_to @policy.state, "#", id:'state', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter State", type: "text" } %>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Zip</td>
-                  <td>
-                    <%= link_to @policy.zip, "#", id:'zip', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Zip", type: "text" } %>
-                  </td>
-                </tr>
-                <!--
+
                 <tr>
                   <td>Select, local array, custom display</td>
-                  <td><a href="#" id="sex" data-type="select" data-pk="1" data-value="" data-title="Select sex" class="editable editable-click" style="color: gray;">not selected</a></td>
+                  <td><a href="#" id="sex" data-type="select" data-pk="1" data-value=""
+                    data-title="Select sex" class="editable editable-click"
+                    style="color: gray;">not selected</a></td>
                 </tr>
                 <tr>
                   <td>Select, remote array, no buttons</td>
@@ -158,16 +176,13 @@
                   <td>Select, error while loading</td>
                   <td><a href="#" id="status" data-type="select" data-pk="1" data-value="0" data-source="/status" data-title="Select status" class="editable editable-click">Active</a></td>
                 </tr>
-
-                <tr>
-                  <td>Datepicker</td>
-                  <td>
-                    <span class="notready">not implemented for Bootstrap 3 yet</span>
-                  </td>
-                </tr>
                 <tr>
                   <td>Combodate (date)</td>
-                  <td><a href="#" id="dob" data-type="combodate" data-value="1984-05-15" data-format="YYYY-MM-DD" data-viewformat="DD/MM/YYYY" data-template="D / MMM / YYYY" data-pk="1" data-title="Select Date of birth" class="editable editable-click">15/05/1984</a></td>
+                  <td><a href="#" id="dob" data-type="combodate" data-value="1984-05-15"
+                    data-format="YYYY-MM-DD" data-viewformat="DD/MM/YYYY"
+                    data-template="D / MMM / YYYY" data-pk="1"
+                    data-title="Select Date of birth"
+                    class="editable editable-click">15/05/1984</a></td>
                 </tr>
                 <tr>
                   <td>Combodate (datetime)</td>
@@ -198,7 +213,6 @@
                     <td>Custom input, several fields</td>
                     <td><a href="#" id="address" data-type="address" data-pk="1" data-title="Please, fill address" class="editable editable-click"><b>Moscow</b>, Lenina st., bld. 12</a></td>
                   </tr>
-                -->
                 </tbody>
               </table>
             </div>
@@ -207,18 +221,17 @@
       </div><!-- Row -->
     </div><!-- Main Wrapper -->
 
-    <!-- Javascripts -->
-    <%= content_for :js_includes do %>
-      <%= javascript_include_tag 'jquery-mockjax-master/jquery.mockjax.js' %>
-      <%= javascript_include_tag 'moment/moment.js' %>
-      <%= javascript_include_tag 'x-editable/bootstrap3-editable/js/bootstrap-editable.js' %>
-      <%= javascript_include_tag 'x-editable/inputs-ext/typeaheadjs/lib/typeahead.js' %>
-      <%= javascript_include_tag 'x-editable/inputs-ext/typeaheadjs/typeaheadjs.js' %>
-      <%= javascript_include_tag 'x-editable/inputs-ext/address/address.js' %>
-      <%= javascript_include_tag 'select2/js/select2.full.min.js' %>
-      <%= javascript_include_tag 'bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %>
-      <%= javascript_include_tag 'pages/form-x-editable.js' %>
+  <!-- Javascripts -->
+  <%= content_for :js_includes do %>
+    <%= javascript_include_tag 'jquery-mockjax-master/jquery.mockjax.js' %>
+    <%= javascript_include_tag 'moment/moment.js' %>
+    <%= javascript_include_tag 'x-editable/bootstrap3-editable/js/bootstrap-editable.js' %>
+    <%= javascript_include_tag 'x-editable/inputs-ext/typeaheadjs/lib/typeahead.js' %>
+    <%= javascript_include_tag 'x-editable/inputs-ext/typeaheadjs/typeaheadjs.js' %>
+    <%= javascript_include_tag 'x-editable/inputs-ext/address/address.js' %>
+    <%= javascript_include_tag 'select2/js/select2.full.min.js' %>
+    <%= javascript_include_tag 'bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %>
+    <%= javascript_include_tag 'pages/form-x-editable.js' %>
 
-      <%= javascript_include_tag 'dropzone/dropzone.min.js' %>
-
-    <% end %>
+    <%#= javascript_include_tag 'dropzone/dropzone.min.js' %>
+  <% end %>

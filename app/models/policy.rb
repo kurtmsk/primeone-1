@@ -8,4 +8,6 @@ class Policy < ActiveRecord::Base
   has_one :crime
   has_one :gl
   has_one :auto
+
+  #accepts_nested_attributes_for :property, allow_destroy: true
 end
