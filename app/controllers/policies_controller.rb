@@ -51,8 +51,7 @@ class PoliciesController < ApplicationController
   end
 
   def upload
-    puts ("Uploaded a homey!")
-
+    #@policy = Policy.find(params[:id])
     readWorkbook()
 
     respond_to do |format|
@@ -63,6 +62,7 @@ class PoliciesController < ApplicationController
         format.html { render :edit }
         format.json { render json: @policy.errors, status: :unprocessable_entity }
       end
+    end
   end
 
   # PATCH/PUT /policies/1
@@ -116,7 +116,7 @@ class PoliciesController < ApplicationController
       @policy.effective_date= workbook.cell('F',7)
       @policy.expiration_date= workbook.cell('J',7)
 
-      @policy.total_package_premium= workbook.cell('N',109)
+      @policy.package_total_premium= workbook.cell('N',109)
 
       #dba: workbook.cell('B',4),
       @policy.business_type= workbook.cell('L',5)
@@ -150,13 +150,13 @@ class PoliciesController < ApplicationController
         food_premium: workbook.cell('J',17),
 
         theft_limit: workbook.cell('F',18), theft_rate: workbook.cell('H',18),
-        theft_premium: workbook.cell('J',18) },
+        theft_premium: workbook.cell('J',18),
 
         enhc_limit: workbook.cell('F',19), enhc_rate: workbook.cell('H',19),
-        enhc_premium: workbook.cell('J',19) },
+        enhc_premium: workbook.cell('J',19),
 
         mech_limit: workbook.cell('F',20), mech_rate: workbook.cell('H',20),
-        mech_premium: workbook.cell('J',20) }
+        mech_premium: workbook.cell('J',20)
       )
 
       for i in 23..29 do
@@ -187,17 +187,17 @@ class PoliciesController < ApplicationController
           food_premium: workbook.cell('AA',17),
 
           theft_limit: workbook.cell('W',18), theft_rate: workbook.cell('Y',18),
-          theft_premium: workbook.cell('AA',18) },
+          theft_premium: workbook.cell('AA',18),
 
           enhc_limit: workbook.cell('W',19), enhc_rate: workbook.cell('Y',19),
-          enhc_premium: workbook.cell('AA',19) },
+          enhc_premium: workbook.cell('AA',19),
 
           mech_limit: workbook.cell('W',20), mech_rate: workbook.cell('Y',20),
-          mech_premium: workbook.cell('AA',20) }
+          mech_premium: workbook.cell('AA',20)
         )
 
         for i in 23..29 do
-          @policy.property.locations.first.exposures << Exposure.create!(
+          @policy.property.locations.second.exposures << Exposure.create!(
           name: workbook.cell('R',i), valuation: workbook.cell('U',i),
           limit: workbook.cell('W',i), rate: workbook.cell('Y',i),
           ded_factor: workbook.cell('AA',i), co_ins_factor: workbook.cell('AC',i),
@@ -261,4 +261,5 @@ class PoliciesController < ApplicationController
       @policy.auto.hired_auto= workbook.cell('F',103)
       @policy.auto.hired_auto_premium= workbook.cell('Q',103)
     end
+
 end

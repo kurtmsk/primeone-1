@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :policies do
-    post 'upload'
+    member do
+      post 'upload', method: :post
+    end
   end
   resources :brokers, only: [:index]
   # The priority is based upon order of creation: first created -> highest priority.

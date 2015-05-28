@@ -37,13 +37,14 @@
         <div class="panel panel-white">
           <div class="panel-body">
             <!--form action="#{@policy.id}/upload" class="dropzone">-->
-            <%= form_tag policy_upload_path(@policy), class:'dropzone' do %>
+            <%= form_tag upload_policy_path, class:'', multipart: true do %>
+              <%#= hidden_field_tag :id, @policy.id %>
               <div class="fallback">
-                <input name="file" type="file" />
-                <%#= file_field_tag 'file', type: 'file' %>
+                <!--<input name="file" type="file" />-->
+                <%= file_field_tag :file %>
               </div>
               <div style="float: right; margin-bottom: 10px">
-                <%#= submit_tag "", class:"btn btn-success bg-success" %>
+                <%= submit_tag "Populate", class:"btn btn-success bg-success" %>
               </div>
 
             <% end %>
