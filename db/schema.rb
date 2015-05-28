@@ -72,11 +72,11 @@ ActiveRecord::Schema.define(version: 20150526060651) do
     t.string   "code",          default: ""
     t.integer  "premium_basis", default: 0
     t.string   "type",          default: ""
-    t.integer  "base_rate",     default: 0
-    t.integer  "ilf",           default: 0
+    t.decimal  "base_rate",     default: 0.0
+    t.decimal  "ilf",           default: 0.0
     t.integer  "premium",       default: 0
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "gl_id"
   end
 
@@ -166,16 +166,16 @@ ActiveRecord::Schema.define(version: 20150526060651) do
     t.string   "policy_number",         default: ""
     t.string   "status",                default: ""
     t.string   "client_code",           default: ""
-    t.date     "effective_date"
-    t.date     "expiration_date"
+    t.date     "effective_date",        default: '1995-11-08'
+    t.date     "expiration_date",       default: '1995-11-08'
     t.string   "forms",                 default: ""
     t.string   "property_forms",        default: ""
     t.string   "gl_forms",              default: ""
     t.string   "crime_forms",           default: ""
     t.string   "auto_forms",            default: ""
     t.integer  "package_premium_total", default: 0
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.integer  "broker_id"
     t.string   "name",                  default: ""
     t.string   "quoted_by",             default: ""
