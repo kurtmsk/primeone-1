@@ -60,10 +60,13 @@
           <div class="panel-body">
             <h2 class="no-m m-b-lg">Policy Information</h2>
             <hr>
-
             <h2 class="client_code_display"><%= @policy.client_code %></h2>
             <div style="float: right; margin-bottom: 10px">
-              <button id="enable" class="btn btn-default"></button>
+              <%= link_to policy_path(@policy, format: 'pdf') do %>
+              <button  class="btn btn-danger bg-danger">
+                Declaration Pages
+              </button>
+              <% end %>
             </div>
             <p>Click to edit</p>
             <table id="policy" class="table table-bordered table-striped" style="clear: both">

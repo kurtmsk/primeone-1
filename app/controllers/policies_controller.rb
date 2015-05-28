@@ -248,7 +248,7 @@ class PoliciesController < ApplicationController
         cov: workbook.cell('C',i),
         code: workbook.cell('H',i),
         premium_basis: workbook.cell('I',i),
-        sales_type: workbook.cell('K',i),
+        #sales_type: workbook.cell('K',i),
         base_rate: workbook.cell('M',i),
         ilf: workbook.cell('O',i),
         premium: workbook.cell('Q',i)

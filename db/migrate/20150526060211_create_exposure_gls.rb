@@ -8,7 +8,7 @@ class CreateExposureGls < ActiveRecord::Migration
       t.string :cov, default: ""
       t.string :code, default: ""
       t.integer :premium_basis, default: 0
-      t.string :sale_type, default: ""
+      t.string :sales_type, default: ""
       t.decimal :base_rate, default: 0
       t.decimal :ilf, default: 0
       t.integer :premium, default: 0

@@ -10,7 +10,7 @@
         .box
           %p.tag
             INSURED IS:
-            %span.item.text-center= @policy.type
+            %span.item.text-center= @policy.insured_type
 
         .box
           %p.strong THIS POLICY CONSISTS OF THE FOLLOWING COVERAGE PARTS FOR WHICH A |
@@ -38,14 +38,14 @@
             .col-xs-1.col-xs-offset-1
               %p.item $
             .col-xs-1.col-xs-offset-1
-              %p.item.text-right= displayPropertyPremium(@policy.property[:property_premium_total])
+              %p.item.text-right= displayPropertyPremium(@policy.property.premium_total)
           .row
             .col-xs-6.col-xs-offset-1.text-left
               %p.item COMMERCIAL CRIME
             .col-xs-1.col-xs-offset-1
               %p.item $
             .col-xs-1.col-xs-offset-1
-              %p.item.text-right= displayPropertyPremium(@policy.crime[:crime_total_premium])
+              %p.item.text-right= displayPropertyPremium(@policy.crime.premium_total)
           .row
             .col-xs-6.col-xs-offset-1.text-left
               %p.item COMMERCIAL INLAND MARINE
@@ -60,7 +60,7 @@
             .col-xs-1.col-xs-offset-1
               %p.item $
             .col-xs-1.col-xs-offset-1
-              %p.item.text-right= displayPropertyPremium(@policy.commercial_auto[:total_auto_premium])
+              %p.item.text-right= displayPropertyPremium(@policy.auto.premium_total)
         .box
           .row
             .col-xs-6.col-xs-offset-2.text-right
@@ -68,7 +68,7 @@
             .col-xs-1
               %p.item $
             .col-xs-1.col-xs-offset-1
-              %p.tag.text-right= displayPropertyPremium(@policy.total_package_premium)
+              %p.tag.text-right= displayPropertyPremium(@policy.package_premium_total)
         .box
 
         %p Commercial Filing Exemption- This policy is exempt from the filing |
@@ -85,212 +85,208 @@
 
       = render partial: 'pdf_footer.html', locals: {page: 1, name:"SUM"}
 
-    -# COMMERCIAL PROPERTY DECLARATIONS
-    -if @policy.property[:property_premium_total].to_i != 0
-      .property-page
-        = render partial: 'pdf_header.html', locals: {title: "COMMERCIAL PROPERTY DECLARATIONS"}
-        .page
-          %section.section-small
-            %p These declarations must be completed by the attachment of additional |
-              declarations or supplements and policy provisions for each applicable coverage. |
-            %table#locations.table-striped
+  -# COMMERCIAL PROPERTY DECLARATIONS
+  -if @policy.property.premium_total.to_i != 0
+    .property-page
+      = render partial: 'pdf_header.html', locals: {title: "COMMERCIAL PROPERTY DECLARATIONS"}
+      .page
+        %section.section-small
+          %p These declarations must be completed by the attachment of additional |
+            declarations or supplements and policy provisions for each applicable coverage. |
+          %table#locations.table-striped
+            %tr
+              %th LOC
+              %th BLDG
+              %th Occupancy and Location
+            - @policy.property.locations.each_with_index do |loc, i|
               %tr
-                %th LOC
-                %th BLDG
-                %th Occupancy and Location
-              - @policy.property[:locations].each_with_index do |(key,val), i|
-                %tr
-                  %td= i+1
-                  %td= i+1
-                  %td= "#{val[:address][:street]}, " + |
-                    "#{val[:address][:city]}, " + |
-                    "#{val[:address][:state]}. " + |
-                    "#{val[:address][:zip]} " + |
-                    "occupied as #{val[:building_exposure][:type_of_business]}" |
+                %td= i+1
+                %td= i+1
+                %td= "#{loc.street}, #{loc.city}, #{loc.state}. #{loc.zip} occupied as #{loc.business_type}"
 
-          %section.section-small
-            %table#exposures.table-striped
+        %section.section-small
+          %table#exposures.table-striped
+            %tr
+              %th COVERAGE
+              %th LIMIT OF INSURANCE
+              %th VALUATION
+              %th CO-INS
+              %th COVERED CAUSE OF LOSS
+              %th THEFT
+              %th DEDUCTIBLE
+              %th PREMIUM
+            - @policy.property.locations.first.exposures.each do |exp|
               %tr
-                %th COVERAGE
-                %th LIMIT OF INSURANCE
-                %th VALUATION
-                %th CO-INS
-                %th COVERED CAUSE OF LOSS
-                %th THEFT
-                %th DEDUCTIBLE
-                %th PREMIUM
-              - @policy.property[:locations][:location_1][:exposures].each do |(key,val)|
-                %tr
-                  -if val[:premium] != 0
-                    %td.text-left= val[:name]
-                    %td.text-right= number_to_currency(val[:limit],precision:0)
-                    %td.text-center= val[:valuation]
-                    %td.text-center= number_to_percentage(@policy.property[:locations][:location_1][:co_insurance]*100, precision:0)
-                    %td.text-center= @policy.property[:locations][:location_1][:building_exposure][:coverage_type]
-                    %td.text-left= @policy.property[:locations][:location_1][:theft][:facticity]
-                    %td.text-right= number_to_currency(@policy.property[:locations][:location_1][:deductible],precision:0)
-                    %td.text-center Included
-                  -else
-                    %td.text-left -
-                    %td.text-right -
-                    %td.text-center -
-                    %td.text-center -
-                    %td.text-center -
-                    %td.text-left
-                    %td.text-right -
-                    %td.text-center -
-            .container
-              %p.pull-left MONTHLY LIMIT OF INDEMNITY
-              %p.pull-left.col-xs-offset-1 -
-              %p.pull-right *Applies to Business Income Only * Ext. Period of Indemnity
+                -if exp.premium != 0
+                  %td.text-left= exp.name
+                  %td.text-right= number_to_currency(exp.limit,precision:0)
+                  %td.text-center= exp.valuation
+                  %td.text-center= number_to_percentage(@policy.property.locations.first.co_ins*100, precision:0)
+                  %td.text-center= @policy.property.locations.first.coverage_type
+                  %td.text-left= @policy.property.locations.first.theft_limit
+                  %td.text-right= number_to_currency(@policy.property.locations.first.ded,precision:0)
+                  %td.text-center Included
+                -else
+                  %td.text-left -
+                  %td.text-right -
+                  %td.text-center -
+                  %td.text-center -
+                  %td.text-center -
+                  %td.text-left
+                  %td.text-right -
+                  %td.text-center -
+          .container
+            %p.pull-left MONTHLY LIMIT OF INDEMNITY
+            %p.pull-left.col-xs-offset-1 -
+            %p.pull-right *Applies to Business Income Only * Ext. Period of Indemnity
 
-          %section.section-small.descript
-            .box
-              %p.tag MORTGAGE HOLDER(S) AND MAILING ADDRESS
-            .box.forms
-              %p.item= @policy.insured[:mortgagee]
-            .box
+        %section.section-small.descript
+          .box
+            %p.tag MORTGAGE HOLDER(S) AND MAILING ADDRESS
+          .box.forms
+            %p.item= @policy.mortgagee
+          .box
 
-          %section
-            %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
-            .box.forms
-              %p.item= @policy.property_forms
-            .box
-            %p These Declarations and the Common Policy Declarations, if applicable, |
-              together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
-              if any, issued to form a part thereof, complete the above numbered policy. |
+        %section
+          %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
+          .box.forms
+            %p.item= @policy.property_forms
+          .box
+          %p These Declarations and the Common Policy Declarations, if applicable, |
+            together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
+            if any, issued to form a part thereof, complete the above numbered policy. |
 
-          = render partial: 'pdf_footer.html', locals: {page: 2, name: "CP"}
+        = render partial: 'pdf_footer.html', locals: {page: 2, name: "CP"}
 
-    -# GENERAL LIABILITY DECLARATIONS
-    -if @policy.general_liability[:total_gl_premium].to_i != 0
-      .gl-page
-        = render partial: 'pdf_header.html', locals: {title: "GENERAL LIABILITY DECLARATIONS"}
-        .page
-          %section
-            .limits-top
-              %p.tag.text-center LIMITS OF INSURANCE
-            .limits-base
-              .row
-                .col-xs-7
-                  %p.item General Aggregate Limit
-                .col-xs-1.text-right
-                  %p.item= number_to_currency(@policy.general_liability[:limits][:general_aggregate], precision: 0)
-              .row
-                .col-xs-7
-                  %p.item Products/Completed Operations Aggregate Limit
-                .col-xs-1.text-right
-                  %p.item= number_to_currency(@policy.general_liability[:limits][:products_completed_operations], precision: 0)
-              .row
-                .col-xs-7
-                  %p.item Each Occurrence Limit
-                .col-xs-1.text-right
-                  %p.item= number_to_currency(@policy.general_liability[:limits][:each_occurence], precision: 0)
-              .row
-                .col-xs-7
-                  %p.item Personal & Advertising Injury Limit
-                .col-xs-1.text-right
-                  %p.item= number_to_currency(@policy.general_liability[:limits][:personal_advertising_injury], precision: 0)
-              .row
-                .col-xs-7
-                  %p.item Fire Damage Limit (Damage To Premises Rented To You Limit)
-                .col-xs-1.text-right
-                  %p.item= number_to_currency(@policy.general_liability[:limits][:fire_damage], precision: 0)
-              .row
-                .col-xs-7
-                  %p.item Medical Expense Limit
-                .col-xs-1.text-right
-                  %p.item= number_to_currency(@policy.general_liability[:limits][:medical_expense], precision: 0)
+  -# GENERAL LIABILITY DECLARATIONS
+  -if @policy.gl.premium_total.to_i != 0
+    .gl-page
+      = render partial: 'pdf_header.html', locals: {title: "GENERAL LIABILITY DECLARATIONS"}
+      .page
+        %section
+          .limits-top
+            %p.tag.text-center LIMITS OF INSURANCE
+          .limits-base
+            .row
+              .col-xs-7
+                %p.item General Aggregate Limit
+              .col-xs-1.text-right
+                %p.item= number_to_currency(@policy.gl.gen_agg, precision: 0)
+            .row
+              .col-xs-7
+                %p.item Products/Completed Operations Aggregate Limit
+              .col-xs-1.text-right
+                %p.item= number_to_currency(@policy.gl.products_completed_operations, precision: 0)
+            .row
+              .col-xs-7
+                %p.item Each Occurrence Limit
+              .col-xs-1.text-right
+                %p.item= number_to_currency(@policy.gl.each_occurence, precision: 0)
+            .row
+              .col-xs-7
+                %p.item Personal & Advertising Injury Limit
+              .col-xs-1.text-right
+                %p.item= number_to_currency(@policy.gl.personal_advertising_injury, precision: 0)
+            .row
+              .col-xs-7
+                %p.item Fire Damage Limit (Damage To Premises Rented To You Limit)
+              .col-xs-1.text-right
+                %p.item= number_to_currency(@policy.gl.fire_damage, precision: 0)
+            .row
+              .col-xs-7
+                %p.item Medical Expense Limit
+              .col-xs-1.text-right
+                %p.item= number_to_currency(@policy.gl.medical_expense, precision: 0)
 
-          %section.section-small
-            .limits-top
-              %p.tag.text-center ALL PREMISES YOU OWN, RENT OR OCCUPY
-            .limits-top
+        %section.section-small
+          .limits-top
+            %p.tag.text-center ALL PREMISES YOU OWN, RENT OR OCCUPY
+          .limits-top
+            .row
+              .col-xs-1
+                %p.tag Location
+              .col-xs-6
+                %p.tag Address of all Premises you Own, Rent, or Occupy
+          .limits-base
+            - @policy.property.locations.each_with_index do |loc, i|
               .row
                 .col-xs-1
-                  %p.tag Location
+                  %p.item.text-center= i+1
                 .col-xs-6
-                  %p.tag Address of all Premises you Own, Rent, or Occupy
-            .limits-base
-              - @policy.property[:locations].each_with_index do |(key,val), i|
+                  %p.item= "#{loc.street}, #{loc.city}, #{loc.state}. #{loc.zip} "
+
+        %section
+          .exposures-top
+            .row
+              .col-xs-1
+                %p.tag Location
+              .col-xs-4
+                %p.tag Classification
+              .col-xs-2
+                %p.tag Code No.
+              .col-xs-2.text-right
+                %p.tag Premium Basis
+              .col-xs-2.col-xs-offset-1
+                %p.tag Premium
+          .exposures-base
+            - @policy.gl.exposure_gls.each do |exp|
+              -if exp.cov == "GenAgg"
                 .row
                   .col-xs-1
-                    %p.item.text-center= i+1
-                  .col-xs-6
-                    %p.item= "#{val[:address][:street]}, " + |
-                    "#{val[:address][:city]}, " + |
-                    "#{val[:address][:state]}. " + |
-                    "#{val[:address][:zip]} " |
+                    %p.item.text-center= exp.loc_number.to_i
+                  .col-xs-4
+                    %p.item= exp.class_description
+                  .col-xs-2
+                    %p.item= exp.code.to_i
+                  .col-xs-1.col-xs-offset-1
+                    %p.item.text-center= number_to_currency(exp.premium_basis,precision:0,format:'%n')
+                  .col-xs-1
+                    %p.item.text-center= exp.sales_type
+                  .col-xs-2
+                    %p.item Included
 
-          %section
-            .exposures-top
+        %section.section-small
+          %p.item Audit Period (if applicable)
+          %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
+          .box.forms
+            %p.item= @policy.gl_forms
+          .box
+          %p These Declarations and the Common Policy Declarations, if applicable, |
+            together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
+            if any, issued to form a part thereof, complete the above numbered policy. |
+
+        = render partial: 'pdf_footer.html', locals: {page: 3, name: "GL"}
+
+  -# COMMERCIAL CRIME DECLARATIONS
+  -if @policy.crime.premium_total.to_i != 0
+    .crime-page.ca-page
+      = render partial: 'pdf_header.html', locals: {title: "COMMERCIAL CRIME DECLARATIONS"}
+      .page
+        %section.section-large
+          .limits-top
+            .row
+              .col-xs-4
+                %p.tag Coverage
+              .col-xs-2.col-xs-offset-1.text-center
+                %p.tag Limit Per Occurrence
+              .col-xs-2.text-center
+                %p.tag Deductible
+              .col-xs-2.col-xs-offset-1.text-center
+                %p.tag Premium
+          .limits-base
+            - @policy.crime.exposures.each do |exp|
+
               .row
-                .col-xs-1
-                  %p.tag Location
+                - a = (exp.premium.to_i != 0 ? "Included" : "Excluded")
                 .col-xs-4
-                  %p.tag Classification
-                .col-xs-2
-                  %p.tag Code No.
-                .col-xs-2.text-right
-                  %p.tag Premium Basis
-                .col-xs-2.col-xs-offset-1
-                  %p.tag Premium
-            .exposures-base
-              - @policy.general_liability[:gl_exposures].each do |(key,val)|
-                -if val[:cov] == "GenAgg"
-                  .row
-                    .col-xs-1
-                      %p.item.text-center= val[:loc_number].to_i
-                    .col-xs-4
-                      %p.item= val[:class_description]
-                    .col-xs-2
-                      %p.item= val[:code].to_i
-                    .col-xs-1.col-xs-offset-1
-                      %p.item.text-center= number_to_currency(val[:premium_basis],precision:0,format:'%n')
-                    .col-xs-1
-                      %p.item.text-center= val[:type]
-                    .col-xs-2
-                      %p.item Included
-
-          %section.section-small
-            %p.item Audit Period (if applicable)
-            %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
-            .box.forms
-              %p.item= @policy.gl_forms
-            .box
-            %p These Declarations and the Common Policy Declarations, if applicable, |
-              together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
-              if any, issued to form a part thereof, complete the above numbered policy. |
-
-          = render partial: 'pdf_footer.html', locals: {page: 3, name: "GL"}
-
-    -# COMMERCIAL CRIME DECLARATIONS
-    -if @policy.crime[:crime_total_premium].to_i != 0
-      .crime-page.ca-page
-        = render partial: 'pdf_header.html', locals: {title: "COMMERCIAL CRIME DECLARATIONS"}
-        .page
-          %section.section-large
-            .limits-top
-              .row
-                .col-xs-4
-                  %p.tag Coverage
+                  %p.item= exp.name
                 .col-xs-2.col-xs-offset-1.text-center
-                  %p.tag Limit Per Occurrence
+                  %p.item= a == "Excluded" ? "-" : number_to_currency(exp.limit, precision:0)
                 .col-xs-2.text-center
-                  %p.tag Deductible
-                .col-xs-2.col-xs-offset-1.text-center
-                  %p.tag Premium
-            .limits-base
-              .row
-                - a = (@policy.crime[:employee_theft][:premium].to_i != 0 ? "Included" : "Excluded")
-                .col-xs-4
-                  %p.item Employee Theft
-                .col-xs-2.col-xs-offset-1.text-center
-                  %p.item= a == "Excluded" ? "-" : number_to_currency(@policy.crime[:employee_theft][:limit], precision:0)
-                .col-xs-2.text-center
-                  %p.item= a == "Excluded" ? "-" : number_to_currency(@policy.crime[:deductible], precision:0)
+                  %p.item= a == "Excluded" ? "-" : number_to_currency(exp.ded, precision:0)
                 .col-xs-2.col-xs-offset-1.text-center
                   %p.item= a
+            -#
               .row
                 - a = (@policy.crime[:forgery_alteration][:premium].to_i != 0 ? "Included" : "Excluded")
                 .col-xs-4
@@ -342,81 +338,81 @@
                 .col-xs-2.col-xs-offset-1.text-center
                   %p.item= a
 
-          %section.section-small
-            %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
-            .box.forms
-              %p.item= @policy.crime_forms
-            .box
-            %p These Declarations and the Common Policy Declarations, if applicable, |
-              together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
-              if any, issued to form a part thereof, complete the above numbered policy. |
+        %section.section-small
+          %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
+          .box.forms
+            %p.item= @policy.crime_forms
+          .box
+          %p These Declarations and the Common Policy Declarations, if applicable, |
+            together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
+            if any, issued to form a part thereof, complete the above numbered policy. |
 
-          = render partial: 'pdf_footer.html', locals: {page: 4, name: "CR"}
+        = render partial: 'pdf_footer.html', locals: {page: 4, name: "CR"}
 
-    -# COMMERCIAL AUTO DECLARATIONS
-    -if @policy.commercial_auto[:total_auto_premium].to_i != 0
-      .auto-page.ca-page
-        = render partial: 'pdf_header.html', locals: {title: "COMMERCIAL AUTO DECLARATIONS"}
-        .page
-          %section
-            .limits-top
+  -# COMMERCIAL AUTO DECLARATIONS
+  -if @policy.auto.premium_total.to_i != 0
+    .auto-page.ca-page
+      = render partial: 'pdf_header.html', locals: {title: "COMMERCIAL AUTO DECLARATIONS"}
+      .page
+        %section
+          .limits-top
+            .row
+              .col-xs-4
+                %p.tag Coverage
+              .col-xs-1.text-center
+                %p.tag Covered Autos
+              .col-xs-5.text-center
+                %p.tag Limit (The most we will pay for any on Accident of Loss)
+              .col-xs-2.text-center
+                %p.tag Premium
+          .limits-base
+            .row
+              .col-xs-4
+                %p.item Liability
+              .col-xs-1.text-center
+                %p.item ??
+              .col-xs-5.text-center
+                %p.item= #@policy.commercial_auto[:facticity]
+              .col-xs-2.text-center
+                %p.item= @policy.auto.total_auto_premium.to_i != 0 ? "Included" : "N/A"
+            - a = [["Personal Injury Protection (PIP) (or equivalent No-Fault Coverage)", "Separately Stated in each PIP Endorsement(s) minus $"],
+              ["Added PIP (or equivalent No-Fault Coverage)", "Separately in each added PIP Endorsement(s)"],
+              ["Property Protection Insurance (PPI) (Michigan Only)", "Separately Stated in each PPI Endorsement minus Deductible for each Accident"],
+              ["Auto Medical Payments", ""], ["Uninsured Motorists (UM)", ""],
+              ["Uninsured Motorists (when not included in UM Coverage", ""] ]
+            - a.each do |cov|
               .row
                 .col-xs-4
-                  %p.tag Coverage
+                  %p.item= cov[0]
                 .col-xs-1.text-center
-                  %p.tag Covered Autos
+                  %p.item Excluded
                 .col-xs-5.text-center
-                  %p.tag Limit (The most we will pay for any on Accident of Loss)
+                  %p.item= cov[1]
                 .col-xs-2.text-center
-                  %p.tag Premium
-            .limits-base
+                  %p.item N/A
+
+        %section.section-small
+          .limits-top-2
+            %p.tag Physical Damage
+          .limits-base-2
+            - a = ["Comprehensive Coverage", "Special Causes of Loss Coverage",
+              "Collision Coverage", "Towing and Labor"]
+            - a.each do |dmg|
               .row
                 .col-xs-4
-                  %p.item Liability
+                  %p.item= dmg
                 .col-xs-1.text-center
-                  %p.item ??
-                .col-xs-5.text-center
-                  %p.item= @policy.commercial_auto[:facticity]
-                .col-xs-2.text-center
-                  %p.item= @policy.commercial_auto[:total_auto_premium].to_i != 0 ? "Included" : "N/A"
-              - a = [["Personal Injury Protection (PIP) (or equivalent No-Fault Coverage)", "Separately Stated in each PIP Endorsement(s) minus $"],
-                ["Added PIP (or equivalent No-Fault Coverage)", "Separately in each added PIP Endorsement(s)"],
-                ["Property Protection Insurance (PPI) (Michigan Only)", "Separately Stated in each PPI Endorsement minus Deductible for each Accident"],
-                ["Auto Medical Payments", ""], ["Uninsured Motorists (UM)", ""],
-                ["Uninsured Motorists (when not included in UM Coverage", ""] ]
-              - a.each do |cov|
-                .row
-                  .col-xs-4
-                    %p.item= cov[0]
-                  .col-xs-1.text-center
-                    %p.item Excluded
-                  .col-xs-5.text-center
-                    %p.item= cov[1]
-                  .col-xs-2.text-center
-                    %p.item N/A
+                  %p.item Excluded
+                .col-xs-2.col-xs-offset-5.text-center
+                  %p.item N/A
 
-          %section.section-small
-            .limits-top-2
-              %p.tag Physical Damage
-            .limits-base-2
-              - a = ["Comprehensive Coverage", "Special Causes of Loss Coverage",
-                "Collision Coverage", "Towing and Labor"]
-              - a.each do |dmg|
-                .row
-                  .col-xs-4
-                    %p.item= dmg
-                  .col-xs-1.text-center
-                    %p.item Excluded
-                  .col-xs-2.col-xs-offset-5.text-center
-                    %p.item N/A
+        %section
+          %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
+          .box.forms
+            %p.item= @policy.auto_forms
+          .box
+          %p These Declarations and the Common Policy Declarations, if applicable, |
+            together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
+            if any, issued to form a part thereof, complete the above numbered policy. |
 
-          %section
-            %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
-            .box.forms
-              %p.item= @policy.auto_forms
-            .box
-            %p These Declarations and the Common Policy Declarations, if applicable, |
-              together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
-              if any, issued to form a part thereof, complete the above numbered policy. |
-
-          = render partial: 'pdf_footer.html', locals: {page: 5, name: "CA"}
+        = render partial: 'pdf_footer.html', locals: {page: 5, name: "CA"}
