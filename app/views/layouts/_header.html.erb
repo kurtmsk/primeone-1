@@ -46,19 +46,19 @@
         <!-- <li class="nav-heading"><span>Navigation</span></li> -->
         <li class="<%= 'active' if controller_name == 'policies'%>">
           <%= link_to policies_path do %>
-            <span class="menu-icon icon-docs"></span>
+            <span class="menu-icon fa fa-archive"></span>
             <p>Policies</p>
           <% end %>
         </li>
         <li class="<%= 'active' if controller_name == 'quotes'%>">
           <%= link_to "#" do %>
-            <span class="menu-icon icon-briefcase"></span>
+            <span class="menu-icon fa fa-briefcase"></span>
             <p>Quotes</p>
           <% end %>
         </li>
         <li class="<%= 'active' if controller_name == 'brokers'%>">
           <%= link_to brokers_path do %>
-            <span class="menu-icon icon-users"></span>
+            <span class="menu-icon fa fa-users"></span>
             <p>Brokers</p><span class="arrow"></span>
           <% end %>
         </li>

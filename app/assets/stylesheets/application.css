@@ -14,7 +14,7 @@
  *= require uniform/css/uniform.default.css.scss
  *= require bootstrap/css/bootstrap.min.css
  *= require fontawesome/css/font-awesome.css
- *= require line-icons/simple-line-icons.css
+ * require line-icons/simple-line-icons.css
  *= require waves/waves.min.css
  *= require switchery/switchery.min.css
  *= require 3d-bold-navigation/css/style.css
