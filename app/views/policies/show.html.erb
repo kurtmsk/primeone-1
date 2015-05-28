@@ -36,8 +36,7 @@
       <div class="col-md-12">
         <div class="panel panel-white">
           <div class="panel-body">
-            <!--form action="#{@policy.id}/upload" class="dropzone">-->
-            <%= form_tag upload_policy_path, class:'', multipart: true do %>
+            <%= form_tag populate_policy_path, class:'', multipart: true do %>
               <%#= hidden_field_tag :id, @policy.id %>
               <div class="fallback">
                 <!--<input name="file" type="file" />-->
@@ -364,7 +363,8 @@
                 </tr>
                 <% loc.exposures.each do |exp| %>
                 <tr>
-                  <td><%= exp.name %></td>
+                  <td>
+                  <td><b><%= exp.name %></b></td>
                 </tr>
                 <tr>
                   <td>Valuation</td>
@@ -435,7 +435,8 @@
                 </tr>
                 <% @policy.crime.exposures.each do |exp| %>
                 <tr>
-                  <td><%= exp.name %></td>
+                  <td></td>
+                  <td><b><%= exp.name %></b></td>
                 </tr>
                 <tr>
                   <td>Limit</td>
@@ -515,7 +516,8 @@
                 </tr>
                 <% @policy.gl.exposure_gls.each do |exp| %>
                 <tr>
-                  <td><%= exp.name %></td>
+                  <td></td>
+                  <td><b><%= exp.name %></b></td>
                 </tr>
                 <tr>
                   <td>Location Number</td>

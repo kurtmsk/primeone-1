@@ -10,6 +10,11 @@ class CreateCrimes < ActiveRecord::Migration
       t.integer :ded, default: 0
 
       # has_many exposures
+      # Employee Theft --> 0
+      # Forgery & Alteration --> 1
+      # Money & Securities In/Out --> 2
+      # Safe Burglary --> 3
+      # Premises Burglary --> 4
 
       t.timestamps null: false
     end

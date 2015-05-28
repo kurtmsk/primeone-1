@@ -22,6 +22,7 @@ class CreateGls < ActiveRecord::Migration
       t.integer :medical_expense, default: 0
 
       # has_many exposure_gls
+      
 
       t.timestamps null: false
     end

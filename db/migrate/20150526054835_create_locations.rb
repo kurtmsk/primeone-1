@@ -51,6 +51,13 @@ class CreateLocations < ActiveRecord::Migration
       t.integer :mech_premium, default: ""
 
       # has_many Exposures
+      # Building/IBB --> 0
+      # BPP: --> 1
+      # Earnings: --> 2
+      # Sign:   --> 3
+      # Pumps: --> 4
+      # Canopies: --> 5
+      # Other:  --> 6
 
       t.timestamps null: false
     end

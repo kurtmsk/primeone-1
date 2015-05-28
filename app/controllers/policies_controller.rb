@@ -50,22 +50,22 @@ class PoliciesController < ApplicationController
     end
   end
 
-  def upload
-    #@policy = Policy.find(params[:id])
+  # Upload / Populate
+  def populate
     if (params[:file] != nil)
       readWorkbook()
+    end
 
-      respond_to do |format|
-        if @policy.save
-          format.html { render :show, notice: 'Policy was successfully populated' }
-          format.json { render :show, status: :ok, location: @policy }
-        else
-          format.html { render :edit }
-          format.json { render json: @policy.errors, status: :unprocessable_entity }
-        end
+    findForms()
+
+    respond_to do |format|
+      if @policy.save
+        format.html { render :show, notice: 'Policy was successfully populated' }
+        format.json { render :show, status: :ok, location: @policy }
+      else
+        format.html { render :edit }
+        format.json { render json: @policy.errors, status: :unprocessable_entity }
       end
-    else
-      render :show, notice: 'No file selected'
     end
   end
 
@@ -104,10 +104,99 @@ class PoliciesController < ApplicationController
     def policy_params
       params.require(:policy).permit(:policy_number, :client_code, :effective_date, :expiration_date,
       :status, :package_premium_total, :name, :business_type, :type, :mortgagee, :quoted_by,
-      :street, :city, :state, :zip, property_attributes: [:premium_total,
+      :street, :city, :state, :zip, :forms, :property_forms, :gl_forms, :crime_forms,
+      :auto_forms, property_attributes: [:premium_total,
       :schedule_rating_pct, :premium_subtotal] )
     end
 
+    # Find the forms necessary for this policy
+    def findForms
+      # initialize forms for first page (of mandatory forms)
+      @policy.forms = "IL0003(9/08) IL0017(11/98) IL0286(9/08) IL0030(1/06) IL0031(1/06)"
+
+      # add relevant commercial property declarations
+      if (@policy.property.premium_total != 0)
+        # mandatory forms
+        @policy.property_forms = "CP0010(6/07) CP0090(7/88) CP0120(1/08) CP0140(7/06) CP1032(8/08) IL0935(7/02) IL0953(1/08) CP1270(9/96) "
+        # optional forms
+        # BUSINESS INCOME & EXTRA EXPENSE
+        if (!@policy.property.locations[0].exposures.where[2].limit.nil? && !@policy.property.locations[0].exposures[2].limit != 0)
+          @policy.property_forms += "CP0030(6/07) "
+        end
+        # SPOILAGE COVERAGE **
+        if (!@policy.property.locations[0].coverage_type == "Special")
+          @policy.property_forms += "CP1030(6/07) "
+        end
+        # SPECIAL FORM - CAUSE OF LOSS
+        if (!@policy.property.locations[0].exposures[4].limit.nil? && @policy.property.locations[0].exposures[4].limit != 0)
+          @policy.property_forms += "CP0440(6/95) "
+        end
+        # OUTDOOR SIGN
+        if (!@policy.property.locations[0].exposures[3].limit.nil? && !@policy.property.locations[0].exposures[3].limit != 0)
+          @policy.property_forms += "CP1440(6/07) "
+        end
+        # ELITE PROPERTY ENHANCEMENT
+        if (@policy.property.locations[0].enhc_premium != 0)
+          @policy.property_forms += "PO-PRP-3(12/13) "
+        end
+        # MANDATORY EQUIPMENT BREAKDOWN PROTECTION COVERAGE & MICHIGAN CHANGES
+        if (@policy.property.locations[0].mech_premium != 0)
+          @policy.property_forms += "EB0020(08/08) EB0108(09/07)"
+        end
+      end
+
+      # add relevant general liability declarations
+      if (@policy.gl.premium_total != 0)
+        # mandatory forms
+        @policy.gl_forms = "CG0001(12/07) CG0068(5/09) CG0099(11/85) CG0168(12/4) CG2101(11/85) CG2146(7/98) CG2147(12/07) CG2149(9/99) CG2167(12/04) CG2175(6/08) CG2190(1/06) CG2231(7/98) CG2258(11/85) CG2407(1/96) IL0021(9/08) PO-GL-5(5/12) PO-GL-6(5/12) "
+        # optional forms
+        # EXCLUSION MEDICAL PAYMENTS
+        if (!@policy.gl.medical_expense.nil? && @policy.gl.medical_expense != 0)
+          @policy.gl_forms += "CG2135(10/01) "
+        end
+        # EXCLUSION PERSONAL INJURY
+        if (!@policy.gl.personal_advertising_injury.nil? && @policy.gl.personal_advertising_injury != 0)
+          @policy.gl_forms += "CG2138(11/85) "
+        end
+        # EXCLUSION DAMAGE TO PREMISES RENTED
+        if (!@policy.gl.fire_damage.nil? && @policy.gl.fire_damage != 0)
+          @policy.gl_forms += "CG2145(7/98) "
+        end
+        # WATER IN THE GAS TANK
+        if (!@policy.gl.water_gas_tank == "Yes")
+          @policy.gl_forms += "PO_GL_WIG(12/13)"
+        end
+      end
+
+      # add relevant crime declarations
+      if (@policy.crime.premium_total != 0)
+        # mandatory forms
+        @policy.crime_forms = "CR0021(5/06) CR0110(8/07) CR0246(8/07) CR0730(3/06) CR0731(3/06) IL0935(7/02) IL0953(1/08) "
+        # optional forms
+        # EMPLOYEE THEFT AND FORGERY POLICY
+        if ((!@policy.crime.exposures[0].limit.nil? && @policy.crime.exposures[0].limit != 0) ||
+          (!@policy.crime.exposures[1].limit.nil? && @policy.crime.exposures[1].limit != 0))
+          @policy.crime_forms += "CR0029(5/06) "
+        end
+        # INSIDE THE PREMISES-THEFT OF OTHER PROPERTY
+        if (!policy.crime.exposures[4].limit.nil? && @policy.crime.exposures[4].limit != 0)
+          @policy.crime_forms += "CR0405(8/07) "
+        end
+        # INSIDE THE PREMISES – ROBBERY OF A CUSTODIAN OR SAFE BURGLARY OF MONEY & SECURITIES
+        if ((!@policy.crime.exposures[2].limit.nil? && @policy.crime.exposures[2].limit != 0) ||
+          (!@policy.crime.exposures[3].limit.nil? && @policy.crime.exposures[3].limit != 0))
+          @policy.crime_forms += "CR0405(8/07) "
+        end
+      end
+
+      # add relevant commerical auto declarations
+      if (@policy.auto.premium_total != "0.00")
+        # mandatory forms
+        @policy.auto_forms = "CA0110(11/06) CA0217(3/94) CA0001(3/06) CA2384(1/06) PO-CA-1(5/12) "
+      end
+    end
+
+    # Read the workbook to fill out the policy
     def readWorkbook
       # open the speadsheet
       workbook = Roo::Spreadsheet.open(params[:file], extension: :xlsx)
@@ -136,7 +225,8 @@ class PoliciesController < ApplicationController
       @policy.property.premium_subtotal= workbook.cell('J',35)
       @policy.property.premium_total= workbook.cell('M',41)
 
-      @policy.property.locations << Location.create!(
+      # First location (locations[0])
+      @policy.property.locations[0] = Location.create!(
         number: 1, premium: workbook.cell('N',33), co_ins: workbook.cell('L',14),
         co_ins_factor: workbook.cell('L',15), ded: workbook.cell('B',15),
         ded_factor: workbook.cell('G',15),
@@ -164,7 +254,7 @@ class PoliciesController < ApplicationController
       )
 
       for i in 23..29 do
-        @policy.property.locations.first.exposures << Exposure.create!(
+        @policy.property.locations[0].exposures[i-23]= Exposure.create!(
         name: workbook.cell('A',i), valuation: workbook.cell('D',i),
         limit: workbook.cell('F',i), rate: workbook.cell('H',i),
         ded_factor: workbook.cell('J',i), co_ins_factor: workbook.cell('L',i),
@@ -172,8 +262,9 @@ class PoliciesController < ApplicationController
         )
       end
 
+      # Second location (locations[1]) (optional)
       if (workbook.cell('T',10) != nil)
-        @policy.property.locations << Location.create!(
+        @policy.property.locations[1] = Location.create!(
           number: 2, premium: workbook.cell('AE',33), co_ins: workbook.cell('AC',14),
           co_ins_factor: workbook.cell('AC',15), ded: workbook.cell('S',15),
           ded_factor: workbook.cell('X',15),
@@ -201,7 +292,7 @@ class PoliciesController < ApplicationController
         )
 
         for i in 23..29 do
-          @policy.property.locations.second.exposures << Exposure.create!(
+          @policy.property.locations[1].exposures[i-23]= Exposure.create!(
           name: workbook.cell('R',i), valuation: workbook.cell('U',i),
           limit: workbook.cell('W',i), rate: workbook.cell('Y',i),
           ded_factor: workbook.cell('AA',i), co_ins_factor: workbook.cell('AC',i),

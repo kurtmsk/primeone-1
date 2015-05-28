@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :policies do
     member do
-      post 'upload', method: :post
+      post 'populate', method: :post
     end
   end
   resources :brokers, only: [:index]
