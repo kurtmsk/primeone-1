@@ -85,11 +85,25 @@
                 <tr>
                   <td>Status</td>
                   <td>
-                    <%= link_to @policy.status, "#", id:'status', class: "editable editable-clickaaa",
+                    <%= link_to @policy.status, "#", id:'status', class: "editable editable-clickable",
                     data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
                     title: "Enter Status", type: "select", value: @policy.status } %>
                   </td>
                 </tr>
+
+                <tr>
+                  <td>Broker</td>
+                  <td>
+                    <%= link_to @broker.try(:name), "#", id:'broker_id', class: "editable editable-clickable editable-empty",
+                    data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+                    title:  "Select Broker", type:"select2", value: @broker.try(:id) } %>
+
+                    <!--<a href="#" id="country" data-type="select2" data-pk="1" data-value="BS" data-title="Select country" class="editable editable-click">
+                      Bahamas
+                    </a>-->
+                  </td>
+                </tr>
+
                 <tr>
                   <td>Effective Date</td>
                   <td>
@@ -620,14 +634,7 @@
                     <td>Select2 (tags mode)</td>
                     <td><a href="#" id="tags" data-type="select2" data-pk="1" data-title="Enter tags" class="editable editable-click">html, javascript</a></td>
                   </tr>
-                  <tr>
-                    <td>Select2 (dropdown mode)</td>
-                    <td><a href="#" id="country" data-type="select2" data-pk="1" data-value="BS" data-title="Select country" class="editable editable-click">Bahamas</a></td>
-                  </tr>
-                  <tr>
-                    <td>Custom input, several fields</td>
-                    <td><a href="#" id="address" data-type="address" data-pk="1" data-title="Please, fill address" class="editable editable-click"><b>Moscow</b>, Lenina st., bld. 12</a></td>
-                  </tr>-->
+                  -->
                 </tbody>
               </table>
             </div>

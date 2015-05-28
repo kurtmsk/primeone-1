@@ -22,33 +22,33 @@ class CreateLocations < ActiveRecord::Migration
       t.string :protection_class, default: ""
       t.string :updates, default: ""
       t.string :year_built, default: ""
-      t.integer :stories, default: ""
-      t.integer :square_feet, default: ""
-      t.integer :parking_lot, default: ""
+      t.integer :stories, default: 0
+      t.integer :square_feet, default: 0
+      t.integer :parking_lot, default: 0
 
       # Food Spoilage
       #t.string :food_facticity, default: ""
-      t.integer :food_limit, default: ""
-      t.integer :food_rate, default: ""
-      t.integer :food_premium, default: ""
+      t.integer :food_limit, default: 0
+      t.integer :food_rate, default: 0
+      t.integer :food_premium, default: 0
 
       # Theft
       #t.string :theft_facticity, default: ""
-      t.integer :theft_limit, default: ""
-      t.integer :theft_rate, default: ""
-      t.integer :theft_premium, default: ""
+      t.integer :theft_limit, default: 0
+      t.integer :theft_rate, default: 0
+      t.integer :theft_premium, default: 0
 
       # Property Enhancement
       #t.string :enhc_facticity, default: ""
-      t.integer :enhc_limit, default: ""
-      t.integer :enhc_rate, default: ""
-      t.integer :enhc_premium, default: ""
+      t.integer :enhc_limit, default: 0
+      t.integer :enhc_rate, default: 0
+      t.integer :enhc_premium, default: 0
 
       # Mechanical Breakdown
       #t.string :mech_facticity, default: ""
-      t.integer :mech_limit, default: ""
-      t.integer :mech_rate, default: ""
-      t.integer :mech_premium, default: ""
+      t.integer :mech_limit, default: 0
+      t.integer :mech_rate, default: 0
+      t.integer :mech_premium, default: 0
 
       # has_many Exposures
       # Building/IBB --> 0

@@ -9,9 +9,9 @@
         %p.strong BY:
       .col-xs-5.signature
         -if request.format == 'pdf'
-          = wicked_pdf_image_tag "sig.png", width:"200", height:"100"
+          = wicked_pdf_image_tag "signature.jpg", width:"200", height:"100"
         -else
-          = image_tag "sig.png", width:"200", height:"100"
+          = image_tag "signature.jpg", width:"200", height:"100"
 
     .row
       .col-xs-3.col-xs-offset-3

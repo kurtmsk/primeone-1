@@ -1,5 +1,5 @@
 class PoliciesController < ApplicationController
-  before_action :set_policy, only: [:show, :edit, :update, :destroy, :upload]
+  before_action :set_policy, only: [:show, :edit, :update, :destroy, :populate]
 
   # GET /policies
   # GET /policies.json
@@ -105,7 +105,7 @@ class PoliciesController < ApplicationController
       params.require(:policy).permit(:policy_number, :client_code, :effective_date, :expiration_date,
       :status, :package_premium_total, :name, :business_type, :type, :mortgagee, :quoted_by,
       :street, :city, :state, :zip, :forms, :property_forms, :gl_forms, :crime_forms,
-      :auto_forms, property_attributes: [:premium_total,
+      :auto_forms, :broker_id, property_attributes: [:premium_total,
       :schedule_rating_pct, :premium_subtotal] )
     end
 
@@ -120,7 +120,7 @@ class PoliciesController < ApplicationController
         @policy.property_forms = "CP0010(6/07) CP0090(7/88) CP0120(1/08) CP0140(7/06) CP1032(8/08) IL0935(7/02) IL0953(1/08) CP1270(9/96) "
         # optional forms
         # BUSINESS INCOME & EXTRA EXPENSE
-        if (!@policy.property.locations[0].exposures.where[2].limit.nil? && !@policy.property.locations[0].exposures[2].limit != 0)
+        if (!@policy.property.locations[0].exposures[2].limit.nil? && !@policy.property.locations[0].exposures[2].limit != 0)
           @policy.property_forms += "CP0030(6/07) "
         end
         # SPOILAGE COVERAGE **
@@ -262,6 +262,11 @@ class PoliciesController < ApplicationController
         )
       end
 
+      # Earnings should have all 0s
+      @policy.property.locations[0].exposures[2].valuation= 0
+      @policy.property.locations[0].exposures[2].ded_factor= 0
+      @policy.property.locations[0].exposures[2].co_ins_factor= 0
+
       # Second location (locations[1]) (optional)
       if (workbook.cell('T',10) != nil)
         @policy.property.locations[1] = Location.create!(
@@ -299,6 +304,11 @@ class PoliciesController < ApplicationController
           premium: workbook.cell('AF',i)
           )
         end
+
+        # Earnings should have all 0s
+        @policy.property.locations[1].exposures[2].valuation= 0
+        @policy.property.locations[1].exposures[2].ded_factor= 0
+        @policy.property.locations[1].exposures[2].co_ins_factor= 0
       end
 
       # Crime
