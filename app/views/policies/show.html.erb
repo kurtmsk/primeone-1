@@ -186,7 +186,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Property Premium Subtotal</td>
+                  <td>Property Premium Total</td>
                   <td>
                     <%= link_to @policy.property.premium_total, "#" %>
                   </td>
@@ -362,8 +362,217 @@
                     <%= link_to loc.mech_premium, "#" %>
                   </td>
                 </tr>
-
+                <% loc.exposures.each do |exp| %>
+                <tr>
+                  <td><%= exp.name %></td>
+                </tr>
+                <tr>
+                  <td>Valuation</td>
+                  <td><%= link_to exp.valuation, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Limit</td>
+                  <td><%= link_to exp.limit, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Rate</td>
+                  <td><%= link_to exp.rate, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Deduction Factor</td>
+                  <td><%= link_to exp.ded_factor, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Co Insurance Factor</td>
+                  <td><%= link_to exp.co_ins_factor, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Premium</td>
+                  <td><%= link_to exp.premium, "#" %></td>
+                </tr>
                 <% end %>
+                <% end %>
+                <tr>
+                  <td>
+                    <b>Crime</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Exclude Safe</td>
+                  <td>
+                    <%= link_to @policy.crime.exclude_safe, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Burglar Alarm</td>
+                  <td>
+                    <%= link_to @policy.crime.burglar_alarm, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Deduction</td>
+                  <td>
+                    <%= link_to @policy.crime.ded, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Schedule Rating</td>
+                  <td>
+                    <%= link_to @policy.crime.schedule_rating, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Premium Subtotal</td>
+                  <td>
+                    <%= link_to @policy.crime.premium_subtotal, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Premium Total</td>
+                  <td>
+                    <%= link_to @policy.crime.premium_total, "#" %>
+                  </td>
+                </tr>
+                <% @policy.crime.exposures.each do |exp| %>
+                <tr>
+                  <td><%= exp.name %></td>
+                </tr>
+                <tr>
+                  <td>Limit</td>
+                  <td><%= link_to exp.limit, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Premium</td>
+                  <td><%= link_to exp.premium, "#" %></td>
+                </tr>
+                <% end %>
+                <tr>
+                  <td><b>General Liability</b></td>
+                </tr>
+                <tr>
+                  <td>Premium Total</td>
+                  <td><%= link_to @policy.gl.premium_total, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Premium Subtotal</td>
+                  <td><%= link_to @policy.gl.premium_subtotal, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Schedule Rating Percentage</td>
+                  <td><%= link_to @policy.gl.schedule_rating, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Multi Location Factor</td>
+                  <td><%= link_to @policy.gl.multi_loc_factor, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Gas Premium</td>
+                  <td><%= link_to @policy.gl.gas_premium, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Rate</td>
+                  <td><%= link_to @policy.gl.rate, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Water in the Gas Tank</td>
+                  <td><%= link_to @policy.gl.water_gas_tank, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Additional Insurance Number</td>
+                  <td><%= link_to @policy.gl.add_ins_number, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Territory</td>
+                  <td><%= link_to @policy.gl.territory, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Comments</td>
+                  <td><%= link_to @policy.gl.comments, "#" %></td>
+                </tr>
+                <tr>
+                  <td>General Aggregate</td>
+                  <td><%= link_to @policy.gl.gen_agg, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Products Completed Operations</td>
+                  <td><%= link_to @policy.gl.products_completed_operations, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Personal Advertising Injurt</td>
+                  <td><%= link_to @policy.gl.personal_advertising_injury, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Each Occurence</td>
+                  <td><%= link_to @policy.gl.each_occurence, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Fire Damag</td>
+                  <td><%= link_to @policy.gl.fire_damage, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Medical Expense</td>
+                  <td><%= link_to @policy.gl.medical_expense, "#" %></td>
+                </tr>
+                <% @policy.gl.exposure_gls.each do |exp| %>
+                <tr>
+                  <td><%= exp.name %></td>
+                </tr>
+                <tr>
+                  <td>Location Number</td>
+                  <td><%= link_to exp.loc_number, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Description</td>
+                  <td><%= link_to exp.description, "#" %></td>
+                </tr>
+                <tr>
+                  <td>COV</td>
+                  <td><%= link_to exp.cov, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Code</td>
+                  <td><%= link_to exp.code, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Premium Basis</td>
+                  <td><%= link_to exp.premium_basis, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Sales Type</td>
+                  <td><%#= link_to exp.sales_type, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Base Rate</td>
+                  <td><%= link_to exp.base_rate, "#" %></td>
+                </tr>
+                <tr>
+                  <td>ILF</td>
+                  <td><%= link_to exp.ilf, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Premium</td>
+                  <td><%= link_to exp.premium, "#" %></td>
+                </tr>
+                <% end %>
+                <tr>
+                  <td><b>Commercial Auto</b></td>
+                </tr>
+                <tr>
+                  <td>Locations</td>
+                  <td><%= link_to @policy.auto.locations, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Hired Auto</td>
+                  <td><%= link_to @policy.auto.hired_auto, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Hired Auto Premium</td>
+                  <td><%= link_to @policy.auto.hired_auto_premium, "#" %></td>
+                </tr>
+                <tr>
+                  <td>Premium Total</td>
+                  <td><%= link_to @policy.auto.premium_total, "#" %></td>
+                </tr>
 
                 <!--
                 <tr>

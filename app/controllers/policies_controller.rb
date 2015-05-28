@@ -52,16 +52,20 @@ class PoliciesController < ApplicationController
 
   def upload
     #@policy = Policy.find(params[:id])
-    readWorkbook()
+    if (params[:file] != nil)
+      readWorkbook()
 
-    respond_to do |format|
-      if @policy.save
-        format.html { render :show, notice: 'Policy was successfully updated' }
-        format.json { render :show, status: :ok, location: @policy }
-      else
-        format.html { render :edit }
-        format.json { render json: @policy.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @policy.save
+          format.html { render :show, notice: 'Policy was successfully populated' }
+          format.json { render :show, status: :ok, location: @policy }
+        else
+          format.html { render :edit }
+          format.json { render json: @policy.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      render :show, notice: 'No file selected'
     end
   end
 
