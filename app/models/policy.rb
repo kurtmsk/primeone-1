@@ -4,10 +4,13 @@ class Policy < ActiveRecord::Base
 
   # Associations
   belongs_to :broker
-  has_one :property
-  has_one :crime
-  has_one :gl
-  has_one :auto
+  has_one :property, dependent: :destroy
+  has_one :crime, dependent: :destroy
+  has_one :gl, dependent: :destroy
+  has_one :auto, dependent: :destroy
 
-  #accepts_nested_attributes_for :property, allow_destroy: true
+  accepts_nested_attributes_for :property, allow_destroy: true
+  accepts_nested_attributes_for :gl, allow_destroy: true
+  accepts_nested_attributes_for :crime, allow_destroy: true
+  accepts_nested_attributes_for :auto, allow_destroy: true
 end

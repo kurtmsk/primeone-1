@@ -11,7 +11,7 @@ namespace :preload do
     workbook.default_sheet = 'Sheet1'
 
     (2..workbook.last_row).each do |i|
-      Broker.create( name: (workbook.row(i)[0] || ""), dba: (workbook.row(i)[1] || ""),
+      Broker.create!( name: (workbook.row(i)[0] || ""), dba: (workbook.row(i)[1] || ""),
       street: (workbook.row(i)[2] || ""), city: (workbook.row(i)[3] || ""),
       state: (workbook.row(i)[4] || ""), zip: (workbook.row(i)[5].to_s.split('.')[0] || ""),
       phone: (number_to_phone(workbook.row(i)[6].to_s.split('.')[0], area_code:true) || ""),
@@ -30,10 +30,16 @@ namespace :preload do
     workbook.default_sheet = 'Sheet1'
 
     (2..workbook.last_row).each do |i|
-      Policy.create( status: (workbook.row(i)[0] || ""), client_code: (workbook.row(i)[1] || ""),
+      p = Policy.new( status: (workbook.row(i)[0] || ""), client_code: (workbook.row(i)[1] || ""),
         name: (workbook.row(i)[2] || ""), effective_date: (workbook.row(i)[3] || ""),
         policy_number: (workbook.row(i)[4] || "") )
 
+      p.build_property()
+      p.build_gl()
+      p.build_crime()
+      p.build_auto()
+
+      p.save
       #puts fields
     end
   end
