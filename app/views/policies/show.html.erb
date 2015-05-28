@@ -165,14 +165,204 @@
                   <td>
                     <b>Property</b>
                   </td>
+                  <td>
+                    edit of sub categories coming soon
+                  </td>
                 </tr>
                 <tr>
                   <td>Property Schedule Rating Percentage</td>
                   <td>
                     <%#= link_to @policy.property.schedule_rating_pct, "#", id:'schedule_rating_pct', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Schedule Rating Percentage", type: "text" } %>
+                    <%= link_to @policy.property.schedule_rating_pct, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Property Premium Subtotal</td>
+                  <td>
+                    <%= link_to @policy.property.premium_subtotal, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Property Premium Subtotal</td>
+                  <td>
+                    <%= link_to @policy.property.premium_total, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Locations</b>
+                  </td>
+                </tr>
+                <% @policy.property.locations.each do |loc| %>
+                <tr>
+                  <td>Location Number </td>
+                  <td>
+                    <%= link_to loc.number, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Location Premium </td>
+                  <td>
+                    <%= link_to loc.premium, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Location Co-Insurance </td>
+                  <td>
+                    <%= link_to loc.co_ins, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Location Co-Insurance Factor </td>
+                  <td>
+                    <%= link_to loc.co_ins_factor, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Location Deductible </td>
+                  <td>
+                    <%= link_to loc.ded, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Location Deductible Factor </td>
+                  <td>
+                    <%= link_to loc.ded_factor, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Location Address </td>
+                  <td>
+                    <%= link_to "#{loc.street} <br /> #{loc.city}, #{loc.state}. #{loc.zip}".html_safe, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Location Business Type </td>
+                  <td>
+                    <%= link_to loc.business_type, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Location Coverage Type </td>
+                  <td>
+                    <%= link_to loc.coverage_type, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Location Protection Class </td>
+                  <td>
+                    <%= link_to loc.protection_class, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Location Updates </td>
+                  <td>
+                    <%= link_to loc.updates, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Location Year Built </td>
+                  <td>
+                    <%= link_to loc.year_built, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Location Stories </td>
+                  <td>
+                    <%= link_to loc.stories, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Location Square Feet </td>
+                  <td>
+                    <%= link_to loc.square_feet, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Location Parking Lot Square Feet </td>
+                  <td>
+                    <%= link_to loc.parking_lot, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Food Spoilage</td>
+                </tr>
+                <tr>
+                  <td>Food Spoilage Limit </td>
+                  <td>
+                    <%= link_to loc.food_limit, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Food Spoilage Rate </td>
+                  <td>
+                    <%= link_to loc.food_rate, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Food Spoilage Premium </td>
+                  <td>
+                    <%= link_to loc.food_premium, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Theft Limit</td>
+                  <td>
+                    <%= link_to loc.theft_limit, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Theft Rate</td>
+                  <td>
+                    <%= link_to loc.theft_rate, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Theft Premium</td>
+                  <td>
+                    <%= link_to loc.theft_premium, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Enchancements Limit</td>
+                  <td>
+                    <%= link_to loc.enhc_limit, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Enhancements Rate</td>
+                  <td>
+                    <%= link_to loc.enhc_rate, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Enhancements Premium</td>
+                  <td>
+                    <%= link_to loc.enhc_premium, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Mechanical Breakdown Limit</td>
+                  <td>
+                    <%= link_to loc.mech_limit, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Mechanical Breakdown Rate</td>
+                  <td>
+                    <%= link_to loc.mech_rate, "#" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Mechanical Breakdown Premium</td>
+                  <td>
+                    <%= link_to loc.mech_premium, "#" %>
                   </td>
                 </tr>
 
+                <% end %>
+
+                <!--
                 <tr>
                   <td>Select, local array, custom display</td>
                   <td><a href="#" id="sex" data-type="select" data-pk="1" data-value=""
@@ -223,7 +413,7 @@
                   <tr>
                     <td>Custom input, several fields</td>
                     <td><a href="#" id="address" data-type="address" data-pk="1" data-title="Please, fill address" class="editable editable-click"><b>Moscow</b>, Lenina st., bld. 12</a></td>
-                  </tr>
+                  </tr>-->
                 </tbody>
               </table>
             </div>

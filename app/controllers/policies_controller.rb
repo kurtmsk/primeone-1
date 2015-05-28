@@ -116,7 +116,7 @@ class PoliciesController < ApplicationController
       @policy.effective_date= workbook.cell('F',7)
       @policy.expiration_date= workbook.cell('J',7)
 
-      @policy.package_total_premium= workbook.cell('N',109)
+      @policy.package_premium_total= workbook.cell('N',109)
 
       #dba: workbook.cell('B',4),
       @policy.business_type= workbook.cell('L',5)
@@ -128,9 +128,9 @@ class PoliciesController < ApplicationController
       @policy.zip= workbook.cell('K',6).to_i.to_s
 
       # Property
-      @policy.property.premium_total= workbook.cell('J',36)
-      @policy.property.schedule_rating_pct= workbook.cell('J',35)
-      @policy.property.premium_subtotal= workbook.cell('M',41)
+      @policy.property.schedule_rating_pct= workbook.cell('J',36)
+      @policy.property.premium_subtotal= workbook.cell('J',35)
+      @policy.property.premium_total= workbook.cell('M',41)
 
       @policy.property.locations << Location.create!(
         number: 1, premium: workbook.cell('N',33), co_ins: workbook.cell('L',14),
@@ -241,7 +241,7 @@ class PoliciesController < ApplicationController
       @policy.gl.medical_expense= workbook.cell('F',72)
 
       for i in 77..79 do
-        @policy.gl.exposure_gls = ExposureGl.create!(
+        @policy.gl.exposure_gls << ExposureGl.create!(
         name: "Exposure_#{i-76}",
         loc_number: workbook.cell('A',i),
         description: workbook.cell('B',i),
