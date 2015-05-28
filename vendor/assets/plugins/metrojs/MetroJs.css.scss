@@ -3525,7 +3525,7 @@ html body .black.accentBorderTop {
   color: #000;
 }
 .light .appbar-buttons a > img {
-  background-image: url('images/metroIcons_light.jpg');
+  background-image: asset-data-url('MetroJS/metroIcons_light.jpg');
 }
 .light .appbar a.etc,
 .light .appbar a.etc:hover,
@@ -3610,7 +3610,7 @@ html body .black.accentBorderTop {
   width: 840px;
 }
 .appbar-buttons a > img {
-  background-image: url('images/metroIcons.jpg');
+  background-image: asset-data-url('MetroJS/metroIcons.jpg');
   background-repeat: no-repeat;
   border: none;
   height: 64px;
@@ -3972,4 +3972,3 @@ html body .black.accentBorderTop {
     width: 30%;
   }
 }
-
