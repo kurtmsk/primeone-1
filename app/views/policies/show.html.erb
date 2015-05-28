@@ -94,13 +94,9 @@
                 <tr>
                   <td>Broker</td>
                   <td>
-                    <%= link_to @broker.try(:name), "#", id:'broker_id', class: "editable editable-clickable editable-empty",
+                    <%= link_to (@broker.try(:name) || "Empty"), "#", id:'broker_id', class: "editable editable-clickable editable-empty",
                     data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
                     title:  "Select Broker", type:"select2", value: @broker.try(:id) } %>
-
-                    <!--<a href="#" id="country" data-type="select2" data-pk="1" data-value="BS" data-title="Select country" class="editable editable-click">
-                      Bahamas
-                    </a>-->
                   </td>
                 </tr>
 

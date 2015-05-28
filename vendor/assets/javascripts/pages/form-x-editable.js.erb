@@ -123,93 +123,92 @@ $(function(){
     }
   });
 
-$('#status').editable({
-  params: function(params) {
-    var data = {};
-    data['policy'] = {};
-    data['policy'][params.name] = params.value
-    data['id'] = params.pk;
-    data[params.name] = params.value
+  $('#status').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy'][params.name] = params.value
+      data['id'] = params.pk;
+      data[params.name] = params.value
 
-    return data;
-  },
+      return data;
+    },
 
-  source: [
-    {value: 'Upcoming', text: 'Upcoming'},
-    {value: 'Generated', text: 'Generated'},
-    {value: 'Reviewed', text: 'Reviewed'},
-    {value: 'Issued', text: 'Issued'}
-  ],
-});
+    source: [
+      {value: 'Upcoming', text: 'Upcoming'},
+      {value: 'Generated', text: 'Generated'},
+      {value: 'Reviewed', text: 'Reviewed'},
+      {value: 'Issued', text: 'Issued'}
+    ],
+  });
 
-$('#expiration_date').editable({
-  params: function(params) {
-    var data = {};
-    data['policy'] = {};
-    data['policy'][params.name] = params.value
-    data['id'] = params.pk;
-    data[params.name] = params.value
+  $('#expiration_date').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy'][params.name] = params.value
+      data['id'] = params.pk;
+      data[params.name] = params.value
 
-    return data;
-  },
+      return data;
+    },
 
-  viewformat: 'MM/DD/YYYY',
-  template: 'D / MMMM / YYYY',
-  combodate: {
-    minYear: 1950,
-    maxYear: 2050,
-    minuteStep: 1
-  }
-});
+    viewformat: 'MM/DD/YYYY',
+    template: 'D / MMMM / YYYY',
+    combodate: {
+      minYear: 1950,
+      maxYear: 2050,
+      minuteStep: 1
+    }
+  });
 
-$('#effective_date').editable({
-  params: function(params) {
-    var data = {};
-    data['policy'] = {};
-    data['policy'][params.name] = params.value
-    data['id'] = params.pk;
-    data[params.name] = params.value
+  $('#effective_date').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy'][params.name] = params.value
+      data['id'] = params.pk;
+      data[params.name] = params.value
 
-    return data;
-  },
+      return data;
+    },
 
-  viewformat: 'MM/DD/YYYY',
-  template: 'MMM / D / YYYY',
-  combodate: {
-    minYear: 1950,
-    maxYear: 2050,
-    minuteStep: 1
-  }
-});
+    viewformat: 'MM/DD/YYYY',
+    template: 'MMM / D / YYYY',
+    combodate: {
+      minYear: 1950,
+      maxYear: 2050,
+      minuteStep: 1
+    }
+  });
 
-$('#address').editable({
-  params: function(params) {
-    var data = {};
-    data['policy'] = {};
-    data['policy']['street'] = params.value.street;
-    data['policy']['city'] = params.value.city;
-    data['policy']['state'] = params.value.state;
-    data['policy']['zip'] = params.value.zip;
-    data['id'] = params.pk;
+  $('#address').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy']['street'] = params.value.street;
+      data['policy']['city'] = params.value.city;
+      data['policy']['state'] = params.value.state;
+      data['policy']['zip'] = params.value.zip;
+      data['id'] = params.pk;
 
-    return data;
-  },
+      return data;
+    },
 
-  validate: function(value) {
-    if(value.city == '') return 'City is required!';
-    if(value.state == '') return 'State is required!';
-    if(value.zip == '') return 'Zip Code is required!';
-    if(value.street == '') return 'Street is required!';
-  }
-});
+    validate: function(value) {
+      if(value.city == '') return 'City is required!';
+      if(value.state == '') return 'State is required!';
+      if(value.zip == '') return 'Zip Code is required!';
+      if(value.street == '') return 'Street is required!';
+    }
+  });
 
-var countries = [];
-$.each({1: "Broker 1", 2: "Broker 2", 3: "Broker 3", 4: "Broker 4"}, function(k, v) {
-  countries.push({id: k, text: v});
-});
+var brokers = [];
+"<% Broker.select([:id, :name]).each do |b| %>"
+  brokers.push({ id: "<%= b.id %>", text: "<%= b.name %>"})
+"<% end %>"
 
 $('#broker_id').editable({
-
   params: function(params) {
     var data = {};
     data['policy'] = {};
@@ -219,10 +218,11 @@ $('#broker_id').editable({
     return data;
   },
 
-  source: countries,
+  source: brokers,
+  onblur: 'submit',
   select2: {
-    width: 300,
-    placeholder: 'Select Broker',
+    width: 350,
+    placeholder: 'Select a Broker',
     allowClear: true
   }
 });
