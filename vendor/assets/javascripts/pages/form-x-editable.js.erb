@@ -119,7 +119,7 @@ $(function(){
   });
 
 var brokers = [];
-"<% Broker.select([:id, :name]).each do |b| %>"
+"<% @brokers.each do |b| %>"
   brokers.push({ id: "<%= b.id %>", text: "<%= b.name %>"})
 "<% end %>"
 
