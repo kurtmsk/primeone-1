@@ -16,14 +16,18 @@
         %p.item= @policy.name
         .address
           %p.item= @policy.street
-          %span.item= @policy.city
-          ,
-          %span.item= @policy.state
+          -#%span.item= @policy.city
+          -#,
+          -#%span.item= @policy.state
           %span.item= @policy.city + ", " + @policy.state + " " + @policy.zip
       .col-xs-5.box.names.pull-right
         %p.tag PRODUCER:
-        %p.item= @policy.broker.try(:name)
-        -# @policy.agency[:name] #@broker.try[:name]
+        %p.item= @broker.try(:name)
+        %p.item= @broker.street
+        -#%span.item= @broker.city
+        -#,
+        -#%span.item= @policy.state
+        %span.item= @broker.try(:city) + ", " + @broker.try(:state) + " " + @broker.try(:zip)
 
   %section.section-small
     %p.text-center

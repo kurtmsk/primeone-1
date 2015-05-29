@@ -6,6 +6,7 @@ class AddFieldsToPolicy < ActiveRecord::Migration
     add_column :policies, :business_type, :string, default: ""
     add_column :policies, :mortgagee, :string, default: ""
     add_column :policies, :insured_type, :string, default: ""
+    add_column :policies, :dba, :string, default: ""
 
     # Mailing Address
     add_column :policies, :street, :string, default: ""

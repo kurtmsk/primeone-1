@@ -211,7 +211,7 @@ class PoliciesController < ApplicationController
 
       @policy.package_premium_total= workbook.cell('N',109)
 
-      #dba: workbook.cell('B',4),
+      @policy.dba= workbook.cell('B',4),
       @policy.business_type= workbook.cell('L',5)
       @policy.mortgagee= workbook.cell('S',3)
 
@@ -362,7 +362,7 @@ class PoliciesController < ApplicationController
         cov: workbook.cell('C',i),
         code: workbook.cell('H',i),
         premium_basis: workbook.cell('I',i),
-        #sales_type: workbook.cell('K',i),
+        sales_type: workbook.cell('K',i),
         base_rate: workbook.cell('M',i),
         ilf: workbook.cell('O',i),
         premium: workbook.cell('Q',i)

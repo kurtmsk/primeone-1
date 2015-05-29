@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20150526060651) do
     t.string   "cov",           default: ""
     t.string   "code",          default: ""
     t.integer  "premium_basis", default: 0
-    t.string   "type",          default: ""
+    t.string   "sales_type",    default: ""
     t.decimal  "base_rate",     default: 0.0
     t.decimal  "ilf",           default: 0.0
     t.integer  "premium",       default: 0
@@ -140,21 +140,21 @@ ActiveRecord::Schema.define(version: 20150526060651) do
     t.string   "protection_class",  default: ""
     t.string   "updates",           default: ""
     t.string   "year_built",        default: ""
-    t.integer  "stories"
-    t.integer  "square_feet"
-    t.integer  "parking_lot"
-    t.integer  "food_limit"
-    t.integer  "food_rate"
-    t.integer  "food_premium"
-    t.integer  "theft_limit"
-    t.integer  "theft_rate"
-    t.integer  "theft_premium"
-    t.integer  "enhc_limit"
-    t.integer  "enhc_rate"
-    t.integer  "enhc_premium"
-    t.integer  "mech_limit"
-    t.integer  "mech_rate"
-    t.integer  "mech_premium"
+    t.integer  "stories",           default: 0
+    t.integer  "square_feet",       default: 0
+    t.integer  "parking_lot",       default: 0
+    t.integer  "food_limit",        default: 0
+    t.integer  "food_rate",         default: 0
+    t.integer  "food_premium",      default: 0
+    t.integer  "theft_limit",       default: 0
+    t.integer  "theft_rate",        default: 0
+    t.integer  "theft_premium",     default: 0
+    t.integer  "enhc_limit",        default: 0
+    t.integer  "enhc_rate",         default: 0
+    t.integer  "enhc_premium",      default: 0
+    t.integer  "mech_limit",        default: 0
+    t.integer  "mech_rate",         default: 0
+    t.integer  "mech_premium",      default: 0
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.integer  "property_id"
@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(version: 20150526060651) do
     t.string   "business_type",         default: ""
     t.string   "mortgagee",             default: ""
     t.string   "insured_type",          default: ""
+    t.string   "dba",                   default: ""
     t.string   "street",                default: ""
     t.string   "city",                  default: ""
     t.string   "state",                 default: ""
