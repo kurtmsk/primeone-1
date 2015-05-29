@@ -87,7 +87,8 @@
                   <td>
                     <%= link_to @policy.status, "#", id:'status', class: "editable editable-clickable",
                     data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
-                    title: "Enter Status", type: "select", value: @policy.status } %>
+                    title: "Select Status", type: "select", placeholder: "Select Status",
+                    value: @policy.status } %>
                   </td>
                 </tr>
 
