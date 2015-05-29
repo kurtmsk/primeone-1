@@ -225,11 +225,13 @@ class PoliciesController < ApplicationController
       @policy.property.premium_subtotal= workbook.cell('J',35)
       @policy.property.premium_total= workbook.cell('M',41)
 
+      @policy.property.locations.destroy_all # no duplicates
       # First location (locations.first)
+      #locationFields = {
       @policy.property.locations.create!(
-        number: 1, premium: workbook.cell('N',33), co_ins: workbook.cell('L',14),
-        co_ins_factor: workbook.cell('L',15), ded: workbook.cell('B',15),
-        ded_factor: workbook.cell('G',15),
+        number: 1, premium: workbook.cell('N',33),
+        co_ins: workbook.cell('L',14), co_ins_factor: workbook.cell('L',15),
+        ded: workbook.cell('B',15), ded_factor: workbook.cell('G',15),
 
         street: workbook.cell('C',10), city: workbook.cell('B',11),
         state: workbook.cell('G',11), zip: workbook.cell('K',11).to_i.to_s,
@@ -252,6 +254,8 @@ class PoliciesController < ApplicationController
         mech_limit: workbook.cell('F',20), mech_rate: workbook.cell('H',20),
         mech_premium: workbook.cell('J',20)
       )
+      #if (!@policy.property.locations.where(number:1).exists?)
+      #@policy.property.locations.create!(locationFields)
 
       for i in 23..29 do
         @policy.property.locations.first.exposures.create!(
@@ -261,11 +265,13 @@ class PoliciesController < ApplicationController
         premium: workbook.cell('O',i)
         )
       end
+      #else
+        #@policy.property.locations.first.update(locationFields)
+      #end
 
       # Earnings should have all 0s
-      @policy.property.locations.first.exposures.third.valuation= 0
-      @policy.property.locations.first.exposures.third.ded_factor= 0
-      @policy.property.locations.first.exposures.third.co_ins_factor= 0
+      @policy.property.locations.first.exposures.third.update(valuation: 0,
+      ded_factor: 0, co_ins_factor: 0 )
 
       # Second location (locations.second) (optional)
       if (workbook.cell('T',10) != nil)
@@ -306,9 +312,8 @@ class PoliciesController < ApplicationController
         end
 
         # Earnings should have all 0s
-        @policy.property.locations.second.exposures.third.valuation= 0
-        @policy.property.locations.second.exposures.third.ded_factor= 0
-        @policy.property.locations.second.exposures.third.co_ins_factor= 0
+        @policy.property.locations.second.exposures.third.update(valuation: 0,
+        ded_factor: 0, co_ins_factor: 0 )
       end
 
       # Crime
@@ -318,6 +323,8 @@ class PoliciesController < ApplicationController
       @policy.crime.burglar_alarm= workbook.cell('F',44)
       @policy.crime.exclude_safe= workbook.cell('F',45)
       @policy.crime.ded= workbook.cell('K',44)
+
+      @policy.crime.exposures.destroy_all # no duplications
 
       for i in 47..51 do
         @policy.crime.exposures.create!(
@@ -345,9 +352,11 @@ class PoliciesController < ApplicationController
       @policy.gl.fire_damage= workbook.cell('F',71)
       @policy.gl.medical_expense= workbook.cell('F',72)
 
-      for i in 77..79 do
+      @policy.gl.exposure_gls.destroy_all # no duplications
+
+      for i in 76..79 do
         @policy.gl.exposure_gls.create!(
-        name: "exposure_#{i-76}",
+        name: "exposure_#{i-75}",
         loc_number: workbook.cell('A',i),
         description: workbook.cell('B',i),
         cov: workbook.cell('C',i),
