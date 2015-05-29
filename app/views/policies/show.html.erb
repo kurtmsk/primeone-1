@@ -61,7 +61,7 @@
             <hr>
             <h2 class="client_code_display"><%= @policy.client_code %></h2>
             <div style="float: right; margin-bottom: 10px">
-              <%= link_to policy_path(@policy, format: 'pdf') do %>
+              <%= link_to show_policy_path(@policy, format: 'pdf') do %>
               <button  class="btn btn-danger bg-danger">
                 Declaration Pages
               </button>

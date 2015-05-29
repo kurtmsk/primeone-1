@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
-  resources :policies, except: [:show] do
+  resources :policies, except: :show do
     member do
       post 'populate', method: :post
     end
   end
+
   resources :brokers, only: [:index]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'policies#index'
+
+  get 'policies/:policy_number' => 'policies#show', as: 'show_policy'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
