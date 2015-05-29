@@ -76,3 +76,6 @@ gem 'puma'
 
 # PDF Combination
 gem 'combine_pdf'
+
+# HTML --> PDF
+#gem 'pdfcrowd'
