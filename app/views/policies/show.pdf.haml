@@ -1,10 +1,10 @@
 - if @broker == nil
-  %h1.bg-danger.text-danger
+  %h1.bg-danger.text-danger.text-center
     Broker Not Selected
     %br
     Please Go Back and Select One.
     %br
-    = link_to "Back", policy_path(@policy)
+    = link_to "Back", :back
 
 -else
   #pdf.pdf
