@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   resources :policies do
     member do
-      post 'populate', method: :post
+      post 'populate'
+    end
+    collection do
+      post 'find'
     end
   end
 

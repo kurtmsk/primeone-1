@@ -50,6 +50,15 @@ class PoliciesController < ApplicationController
     end
   end
 
+  def find
+    @policy = Policy.find_by_policy_number(params[:policy_number])
+    if @policy != nil
+      redirect_to policy_path(@policy)
+    else
+      render :index
+    end
+  end
+
   # Upload / Populate
   def populate
     if (params[:file] != nil)
