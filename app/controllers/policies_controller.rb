@@ -356,49 +356,52 @@ class PoliciesController < ApplicationController
         )
       end
 
-      # General Liability
-      @policy.gl.premium_total= workbook.cell('N',99)
-      @policy.gl.premium_subtotal= workbook.cell('Q',89)
-      @policy.gl.schedule_rating= workbook.cell('Q',91)
-      @policy.gl.multi_loc_factor= workbook.cell('Q',90)
-      @policy.gl.gas_premium= workbook.cell('M',88)
-      @policy.gl.rate= workbook.cell('J',88)
-      @policy.gl.water_gas_tank= workbook.cell('F',88)
-      @policy.gl.add_ins_number= workbook.cell('F',87)
-      @policy.gl.territory= workbook.cell('B',65).to_i
-      @policy.gl.comments= (workbook.cell('B',99) || "none")
+      if (workbook.cell('A',89) != nil)
+        # General Liability
+        @policy.gl.premium_total= workbook.cell('N',99)
+        @policy.gl.premium_subtotal= workbook.cell('Q',89)
+        @policy.gl.schedule_rating= workbook.cell('Q',91)
+        @policy.gl.multi_loc_factor= workbook.cell('Q',90)
+        @policy.gl.gas_premium= workbook.cell('M',88)
+        @policy.gl.rate= workbook.cell('J',88)
+        @policy.gl.water_gas_tank= workbook.cell('F',88)
+        @policy.gl.add_ins_number= workbook.cell('F',87)
+        @policy.gl.territory= workbook.cell('B',65).to_i
+        @policy.gl.comments= (workbook.cell('B',99) || "none")
 
-      @policy.gl.gen_agg= workbook.cell('F',67)
-      @policy.gl.products_completed_operations= workbook.cell('F',68)
-      @policy.gl.personal_advertising_injury= workbook.cell('F',69)
-      @policy.gl.each_occurence= workbook.cell('F',70)
-      @policy.gl.fire_damage= workbook.cell('F',71)
-      @policy.gl.medical_expense= workbook.cell('F',72)
+        @policy.gl.gen_agg= workbook.cell('F',67)
+        @policy.gl.products_completed_operations= workbook.cell('F',68)
+        @policy.gl.personal_advertising_injury= workbook.cell('F',69)
+        @policy.gl.each_occurence= workbook.cell('F',70)
+        @policy.gl.fire_damage= workbook.cell('F',71)
+        @policy.gl.medical_expense= workbook.cell('F',72)
 
-      @policy.gl.exposure_gls.destroy_all # no duplications
+        @policy.gl.exposure_gls.destroy_all # no duplications
 
-      for i in 76..84 do
-        if (workbook.cell('A',i) != nil)
-          @policy.gl.exposure_gls.create!(
-          name: "exposure_#{i-75}",
-          loc_number: workbook.cell('A',i),
-          description: workbook.cell('B',i),
-          cov: workbook.cell('C',i),
-          code: workbook.cell('H',i),
-          premium_basis: workbook.cell('I',i),
-          sales_type: workbook.cell('K',i),
-          base_rate: workbook.cell('M',i),
-          ilf: workbook.cell('O',i),
-          premium: workbook.cell('Q',i)
-          )
+        for i in 76..84 do
+          if (workbook.cell('A',i) != nil)
+            @policy.gl.exposure_gls.create!(
+            name: "exposure_#{i-75}",
+            loc_number: workbook.cell('A',i),
+            description: workbook.cell('B',i),
+            cov: workbook.cell('C',i),
+            code: workbook.cell('H',i),
+            premium_basis: workbook.cell('I',i),
+            sales_type: workbook.cell('K',i),
+            base_rate: workbook.cell('M',i),
+            ilf: workbook.cell('O',i),
+            premium: workbook.cell('Q',i)
+            )
+          end
         end
+
+        # Commerical Auto
+        @policy.auto.premium_total= workbook.cell('N',107)
+        @policy.auto.locations= workbook.cell('K',102)
+        @policy.auto.hired_auto= workbook.cell('F',103)
+        @policy.auto.hired_auto_premium= workbook.cell('Q',103)
       end
-
-      # Commerical Auto
-      @policy.auto.premium_total= workbook.cell('N',107)
-      @policy.auto.locations= workbook.cell('K',102)
-      @policy.auto.hired_auto= workbook.cell('F',103)
-      @policy.auto.hired_auto_premium= workbook.cell('Q',103)
+    else
+      
     end
-
 end
