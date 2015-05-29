@@ -9,13 +9,13 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.paths << Rails.root.join("vendor", "assets", "plugins")
+#Rails.application.config.assets.paths << Rails.root.join("vendor", "assets", "plugins")
 Rails.application.config.assets.paths << Rails.root.join("vendor", "assets", "images")
 
 # Icons
-Rails.application.config.assets.paths << Rails.root.join("app", "assets", "fonts")
-Rails.application.config.assets.precompile += %w( .svg .eot .woff .ttf )
-
+#Rails.application.config.assets.paths << Rails.root.join("app", "assets", "fonts")
+#Rails.application.config.assets.precompile += %w( .svg .eot .woff .ttf )
+=begin
 # Template Assets (all pages) (js)
 Rails.application.config.assets.precompile += %w( pace-master/pace.min.js
 jquery-blockui/jquery.blockui.js
@@ -34,7 +34,6 @@ bootstrap/css/bootstrap.min.css)
 # Index Page Assets (broker & policies) (css & js)
 Rails.application.config.assets.precompile += %w( datatables/css/jquery.datatables.css
 datatables/css/jquery.datatables_themeroller.css
-jquery-mockjax-master/jquery.mockjax.js
 moment/moment.js
 datatables/js/jquery.datatables.min.js
 pages/table-data.js )
@@ -56,3 +55,4 @@ bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js
 pages/form-x-editable.js
 dropzone/dropzone.min.js
 )
+=end
