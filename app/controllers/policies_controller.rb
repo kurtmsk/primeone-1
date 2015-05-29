@@ -55,7 +55,7 @@ class PoliciesController < ApplicationController
     if @policy != nil
       redirect_to policy_path(@policy)
     else
-      render :index
+      redirect_to policies_path
     end
   end
 
