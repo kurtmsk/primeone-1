@@ -7,7 +7,7 @@ class CreateGls < ActiveRecord::Migration
       t.integer :schedule_rating, default: 0
       t.integer :multi_loc_factor, default: 0
       t.integer :gas_premium, default: 0
-      t.integer :rate, default: 0
+      t.decimal :rate, default: 0
       t.string :water_gas_tank, default: ""
       t.integer :add_ins_number, default: 0
       t.string :territory, default: ""
@@ -22,7 +22,7 @@ class CreateGls < ActiveRecord::Migration
       t.integer :medical_expense, default: 0
 
       # has_many exposure_gls
-      
+
 
       t.timestamps null: false
     end

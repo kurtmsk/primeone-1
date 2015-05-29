@@ -9,8 +9,8 @@ class Policy < ActiveRecord::Base
   has_one :gl, dependent: :destroy
   has_one :auto, dependent: :destroy
 
-  accepts_nested_attributes_for :property, allow_destroy: true
-  accepts_nested_attributes_for :gl, allow_destroy: true
-  accepts_nested_attributes_for :crime, allow_destroy: true
-  accepts_nested_attributes_for :auto, allow_destroy: true
+  accepts_nested_attributes_for :property
+  accepts_nested_attributes_for :gl
+  accepts_nested_attributes_for :crime
+  accepts_nested_attributes_for :auto
 end

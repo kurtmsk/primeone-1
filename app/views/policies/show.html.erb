@@ -323,24 +323,28 @@
                     <%= link_to loc.theft_limit, "#" %>
                   </td>
                 </tr>
+                <% if false %>
                 <tr>
                   <td>Theft Rate</td>
                   <td>
                     <%= link_to loc.theft_rate, "#" %>
                   </td>
                 </tr>
+                <% end %>
                 <tr>
                   <td>Theft Premium</td>
                   <td>
                     <%= link_to loc.theft_premium, "#" %>
                   </td>
                 </tr>
+                <% if false %>
                 <tr>
                   <td>Enchancements Limit</td>
                   <td>
                     <%= link_to loc.enhc_limit, "#" %>
                   </td>
                 </tr>
+                <% end %>
                 <tr>
                   <td>Enhancements Rate</td>
                   <td>
@@ -353,6 +357,7 @@
                     <%= link_to loc.enhc_premium, "#" %>
                   </td>
                 </tr>
+                <% if false %>
                 <tr>
                   <td>Mechanical Breakdown Limit</td>
                   <td>
@@ -365,6 +370,7 @@
                     <%= link_to loc.mech_rate, "#" %>
                   </td>
                 </tr>
+                <% end %>
                 <tr>
                   <td>Mechanical Breakdown Premium</td>
                   <td>
@@ -372,34 +378,41 @@
                   </td>
                 </tr>
                 <% loc.exposures.each do |exp| %>
-                <tr>
-                  <td>
-                  <td><b><%= exp.name %></b></td>
-                </tr>
-                <tr>
-                  <td>Valuation</td>
-                  <td><%= link_to exp.valuation, "#" %></td>
-                </tr>
-                <tr>
-                  <td>Limit</td>
-                  <td><%= link_to exp.limit, "#" %></td>
-                </tr>
-                <tr>
-                  <td>Rate</td>
-                  <td><%= link_to exp.rate, "#" %></td>
-                </tr>
-                <tr>
-                  <td>Deduction Factor</td>
-                  <td><%= link_to exp.ded_factor, "#" %></td>
-                </tr>
-                <tr>
-                  <td>Co Insurance Factor</td>
-                  <td><%= link_to exp.co_ins_factor, "#" %></td>
-                </tr>
-                <tr>
-                  <td>Premium</td>
-                  <td><%= link_to exp.premium, "#" %></td>
-                </tr>
+                  <% if !exp.valuation.blank? %>
+                    <tr>
+                      <td>
+                      <td><b><%= exp.name %></b></td>
+                    </tr>
+                    <tr>
+                      <td>Valuation</td>
+                      <td><%= link_to exp.valuation, "#" %></td>
+                    </tr>
+                    <tr>
+                      <td>Limit</td>
+                      <td><%= link_to exp.limit, "#" %></td>
+                    </tr>
+                    <tr>
+                      <td>Rate</td>
+                      <td><%= link_to exp.rate, "#" %></td>
+                    </tr>
+                    <tr>
+                      <td>Deduction Factor</td>
+                      <td><%= link_to exp.ded_factor, "#" %></td>
+                    </tr>
+                    <tr>
+                      <td>Co Insurance Factor</td>
+                      <td><%= link_to exp.co_ins_factor, "#" %></td>
+                    </tr>
+                    <tr>
+                      <td>Premium</td>
+                      <td><%= link_to exp.premium, "#" %></td>
+                    </tr>
+                  <% else %>
+                  <tr>
+                    <td>
+                    <td><b><%= exp.name %></br> (empty)</td>
+                  </tr>
+                  <% end %>
                 <% end %>
                 <% end %>
                 <tr>
@@ -551,7 +564,7 @@
                 </tr>
                 <tr>
                   <td>Sales Type</td>
-                  <td><%#= link_to exp.sales_type, "#" %></td>
+                  <td><%= link_to exp.sales_type, "#" %></td>
                 </tr>
                 <tr>
                   <td>Base Rate</td>

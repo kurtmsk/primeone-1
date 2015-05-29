@@ -28,26 +28,26 @@ class CreateLocations < ActiveRecord::Migration
 
       # Food Spoilage
       #t.string :food_facticity, default: ""
-      t.integer :food_limit, default: 0
+      #t.integer :food_limit, default: 0
       t.integer :food_rate, default: 0
       t.integer :food_premium, default: 0
 
       # Theft
       #t.string :theft_facticity, default: ""
       t.integer :theft_limit, default: 0
-      t.integer :theft_rate, default: 0
+      #t.integer :theft_rate, default: 0
       t.integer :theft_premium, default: 0
 
       # Property Enhancement
       #t.string :enhc_facticity, default: ""
-      t.integer :enhc_limit, default: 0
+      #t.integer :enhc_limit, default: 0
       t.integer :enhc_rate, default: 0
       t.integer :enhc_premium, default: 0
 
       # Mechanical Breakdown
       #t.string :mech_facticity, default: ""
-      t.integer :mech_limit, default: 0
-      t.integer :mech_rate, default: 0
+      #t.integer :mech_limit, default: 0
+      #t.integer :mech_rate, default: 0
       t.integer :mech_premium, default: 0
 
       # has_many Exposures
