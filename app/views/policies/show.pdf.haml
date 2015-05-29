@@ -1,9 +1,11 @@
 - if @broker == nil
-  %h1.bg-danger
+  %h1.bg-danger.text-danger
     Broker Not Selected
     %br
     Please Go Back and Select One.
+    %br
     = link_to "Back", policy_path(@policy)
+
 -else
   #pdf.pdf
     -# SUMMARY OF DELCARATIONS
