@@ -402,6 +402,6 @@ class PoliciesController < ApplicationController
         @policy.auto.hired_auto_premium= workbook.cell('Q',103)
       end
     else
-      
+
     end
 end

@@ -45,7 +45,6 @@ x-editable/inputs-ext/address/address.css
 select2/css/select2.min.css
 bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css
 dropzone/dropzone.min.css
-
 x-editable/bootstrap3-editable/js/bootstrap-editable.js
 x-editable/inputs-ext/typeaheadjs/lib/typeahead.js
 x-editable/inputs-ext/typeaheadjs/typeaheadjs.js
