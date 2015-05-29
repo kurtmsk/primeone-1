@@ -34,7 +34,7 @@ bootstrap/css/bootstrap.min.css )
 # Index Page Assets (broker & policies) (css & js)
 Rails.application.config.assets.precompile += %w( datatables/css/jquery.datatables.css
 datatables/css/jquery.datatables_themeroller.css
-jquery-mockjax-master/jquery.mockjax.js
+
 moment/moment.js
 datatables/js/jquery.datatables.min.js
 pages/table-data.js )

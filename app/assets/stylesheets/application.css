@@ -13,7 +13,8 @@
  *= require pace-master/themes/blue/pace-theme-flash.css
  *= require uniform/css/uniform.default.css.scss
  *= require bootstrap/css/bootstrap.min.css
- *= require fontawesome/css/font-awesome.css.scss
+ *= require font-awesome
+ * require fontawesome/css/font-awesome.css.scss
  * require line-icons/simple-line-icons.css
  *= require waves/waves.min.css
  *= require switchery/switchery.min.css

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :policies do
+  resources :policies, except: [:show] do
     member do
       post 'populate', method: :post
     end
