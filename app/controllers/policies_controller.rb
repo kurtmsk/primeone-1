@@ -11,7 +11,6 @@ class PoliciesController < ApplicationController
   # GET /policies/1.json
   def show
     @title = @policy.policy_number
-    @brokers = Broker.select([:id, :name])
 
     respond_to do |format|
       format.html

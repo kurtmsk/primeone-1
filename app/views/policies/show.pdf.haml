@@ -4,7 +4,6 @@
     %br
     Please Go Back and Select One.
     %br
-    = link_to "Back", policy_path(@policy)
 
 -else
   #pdf.pdf
@@ -425,3 +424,6 @@
               if any, issued to form a part thereof, complete the above numbered policy. |
 
           = render partial: 'pdf_footer.html', locals: {page: 5, name: "CA"}
+
+
+  = render partial: ''
