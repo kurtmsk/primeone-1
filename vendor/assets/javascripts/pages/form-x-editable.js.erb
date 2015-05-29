@@ -119,8 +119,10 @@ $(function(){
   });
 
 var brokers = [];
+"<% if @brokers != nil %> "
 "<% @brokers.each do |b| %>"
   brokers.push({ id: "<%= b.id %>", text: "<%= b.name %>"})
+"<% end %>"
 "<% end %>"
 
 $('#broker_id').editable({
