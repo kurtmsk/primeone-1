@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :policies, except: :show do
+  resources :policies do
     member do
       post 'populate', method: :post
     end
@@ -11,8 +11,6 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'policies#index'
-
-  get 'policies/:policy_number' => 'policies#show', as: 'show_policy'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

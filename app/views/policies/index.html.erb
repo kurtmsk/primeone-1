@@ -50,7 +50,7 @@
                 <tbody>
                   <% @policies.each do |policy| %>
                   <tr>
-                    <td><%= link_to policy.policy_number, show_policy_path(policy) %></td>
+                    <td><%= link_to policy.policy_number, policy_path(policy) %></td>
                     <td><%= policy.client_code %></td>
                     <td><%= policy.name %></td>
                     <td><%= policy.effective_date %></td>
