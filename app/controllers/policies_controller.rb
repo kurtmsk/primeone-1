@@ -120,27 +120,27 @@ class PoliciesController < ApplicationController
         @policy.property_forms = "CP0010(6/07) CP0090(7/88) CP0120(1/08) CP0140(7/06) CP1032(8/08) IL0935(7/02) IL0953(1/08) CP1270(9/96) "
         # optional forms
         # BUSINESS INCOME & EXTRA EXPENSE
-        if (!@policy.property.locations[0].exposures[2].limit.nil? && !@policy.property.locations[0].exposures[2].limit != 0)
+        if (!@policy.property.locations.first.exposures.third.limit.nil? && !@policy.property.locations.first.exposures.third.limit != 0)
           @policy.property_forms += "CP0030(6/07) "
         end
         # SPOILAGE COVERAGE **
-        if (!@policy.property.locations[0].coverage_type == "Special")
+        if (!@policy.property.locations.first.coverage_type == "Special")
           @policy.property_forms += "CP1030(6/07) "
         end
         # SPECIAL FORM - CAUSE OF LOSS
-        if (!@policy.property.locations[0].exposures[4].limit.nil? && @policy.property.locations[0].exposures[4].limit != 0)
+        if (!@policy.property.locations.first.exposures.fifth.limit.nil? && @policy.property.locations.first.exposures.fifth.limit != 0)
           @policy.property_forms += "CP0440(6/95) "
         end
         # OUTDOOR SIGN
-        if (!@policy.property.locations[0].exposures[3].limit.nil? && !@policy.property.locations[0].exposures[3].limit != 0)
+        if (!@policy.property.locations.first.exposures.fourth.limit.nil? && !@policy.property.locations.first.exposures.fourth.limit != 0)
           @policy.property_forms += "CP1440(6/07) "
         end
         # ELITE PROPERTY ENHANCEMENT
-        if (@policy.property.locations[0].enhc_premium != 0)
+        if (@policy.property.locations.first.enhc_premium != 0)
           @policy.property_forms += "PO-PRP-3(12/13) "
         end
         # MANDATORY EQUIPMENT BREAKDOWN PROTECTION COVERAGE & MICHIGAN CHANGES
-        if (@policy.property.locations[0].mech_premium != 0)
+        if (@policy.property.locations.first.mech_premium != 0)
           @policy.property_forms += "EB0020(08/08) EB0108(09/07)"
         end
       end
@@ -174,17 +174,17 @@ class PoliciesController < ApplicationController
         @policy.crime_forms = "CR0021(5/06) CR0110(8/07) CR0246(8/07) CR0730(3/06) CR0731(3/06) IL0935(7/02) IL0953(1/08) "
         # optional forms
         # EMPLOYEE THEFT AND FORGERY POLICY
-        if ((!@policy.crime.exposures[0].limit.nil? && @policy.crime.exposures[0].limit != 0) ||
-          (!@policy.crime.exposures[1].limit.nil? && @policy.crime.exposures[1].limit != 0))
+        if ((!@policy.crime.exposures.first.limit.nil? && @policy.crime.exposures.first.limit != 0) ||
+          (!@policy.crime.exposures.second.limit.nil? && @policy.crime.exposures.second.limit != 0))
           @policy.crime_forms += "CR0029(5/06) "
         end
         # INSIDE THE PREMISES-THEFT OF OTHER PROPERTY
-        if (!policy.crime.exposures[4].limit.nil? && @policy.crime.exposures[4].limit != 0)
+        if (!policy.crime.exposures.fifth.limit.nil? && @policy.crime.exposures.fifth.limit != 0)
           @policy.crime_forms += "CR0405(8/07) "
         end
         # INSIDE THE PREMISES – ROBBERY OF A CUSTODIAN OR SAFE BURGLARY OF MONEY & SECURITIES
-        if ((!@policy.crime.exposures[2].limit.nil? && @policy.crime.exposures[2].limit != 0) ||
-          (!@policy.crime.exposures[3].limit.nil? && @policy.crime.exposures[3].limit != 0))
+        if ((!@policy.crime.exposures.third.limit.nil? && @policy.crime.exposures.third.limit != 0) ||
+          (!@policy.crime.exposures.fourth.limit.nil? && @policy.crime.exposures.fourth.limit != 0))
           @policy.crime_forms += "CR0405(8/07) "
         end
       end
@@ -225,8 +225,8 @@ class PoliciesController < ApplicationController
       @policy.property.premium_subtotal= workbook.cell('J',35)
       @policy.property.premium_total= workbook.cell('M',41)
 
-      # First location (locations[0])
-      @policy.property.locations[0] = Location.create!(
+      # First location (locations.first)
+      @policy.property.locations.create!(
         number: 1, premium: workbook.cell('N',33), co_ins: workbook.cell('L',14),
         co_ins_factor: workbook.cell('L',15), ded: workbook.cell('B',15),
         ded_factor: workbook.cell('G',15),
@@ -254,7 +254,7 @@ class PoliciesController < ApplicationController
       )
 
       for i in 23..29 do
-        @policy.property.locations[0].exposures[i-23]= Exposure.create!(
+        @policy.property.locations.first.exposures.create!(
         name: workbook.cell('A',i), valuation: workbook.cell('D',i),
         limit: workbook.cell('F',i), rate: workbook.cell('H',i),
         ded_factor: workbook.cell('J',i), co_ins_factor: workbook.cell('L',i),
@@ -263,13 +263,13 @@ class PoliciesController < ApplicationController
       end
 
       # Earnings should have all 0s
-      @policy.property.locations[0].exposures[2].valuation= 0
-      @policy.property.locations[0].exposures[2].ded_factor= 0
-      @policy.property.locations[0].exposures[2].co_ins_factor= 0
+      @policy.property.locations.first.exposures.third.valuation= 0
+      @policy.property.locations.first.exposures.third.ded_factor= 0
+      @policy.property.locations.first.exposures.third.co_ins_factor= 0
 
-      # Second location (locations[1]) (optional)
+      # Second location (locations.second) (optional)
       if (workbook.cell('T',10) != nil)
-        @policy.property.locations[1] = Location.create!(
+        @policy.property.locations.create!(
           number: 2, premium: workbook.cell('AE',33), co_ins: workbook.cell('AC',14),
           co_ins_factor: workbook.cell('AC',15), ded: workbook.cell('S',15),
           ded_factor: workbook.cell('X',15),
@@ -297,7 +297,7 @@ class PoliciesController < ApplicationController
         )
 
         for i in 23..29 do
-          @policy.property.locations[1].exposures[i-23]= Exposure.create!(
+          @policy.property.locations.second.exposures.create!(
           name: workbook.cell('R',i), valuation: workbook.cell('U',i),
           limit: workbook.cell('W',i), rate: workbook.cell('Y',i),
           ded_factor: workbook.cell('AA',i), co_ins_factor: workbook.cell('AC',i),
@@ -306,9 +306,9 @@ class PoliciesController < ApplicationController
         end
 
         # Earnings should have all 0s
-        @policy.property.locations[1].exposures[2].valuation= 0
-        @policy.property.locations[1].exposures[2].ded_factor= 0
-        @policy.property.locations[1].exposures[2].co_ins_factor= 0
+        @policy.property.locations.second.exposures.third.valuation= 0
+        @policy.property.locations.second.exposures.third.ded_factor= 0
+        @policy.property.locations.second.exposures.third.co_ins_factor= 0
       end
 
       # Crime
@@ -320,7 +320,7 @@ class PoliciesController < ApplicationController
       @policy.crime.ded= workbook.cell('K',44)
 
       for i in 47..51 do
-        @policy.crime.exposures << Exposure.create!(
+        @policy.crime.exposures.create!(
         name: workbook.cell('A',i), limit: workbook.cell('F',i),
         premium: workbook.cell('K',i)
         )
@@ -346,8 +346,8 @@ class PoliciesController < ApplicationController
       @policy.gl.medical_expense= workbook.cell('F',72)
 
       for i in 77..79 do
-        @policy.gl.exposure_gls << ExposureGl.create!(
-        name: "Exposure_#{i-76}",
+        @policy.gl.exposure_gls.create!(
+        name: "exposure_#{i-76}",
         loc_number: workbook.cell('A',i),
         description: workbook.cell('B',i),
         cov: workbook.cell('C',i),
