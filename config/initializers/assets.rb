@@ -51,6 +51,7 @@ x-editable/inputs-ext/typeaheadjs/typeaheadjs.js
 x-editable/inputs-ext/address/address.js
 select2/js/select2.full.min.js
 bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js
-pages/form-x-editable.js
+
 dropzone/dropzone.min.js
 )
+#pages/form-x-editable.js
