@@ -13,6 +13,9 @@ gem 'sass-rails', '~> 5.0'
 # Bootstrap styles
 #gem 'bootstrap-sass', '~> 3.3.4'
 
+# Font Awesome
+gem 'font-awesome-rails', '~> '
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
