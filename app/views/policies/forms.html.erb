@@ -23,7 +23,8 @@
     <ol class="breadcrumb container">
       <li><%= link_to "Home", root_path %></li>
       <li><%= link_to "Policies", policies_path %></li>
-      <li><%= link_to @policy.policy_number, "#", class: 'active policy_number_display' %></li>
+      <li><%= link_to @policy.policy_number, policy_path(@policy), class: 'policy_number_display' %></li>
+      <li><%= link_to "Forms", "#", class: 'active' %></li>
     </ol>
   </div>
   <div class="page-title">
