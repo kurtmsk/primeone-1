@@ -11,6 +11,8 @@ class CreateDocs < ActiveRecord::Migration
       t.string :var_5, default: ""
       t.string :var_6, default: ""
 
+      t.boolean :active, default: false
+
       t.timestamps null: false
     end
 

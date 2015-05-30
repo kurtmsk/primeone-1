@@ -54,3 +54,8 @@ bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js
 pages/form-x-editable.js
 dropzone/dropzone.min.js
 )
+
+# Form Page Assets (policies) (css & js)
+Rails.application.config.assets.precompile += %w(
+x-editable/inputs-ext/doc/doc.js
+)

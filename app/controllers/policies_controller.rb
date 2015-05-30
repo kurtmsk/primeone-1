@@ -39,6 +39,48 @@ class PoliciesController < ApplicationController
     @policy.build_crime()
     @policy.build_auto()
 
+    # add all documents
+    @policy.docs.create!({
+      form_code:"CP0440(6/95)",	file:"CP0440.html",
+      description:"SPOILAGE COVERAGE", var_1: @policy.policy_number,
+      var_6: nil
+    })
+    @policy.docs.create!({
+      form_code:"CP1218(6/95)",	file:"CP1218.html",
+      description:"LOSS PAYABLE PROVISIONS", var_1: @policy.policy_number
+    })
+    @policy.docs.create!({
+      form_code:"IL0415(04/98)",	file:"IL0415.html",
+      description:"PROTECTIVE SAFEGUARDS", var_1: @policy.policy_number,
+      var_5: nil, var_6: nil
+    })
+    @policy.docs.create!({
+      form_code:"CG2144(7/98)",	file:"CG2144.html",
+      description:"LIMITATION OF COVERAGE/DESIGNATED PREMISES", var_1: @policy.policy_number,
+      var_4: nil, var_5: nil, var_6: nil
+    })
+    @policy.docs.create!({
+      form_code:"CG2011(1/96)",	file:"CG2011.html",
+      description:"ADD'L INSURED MANAGERS/LESSORS", var_1: @policy.policy_number,
+      var_5: nil, var_6: nil
+    })
+    @policy.docs.create!({
+      form_code:"CG2018(11/85)",	file:"CG2018.html",
+      description:"ADD'L INSURED MORTGAGEE, ETC.", var_1: @policy.policy_number,
+      var_4: nil, var_5: nil, var_6: nil
+    })
+    @policy.docs.create!({
+      form_code:"CG2026(7/04)",	file:"CG2026.html",
+      description:"ADD'L INSURED DESIGNATED PERSON", var_1: @policy.policy_number,
+      var_5: nil, var_6: nil
+    })
+    @policy.docs.create!({
+      form_code:"CG2028(7/04)",	file:"CG2028.html",
+      description:"ADD'L INSURED LESSOR OF LEASED EQUIPMENT", var_1: @policy.policy_number,
+      var_3: nil, var_4: nil, var_5: nil, var_6: nil
+    })
+
+
     respond_to do |format|
       if @policy.save
         format.html { redirect_to @policy, notice: 'Policy was successfully created.' }
@@ -141,8 +183,7 @@ class PoliciesController < ApplicationController
       params.require(:policy).permit(:policy_number, :client_code, :effective_date, :expiration_date,
       :status, :package_premium_total, :name, :business_type, :type, :mortgagee, :quoted_by,
       :street, :city, :state, :zip, :forms, :property_forms, :gl_forms, :crime_forms,
-      :auto_forms, :broker_id, property_attributes: [:premium_total,
-      :schedule_rating_pct, :premium_subtotal] )
+      :auto_forms, :broker_id, docs_attributes: [:id, :active, :var_1, :var_2, :var_3, :var_4, :var_5, :var_6] )
     end
 
     # Find the forms necessary for this policy

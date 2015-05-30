@@ -102,7 +102,26 @@
                   </td>
                 </tr>
 
+                <tr>
+                  <td>Fillable Forms</td>
+                  <td>
+                    <%= link_to "Use this as a variable reference", image_url("form reference.png") %>
+                  </td>
+                </tr>
 
+                <% @policy.docs.each do |doc| %>
+                  <tr>
+                    <td><%= doc.form_code + " -- " + doc.description %></td>
+                    <td>
+                      <%= link_to (doc.active ? "Included" : "Excluded"), "#",
+                      id: doc.id, class: "doc editable editable-click",
+                      data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+                      title: "Fill in Variables", type: "address",
+                      value: { var_1: doc.var_1, var_2: doc.var_2, var_3: doc.var_3,
+                        var_4: doc.var_4, var_5: doc.var_5, var_6: doc.var_6} } %>
+                    </td>
+                  </tr>
+                <% end %>
                 </tbody>
               </table>
             </div>
@@ -117,7 +136,8 @@
     <%= javascript_include_tag 'x-editable/bootstrap3-editable/js/bootstrap-editable.js' %>
     <%= javascript_include_tag 'x-editable/inputs-ext/typeaheadjs/lib/typeahead.js' %>
     <%= javascript_include_tag 'x-editable/inputs-ext/typeaheadjs/typeaheadjs.js' %>
-    <%= javascript_include_tag 'x-editable/inputs-ext/address/address.js' %>
+    <%#= javascript_include_tag 'x-editable/inputs-ext/address/address.js' %>
+    <%= javascript_include_tag 'x-editable/inputs-ext/doc/doc.js' %>
     <%= javascript_include_tag 'select2/js/select2.full.min.js' %>
     <%= javascript_include_tag 'bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %>
     <%= javascript_include_tag 'pages/form-x-editable.js' %>

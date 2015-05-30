@@ -287,16 +287,28 @@ $('#crime_forms').editable({
 
 });
 
-$('#fruits').editable({
-  pk: 1,
-  limit: 3,
-  source: [
-    {value: 1, text: 'banana'},
-    {value: 2, text: 'peach'},
-    {value: 3, text: 'apple'},
-    {value: 4, text: 'watermelon'},
-    {value: 5, text: 'orange'}
-  ]
+$('.doc.editable').editable({
+  params: function(params) {
+
+    var data = {};
+    data['policy'] = {};
+    data['policy']['docs_attributes'] = [
+      {
+        id: params.name, active: true,
+        var_1: params.value.var_1,
+        var_2: params.value.var_2,
+        var_3: params.value.var_3,
+        var_4: params.value.var_4,
+        var_5: params.value.var_5,
+        var_6: params.value.var_6
+      }
+    ];
+    data['id'] = params.pk;
+
+    console.log(data);
+
+    return data;
+  }
 });
 
 

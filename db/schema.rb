@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150530171716) do
     t.string   "var_4",       default: ""
     t.string   "var_5",       default: ""
     t.string   "var_6",       default: ""
+    t.boolean  "active"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.integer  "policy_id"
