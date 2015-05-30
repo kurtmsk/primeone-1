@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  form_code: MyString
+  description: MyString
+  var_1: MyString
+  var_2: MyString
+  var_3: MyString
+  var_4: MyString
+  var_5: MyString
+  var_6: MyString
+
+two:
+  name: MyString
+  form_code: MyString
+  description: MyString
+  var_1: MyString
+  var_2: MyString
+  var_3: MyString
+  var_4: MyString
+  var_5: MyString
+  var_6: MyString
