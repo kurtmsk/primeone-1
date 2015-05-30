@@ -218,8 +218,6 @@ class PoliciesController < ApplicationController
       @policy.effective_date= workbook.cell('F',7)
       @policy.expiration_date= workbook.cell('J',7)
 
-      @policy.package_premium_total= workbook.cell('N',109)
-
       @policy.dba= workbook.cell('B',4),
       @policy.business_type= workbook.cell('L',5)
       @policy.mortgagee= workbook.cell('S',3)
@@ -389,7 +387,7 @@ class PoliciesController < ApplicationController
 
       @policy.gl.exposure_gls.destroy_all # no duplications
 
-      if (workbook.cell('A',89) != nil)
+      if (workbook.cell('A',89) == nil)
         # General Liability
         @policy.gl.premium_total= workbook.cell('N',99)
         @policy.gl.premium_subtotal= workbook.cell('Q',89)
@@ -402,6 +400,7 @@ class PoliciesController < ApplicationController
         @policy.auto.hired_auto= workbook.cell('F',103)
         @policy.auto.hired_auto_premium= workbook.cell('Q',103)
 
+        @policy.package_premium_total= workbook.cell('N',109)
       else
         # General Liability
         @policy.gl.premium_total= workbook.cell('N',101)
@@ -414,6 +413,8 @@ class PoliciesController < ApplicationController
         @policy.auto.locations= workbook.cell('K',104)
         @policy.auto.hired_auto= workbook.cell('F',105)
         @policy.auto.hired_auto_premium= workbook.cell('Q',105)
+
+        @policy.package_premium_total= workbook.cell('N',111)
       end
     end
 end
