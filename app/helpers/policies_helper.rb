@@ -6,4 +6,7 @@ module PoliciesHelper
       "Excluded"
     end
   end
+
+  def displayForms
+  end
 end

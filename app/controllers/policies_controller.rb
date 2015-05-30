@@ -1,5 +1,5 @@
 class PoliciesController < ApplicationController
-  before_action :set_policy, only: [:show, :edit, :update, :destroy, :populate, :download]
+  before_action :set_policy, only: [:show, :edit, :update, :destroy, :populate, :download, :forms]
 
   # GET /policies
   # GET /policies.json
