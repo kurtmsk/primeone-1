@@ -1,5 +1,5 @@
 class PoliciesController < ApplicationController
-  before_action :set_policy, only: [:show, :edit, :update, :destroy, :populate]
+  before_action :set_policy, only: [:show, :edit, :update, :destroy, :populate, :download]
 
   # GET /policies
   # GET /policies.json
@@ -76,6 +76,33 @@ class PoliciesController < ApplicationController
         format.json { render json: @policy.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # GET /policies/1/forms
+  def forms
+  end
+
+  # determine which forms should be downloaded
+  # POST /policies/1/download
+  def download
+    @pdfForms = CombinePDF.new
+    @pdfForms << CombinePDF.load('app/assets/forms/package/all_forms.pdf')
+
+    form_groups = [:property_forms, :gl_forms, :crime_forms, :auto_forms]
+
+    form_groups.each do |fg|
+      if !@policy[fg].empty?
+        @policy[fg].split(" ").each do |f|
+          f = f.gsub("/", "-")
+          begin
+            @pdfForms << CombinePDF.load("app/assets/forms/#{fg.to_s}/#{f}.pdf")
+          rescue
+          end
+        end
+      end
+    end
+
+    send_data @pdfForms.to_pdf, filename: "Forms_#{@policy.policy_number}.pdf", format: 'pdf'
   end
 
   # PATCH/PUT /policies/1

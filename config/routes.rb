@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :policies do
     member do
       post 'populate'
+      post 'download'
+      get 'forms'
     end
     collection do
       post 'find'
