@@ -129,8 +129,6 @@ class PoliciesController < ApplicationController
   def download
     @pdfForms = CombinePDF.new
 
-    #puts open(policy_url(@policy, format: 'pdf')).read
-    @pdfForms << CombinePDF.load('public/tmp/temp.pdf')
     @pdfForms << CombinePDF.load('app/assets/forms/package/all_forms.pdf')
 
     form_groups = [:property_forms, :gl_forms, :crime_forms, :auto_forms]
