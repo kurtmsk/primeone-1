@@ -1,0 +1,15 @@
+Dir.glob("./*.html").each do |file|
+  File.rename(file,File.basename(file)+".erb")
+  f = File.open(file+".erb")			 
+  contents = f.read
+  f.close
+
+  n = contents.gsub(/1111111111-11/, "<%= @doc.var_1 %>")
+
+  File.open(file+".erb", "w") do |f|
+    f.puts n
+  end
+
+  #puts contents
+
+end

@@ -1,5 +1,5 @@
 class PoliciesController < ApplicationController
-  before_action :set_policy, only: [:show, :edit, :update, :destroy, :populate, :download, :forms]
+  before_action :set_policy, only: [:show, :edit, :update, :destroy, :populate, :download, :forms, :remove_form]
 
   # GET /policies
   # GET /policies.json
@@ -125,9 +125,12 @@ class PoliciesController < ApplicationController
   end
 
   # determine which forms should be downloaded
-  # POST /policies/1/download
+  # GET /policies/1/download
   def download
     @pdfForms = CombinePDF.new
+
+    #puts open(policy_url(@policy, format: 'pdf')).read
+    @pdfForms << CombinePDF.load('public/tmp/temp.pdf')
     @pdfForms << CombinePDF.load('app/assets/forms/package/all_forms.pdf')
 
     form_groups = [:property_forms, :gl_forms, :crime_forms, :auto_forms]
@@ -169,6 +172,12 @@ class PoliciesController < ApplicationController
       format.html { redirect_to policies_url, notice: 'Policy was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def remove_form
+    @policy.docs.find(params[:doc_id]).update(active: false)
+
+    redirect_to forms_policy_path(@policy)
   end
 
   private

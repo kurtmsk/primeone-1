@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     member do
       post 'populate'
       post 'download'
+      get 'remove_form'
       get 'forms'
     end
     collection do

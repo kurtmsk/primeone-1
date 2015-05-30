@@ -171,6 +171,7 @@ Address.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
   '<div class="editable-address"><label><span>Variable 4: </span><input type="text" name="var_4" class="input-large"></label></div>'+
   '<div class="editable-address"><label><span>Variable 5: </span><input type="text" name="var_5" class="input-large"></label></div>'+
   '<div class="editable-address"><label><span>Variable 6: </span><input type="text" name="var_6" class="input-large"></label></div>',
+  //'<div class="editable-address"><label><span>Include Form? </span><select name="active"><option value="true">Yes</option><option value="false">No</option></select></label></div>',
 
   inputclass: ''
 });

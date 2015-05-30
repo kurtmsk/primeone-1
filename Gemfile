@@ -78,4 +78,4 @@ gem 'puma'
 gem 'combine_pdf'
 
 # HTML --> PDF
-#gem 'pdfcrowd'
+gem 'doc_raptor'
