@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150526060651) do
+ActiveRecord::Schema.define(version: 20150530171716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,23 @@ ActiveRecord::Schema.define(version: 20150526060651) do
   end
 
   add_index "crimes", ["policy_id"], name: "index_crimes_on_policy_id", using: :btree
+
+  create_table "docs", force: :cascade do |t|
+    t.string   "file",        default: ""
+    t.string   "form_code",   default: ""
+    t.string   "description", default: ""
+    t.string   "var_1",       default: ""
+    t.string   "var_2",       default: ""
+    t.string   "var_3",       default: ""
+    t.string   "var_4",       default: ""
+    t.string   "var_5",       default: ""
+    t.string   "var_6",       default: ""
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "policy_id"
+  end
+
+  add_index "docs", ["policy_id"], name: "index_docs_on_policy_id", using: :btree
 
   create_table "exposure_gls", force: :cascade do |t|
     t.string   "name",          default: ""
@@ -200,6 +217,7 @@ ActiveRecord::Schema.define(version: 20150526060651) do
 
   add_foreign_key "autos", "policies"
   add_foreign_key "crimes", "policies"
+  add_foreign_key "docs", "policies"
   add_foreign_key "exposure_gls", "gls"
   add_foreign_key "exposures", "crimes"
   add_foreign_key "exposures", "locations"
