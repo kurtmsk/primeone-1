@@ -153,8 +153,14 @@ class PoliciesController < ApplicationController
   def update
     respond_to do |format|
       if @policy.update(policy_params)
-        format.html { render :show, notice: 'Policy was successfully updated' }
-        format.json { render :show, status: :ok, location: @policy }
+        findForms()
+        if @policy.save
+          format.html { render :show, notice: 'Policy was successfully updated' }
+          format.json { render :show, status: :ok, location: @policy }
+        else
+          format.html { render :edit }
+          format.json { render json: @policy.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :edit }
         format.json { render json: @policy.errors, status: :unprocessable_entity }
@@ -225,8 +231,29 @@ class PoliciesController < ApplicationController
         end
         # MANDATORY EQUIPMENT BREAKDOWN PROTECTION COVERAGE & MICHIGAN CHANGES
         if (@policy.property.locations.first.mech_premium != 0)
-          @policy.property_forms += "EB0020(08/08) EB0108(09/07)"
+          @policy.property_forms += "EB0020(08/08) EB0108(09/07) "
         end
+
+        # CP1218(6/95)
+        if (@policy.docs.where(form_code:"CP1218(6/95)")[0].active == true)
+          @policy.property_forms += "CP1218(6/95) "
+        end
+
+        # CP0440(6/95)
+        if (@policy.docs.where(form_code:"CP0440(6/95)")[0].active == true)
+          @policy.property_forms += "CP0440(6/95) "
+        end
+
+        # IL0415(04/98)
+        if (@policy.docs.where(form_code:"IL0415(04/98)")[0].active == true)
+          @policy.property_forms += "IL0415(04/98) "
+        end
+
+        # CG2028(7/04)
+        if (@policy.docs.where(form_code:"CG2028(7/04)")[0].active == true)
+          @policy.property_forms += "CG2028(7/04)"
+        end
+
       end
 
       # add relevant general liability declarations
@@ -249,6 +276,26 @@ class PoliciesController < ApplicationController
         # WATER IN THE GAS TANK
         if (!@policy.gl.water_gas_tank == "Yes")
           @policy.gl_forms += "PO_GL_WIG(12/13)"
+        end
+
+        # CG2026(7/04)
+        if (@policy.docs.where(form_code:"CG2026(7/04)")[0].active == true)
+          @policy.gl_forms += "CG2026(7/04)"
+        end
+
+        # CG2018(11/85)
+        if (@policy.docs.where(form_code:"CG2018(11/85)")[0].active == true)
+          @policy.gl_forms += "CG2018(11/85)"
+        end
+
+        # CG2011(1/96)
+        if (@policy.docs.where(form_code:"CG2011(1/96)")[0].active == true)
+          @policy.gl_forms += "CG2011(1/96)"
+        end
+
+        # CG2144(7/98)
+        if (@policy.docs.where(form_code:"CG2144(7/98)")[0].active == true)
+          @policy.gl_forms += "CG2144(7/98)"
         end
       end
 
