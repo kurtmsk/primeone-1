@@ -483,8 +483,8 @@ class PoliciesController < ApplicationController
           @policy.gl.exposure_gls.create!(
             name: "exposure_#{i-75}",
             loc_number: workbook.cell('A',i),
-            description: workbook.cell('B',i),
-            cov: workbook.cell('C',i),
+            description: workbook.cell('C',i),
+            cov: workbook.cell('B',i),
             code: workbook.cell('H',i),
             premium_basis: workbook.cell('I',i),
             sales_type: workbook.cell('K',i),
