@@ -476,19 +476,21 @@ class PoliciesController < ApplicationController
         )
       end
 
+      @policy.gl.exposure_gls.destroy_all # no duplications
+
       for i in 76..84 do
         if (workbook.cell('A',i) != nil)
           @policy.gl.exposure_gls.create!(
-          name: "exposure_#{i-75}",
-          loc_number: workbook.cell('A',i),
-          description: workbook.cell('B',i),
-          cov: workbook.cell('C',i),
-          code: workbook.cell('H',i),
-          premium_basis: workbook.cell('I',i),
-          sales_type: workbook.cell('K',i),
-          base_rate: workbook.cell('M',i),
-          ilf: workbook.cell('O',i),
-          premium: workbook.cell('Q',i)
+            name: "exposure_#{i-75}",
+            loc_number: workbook.cell('A',i),
+            description: workbook.cell('B',i),
+            cov: workbook.cell('C',i),
+            code: workbook.cell('H',i),
+            premium_basis: workbook.cell('I',i),
+            sales_type: workbook.cell('K',i),
+            base_rate: workbook.cell('M',i),
+            ilf: workbook.cell('O',i),
+            premium: workbook.cell('Q',i)
           )
         end
       end
@@ -506,8 +508,6 @@ class PoliciesController < ApplicationController
       @policy.gl.each_occurence= workbook.cell('F',70)
       @policy.gl.fire_damage= workbook.cell('F',71)
       @policy.gl.medical_expense= workbook.cell('F',72)
-
-      @policy.gl.exposure_gls.destroy_all # no duplications
 
       if (workbook.cell('A',89) == nil)
         # General Liability

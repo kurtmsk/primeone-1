@@ -49,9 +49,9 @@
                 <% end %>
               </div>
               <div>
-                <%= link_to download_policy_path(@policy) do %>
-                <button class="btn btn-success bg-success" style="width:133px;">
-                  Download Fillable Forms
+                <%= link_to download_policy_path(@policy), method: 'post' do %>
+                <button class="btn btn-success bg-success" >
+                  Download Non-Fillable Forms
                 </button>
                 <% end %>
               </div>
