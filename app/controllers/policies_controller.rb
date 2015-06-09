@@ -200,7 +200,8 @@ class PoliciesController < ApplicationController
       params.require(:policy).permit(:policy_number, :client_code, :effective_date, :expiration_date,
       :status, :package_premium_total, :name, :business_type, :type, :mortgagee, :quoted_by,
       :street, :city, :state, :zip, :forms, :property_forms, :gl_forms, :crime_forms,
-      :auto_forms, :broker_id, docs_attributes: [:id, :active, :var_1, :var_2, :var_3, :var_4, :var_5, :var_6] )
+      :auto_forms, :broker_id, docs_attributes: [:id, :active, :var_1, :var_2, :var_3, :var_4, :var_5, :var_6],
+      property_attributes: [:id, :schedule_rating_pct, :premium_subtotal, :premium_total] )
     end
 
     # Find the forms necessary for this policy

@@ -12,7 +12,6 @@ $(function(){
       data['policy'] = {};
       data['policy'][params.name] = params.value
       data['id'] = params.pk;
-      data[params.name] = params.value
 
       return data;
     },
@@ -28,7 +27,6 @@ $(function(){
       data['policy'] = {};
       data['policy'][params.name] = params.value
       data['id'] = params.pk;
-      data[params.name] = params.value
 
       return data;
     },
@@ -44,7 +42,6 @@ $(function(){
       data['policy'] = {};
       data['policy'][params.name] = params.value
       data['id'] = params.pk;
-      data[params.name] = params.value
 
       return data;
     },
@@ -63,7 +60,6 @@ $(function(){
       data['policy'] = {};
       data['policy'][params.name] = params.value
       data['id'] = params.pk;
-      data[params.name] = params.value
 
       return data;
     },
@@ -83,7 +79,6 @@ $(function(){
       data['policy'] = {};
       data['policy'][params.name] = params.value
       data['id'] = params.pk;
-      data[params.name] = params.value
 
       return data;
     },
@@ -291,11 +286,12 @@ $('.prop.editable').editable({
   params: function(params) {
     var data = {};
     data['policy'] = {};
-    data['policy']['property_attributes'] = [
-      {
-        params.name: params.value;
-      }
-    ]
+    data['policy']['property_attributes'] = { id: params.name.split(" ")[0] }
+    data['policy']['property_attributes'][params.name.split(" ")[1]] = params.value;
+
+    data['id'] = params.pk;
+
+    return data;
   }
 })
 
@@ -329,7 +325,8 @@ $('.editable').editable({
     data['policy'] = {};
     data['policy'][params.name] = params.value
     data['id'] = params.pk;
-    data[params.name] = params.value
+
+    console.log(data);
 
     return data;
   },

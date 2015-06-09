@@ -187,24 +187,28 @@
                           <tr>
                             <td>Property Schedule Rating Percentage</td>
                             <td>
-                              <%#= link_to @policy.property.schedule_rating_pct, "#", id:'schedule_rating_pct', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Schedule Rating Percentage", type: "text" } %>
-                              <%#= link_to @policy.property.schedule_rating_pct, "#" %>
                               <%= link_to @policy.property.schedule_rating_pct, "#",
-                              id: @policy.property.id, class:"prop editable editable-click",
+                              id: "#{@policy.property.id} schedule_rating_pct", class:"prop editable editable-click",
                               data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
-                              title: "Enter Property Schedule Rating Percentage", type:"number"}
+                              title: "Enter Property Schedule Rating Percentage", type:"number"} %>
                             </td>
                           </tr>
                           <tr>
                             <td>Property Premium Subtotal</td>
                             <td>
-                              <%= link_to @policy.property.premium_subtotal, "#" %>
+                              <%= link_to @policy.property.premium_subtotal, "#",
+                              id: "#{@policy.property.id} premium_subtotal", class:"prop editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property Premium Subtotal", type:"number"} %>
                             </td>
                           </tr>
                           <tr>
                             <td>Property Premium Total</td>
                             <td>
-                              <%= link_to @policy.property.premium_total, "#" %>
+                              <%= link_to @policy.property.premium_total, "#",
+                              id: "#{@policy.property.id} premium_total", class:"prop editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property Premium Total", type:"number"} %>
                             </td>
                           </tr>
                           <tr>
