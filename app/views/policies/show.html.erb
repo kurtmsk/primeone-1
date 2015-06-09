@@ -18,6 +18,10 @@
     .tab-content {
       padding: 15px 0;
     }
+
+    .tab-pane {
+      min-height: 300px;
+    }
   </style>
 <% end %>
 
@@ -63,9 +67,9 @@
             <div role="tabpanel">
               <!-- Nav tabs -->
               <ul class="nav nav-tabs nav-justified" role="tablist">
-                <li role="presentation" class="active"><a href="#tab1" role="tab" data-toggle="tab">CORE</a></li>
+                <li role="presentation" class="active"><a href="#tab1" role="tab" data-toggle="tab">FIELDS</a></li>
                 <li role="presentation"><a href="#tab2" role="tab" data-toggle="tab">ENDORSEMENTS</a></li>
-                <li role="presentation"><a href="#tab3" role="tab" data-toggle="tab">GENERATE</a></li>
+                <li role="presentation"><a href="#tab3" role="tab" data-toggle="tab">REVIEW</a></li>
               </ul>
               <!-- Tab panes -->
               <div class="tab-content">
@@ -92,7 +96,6 @@
                           title: "Select Status", type: "select", value: @policy.status } %>
                         </td>
                       </tr>
-
                       <tr>
                         <td>Broker</td>
                         <td>
@@ -101,344 +104,346 @@
                           title:  "Select Broker", type:"select2", value: @broker.try(:id) } %>
                         </td>
                       </tr>
-
                       <tr>
                         <td>Effective Date</td>
                         <td>
                           <%= link_to @policy.effective_date.strftime("%_m/%d/%Y"), "#", id:'effective_date',
                           class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
-                            pk: "#{@policy.id}", title: "Select Effective Date", type: "combodate",
-                            value: "#{@policy.expiration_date}" } %></td>
+                          pk: "#{@policy.id}", title: "Select Effective Date", type: "combodate",
+                          value: "#{@policy.expiration_date}" } %></td>
+                        </tr>
+                        <tr>
+                          <td>Expiration Date</td>
+                          <td>
+                            <%= link_to @policy.expiration_date.strftime("%_m/%d/%Y"), "#", id:'expiration_date',
+                            class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
+                            pk: "#{@policy.id}", title: "Select Expiration Date", type: "combodate",
+                            value: "#{@policy.expiration_date}" } %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Package Premium Total</td>
+                          <td>
+                            <%= link_to @policy.package_premium_total, "#", id:'package_premium_total',
+                            class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
+                            pk: "#{@policy.id}", title: "Enter Package Premium Total", type: "number" } %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Insured Name</td>
+                          <td>
+                            <%= link_to @policy.name, "#", id:'name', class: "editable editable-click editable-generic",
+                            data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+                            title: "Enter Insured Name", type: "text", inputclass:'input-long' } %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Business Type</td>
+                          <td>
+                            <%= link_to @policy.business_type, "#", id:'business_type',
+                            class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
+                            pk: "#{@policy.id}", title: "Enter Business Type", type: "text" } %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Insured Type</td>
+                          <td>
+                            <%= link_to @policy.insured_type, "#", id:'insured_type',
+                            class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
+                            pk: "#{@policy.id}", title: "Enter Insured Type", type: "text" } %>
+                            </td>
                           </tr>
                           <tr>
-                            <td>Expiration Date</td>
+                            <td>Address</td>
                             <td>
-                              <%= link_to @policy.expiration_date.strftime("%_m/%d/%Y"), "#", id:'expiration_date',
-                              class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
-                                pk: "#{@policy.id}", title: "Select Expiration Date", type: "combodate",
-                                value: "#{@policy.expiration_date}" } %>
-                              </td>
+                              <%= link_to "#{@policy.street} <br /> #{@policy.city}, #{@policy.state}. #{@policy.zip}".html_safe,
+                              "#", id:'address', class: "editable editable-click",
+                              data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+                              title: "Enter Address", type: "address", value: {
+                              street: @policy.street, city: @policy.city, state: @policy.state,
+                              zip: @policy.zip } } %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Quoted By</td>
+                            <td>
+                              <%= link_to @policy.quoted_by, "#", id:'quoted_by', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Quoted By", type: "text" } %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Mortgagee</td>
+                            <td>
+                              <%= link_to @policy.mortgagee, "#", id:'mortgagee', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Mortgagee", type: "text" } %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <b>Property</b>
+                            </td>
+                            <td>
+                              edit of sub categories coming soon
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Property Schedule Rating Percentage</td>
+                            <td>
+                              <%#= link_to @policy.property.schedule_rating_pct, "#", id:'schedule_rating_pct', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Schedule Rating Percentage", type: "text" } %>
+                              <%#= link_to @policy.property.schedule_rating_pct, "#" %>
+                              <%= link_to @policy.property.schedule_rating_pct, "#",
+                              id: @policy.property.id, class:"prop editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property Schedule Rating Percentage", type:"number"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Property Premium Subtotal</td>
+                            <td>
+                              <%= link_to @policy.property.premium_subtotal, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Property Premium Total</td>
+                            <td>
+                              <%= link_to @policy.property.premium_total, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <b>Locations</b>
+                            </td>
+                          </tr>
+                          <% @policy.property.locations.each do |loc| %>
+                          <tr>
+                            <td>Location Number </td>
+                            <td>
+                              <%= link_to loc.number, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Location Premium </td>
+                            <td>
+                              <%= link_to loc.premium, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Location Co-Insurance </td>
+                            <td>
+                              <%= link_to loc.co_ins, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Location Co-Insurance Factor </td>
+                            <td>
+                              <%= link_to loc.co_ins_factor, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Location Deductible </td>
+                            <td>
+                              <%= link_to loc.ded, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Location Deductible Factor </td>
+                            <td>
+                              <%= link_to loc.ded_factor, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Location Address </td>
+                            <td>
+                              <%= link_to "#{loc.street} <br /> #{loc.city}, #{loc.state}. #{loc.zip}".html_safe, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Location Business Type </td>
+                            <td>
+                              <%= link_to loc.business_type, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Location Coverage Type </td>
+                            <td>
+                              <%= link_to loc.coverage_type, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Location Protection Class </td>
+                            <td>
+                              <%= link_to loc.protection_class, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Location Updates </td>
+                            <td>
+                              <%= link_to loc.updates, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Location Year Built </td>
+                            <td>
+                              <%= link_to loc.year_built, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Location Stories </td>
+                            <td>
+                              <%= link_to loc.stories, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Location Square Feet </td>
+                            <td>
+                              <%= link_to loc.square_feet, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Location Parking Lot Square Feet </td>
+                            <td>
+                              <%= link_to loc.parking_lot, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Food Spoilage</td>
+                          </tr>
+                          <% if false %>
+                          <tr>
+                            <td>Food Spoilage Limit </td>
+                            <td>
+                              <%= link_to loc.food_limit, "#" %>
+                            </td>
+                          </tr>
+                          <% end %>
+                          <tr>
+                            <td>Food Spoilage Rate </td>
+                            <td>
+                              <%= link_to loc.food_rate, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Food Spoilage Premium </td>
+                            <td>
+                              <%= link_to loc.food_premium, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Theft Limit</td>
+                            <td>
+                              <%= link_to loc.theft_limit, "#" %>
+                            </td>
+                          </tr>
+                          <% if false %>
+                          <tr>
+                            <td>Theft Rate</td>
+                            <td>
+                              <%= link_to loc.theft_rate, "#" %>
+                            </td>
+                          </tr>
+                          <% end %>
+                          <tr>
+                            <td>Theft Premium</td>
+                            <td>
+                              <%= link_to loc.theft_premium, "#" %>
+                            </td>
+                          </tr>
+                          <% if false %>
+                          <tr>
+                            <td>Enchancements Limit</td>
+                            <td>
+                              <%= link_to loc.enhc_limit, "#" %>
+                            </td>
+                          </tr>
+                          <% end %>
+                          <tr>
+                            <td>Enhancements Rate</td>
+                            <td>
+                              <%= link_to loc.enhc_rate, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Enhancements Premium</td>
+                            <td>
+                              <%= link_to loc.enhc_premium, "#" %>
+                            </td>
+                          </tr>
+                          <% if false %>
+                          <tr>
+                            <td>Mechanical Breakdown Limit</td>
+                            <td>
+                              <%= link_to loc.mech_limit, "#" %>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Mechanical Breakdown Rate</td>
+                            <td>
+                              <%= link_to loc.mech_rate, "#" %>
+                            </td>
+                          </tr>
+                          <% end %>
+                          <tr>
+                            <td>Mechanical Breakdown Premium</td>
+                            <td>
+                              <%= link_to loc.mech_premium, "#" %>
+                            </td>
+                          </tr>
+                          <% loc.exposures.each do |exp| %>
+                          <% if !exp.valuation.blank? %>
+                          <tr>
+                            <td>
+                              <td><b><%= exp.name %></b></td>
                             </tr>
                             <tr>
-                              <td>Package Premium Total</td>
+                              <td>Valuation</td>
+                              <td><%= link_to exp.valuation, "#" %></td>
+                            </tr>
+                            <tr>
+                              <td>Limit</td>
+                              <td><%= link_to exp.limit, "#" %></td>
+                            </tr>
+                            <tr>
+                              <td>Rate</td>
+                              <td><%= link_to exp.rate, "#" %></td>
+                            </tr>
+                            <tr>
+                              <td>Deduction Factor</td>
+                              <td><%= link_to exp.ded_factor, "#" %></td>
+                            </tr>
+                            <tr>
+                              <td>Co Insurance Factor</td>
+                              <td><%= link_to exp.co_ins_factor, "#" %></td>
+                            </tr>
+                            <tr>
+                              <td>Premium</td>
+                              <td><%= link_to exp.premium, "#" %></td>
+                            </tr>
+                            <% else %>
+                            <tr>
                               <td>
-                                <%= link_to @policy.package_premium_total, "#", id:'package_premium_total',
-                                class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
-                                  pk: "#{@policy.id}", title: "Enter Package Premium Total", type: "number" } %>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>Insured Name</td>
-                                <td>
-                                  <%= link_to @policy.name, "#", id:'name', class: "editable editable-click editable-generic",
-                                  data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
-                                  title: "Enter Insured Name", type: "text", inputclass:'input-long' } %>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>Business Type</td>
-                                <td>
-                                  <%= link_to @policy.business_type, "#", id:'business_type',
-                                  class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
-                                    pk: "#{@policy.id}", title: "Enter Business Type", type: "text" } %>
+                                <td><b><%= exp.name %></br> (empty)</td>
+                                </tr>
+                                <% end %>
+                                <% end %>
+                                <% end %>
+                                <tr>
+                                  <td>
+                                    <b>Crime</b>
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td>Insured Type</td>
+                                  <td>Exclude Safe</td>
                                   <td>
-                                    <%= link_to @policy.insured_type, "#", id:'insured_type',
-                                    class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
-                                      pk: "#{@policy.id}", title: "Enter Insured Type", type: "text" } %>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>Address</td>
-                                    <td>
-                                      <%= link_to "#{@policy.street} <br /> #{@policy.city}, #{@policy.state}. #{@policy.zip}".html_safe,
-                                      "#", id:'address', class: "editable editable-click",
-                                      data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
-                                      title: "Enter Address", type: "address", value: {
-                                        street: @policy.street, city: @policy.city, state: @policy.state,
-                                        zip: @policy.zip } } %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Quoted By</td>
-                                      <td>
-                                        <%= link_to @policy.quoted_by, "#", id:'quoted_by', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Quoted By", type: "text" } %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Mortgagee</td>
-                                      <td>
-                                        <%= link_to @policy.mortgagee, "#", id:'mortgagee', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Mortgagee", type: "text" } %>
-                                      </td>
-                                    </tr>
-
-                                    <tr>
-                                      <td>
-                                        <b>Property</b>
-                                      </td>
-                                      <td>
-                                        edit of sub categories coming soon
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Property Schedule Rating Percentage</td>
-                                      <td>
-                                        <%#= link_to @policy.property.schedule_rating_pct, "#", id:'schedule_rating_pct', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Schedule Rating Percentage", type: "text" } %>
-                                        <%= link_to @policy.property.schedule_rating_pct, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Property Premium Subtotal</td>
-                                      <td>
-                                        <%= link_to @policy.property.premium_subtotal, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Property Premium Total</td>
-                                      <td>
-                                        <%= link_to @policy.property.premium_total, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <b>Locations</b>
-                                      </td>
-                                    </tr>
-                                    <% @policy.property.locations.each do |loc| %>
-                                    <tr>
-                                      <td>Location Number </td>
-                                      <td>
-                                        <%= link_to loc.number, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Location Premium </td>
-                                      <td>
-                                        <%= link_to loc.premium, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Location Co-Insurance </td>
-                                      <td>
-                                        <%= link_to loc.co_ins, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Location Co-Insurance Factor </td>
-                                      <td>
-                                        <%= link_to loc.co_ins_factor, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Location Deductible </td>
-                                      <td>
-                                        <%= link_to loc.ded, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Location Deductible Factor </td>
-                                      <td>
-                                        <%= link_to loc.ded_factor, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Location Address </td>
-                                      <td>
-                                        <%= link_to "#{loc.street} <br /> #{loc.city}, #{loc.state}. #{loc.zip}".html_safe, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Location Business Type </td>
-                                      <td>
-                                        <%= link_to loc.business_type, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Location Coverage Type </td>
-                                      <td>
-                                        <%= link_to loc.coverage_type, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Location Protection Class </td>
-                                      <td>
-                                        <%= link_to loc.protection_class, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Location Updates </td>
-                                      <td>
-                                        <%= link_to loc.updates, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Location Year Built </td>
-                                      <td>
-                                        <%= link_to loc.year_built, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Location Stories </td>
-                                      <td>
-                                        <%= link_to loc.stories, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Location Square Feet </td>
-                                      <td>
-                                        <%= link_to loc.square_feet, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Location Parking Lot Square Feet </td>
-                                      <td>
-                                        <%= link_to loc.parking_lot, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Food Spoilage</td>
-                                    </tr>
-                                    <% if false %>
-                                    <tr>
-                                      <td>Food Spoilage Limit </td>
-                                      <td>
-                                        <%= link_to loc.food_limit, "#" %>
-                                      </td>
-                                    </tr>
-                                    <% end %>
-                                    <tr>
-                                      <td>Food Spoilage Rate </td>
-                                      <td>
-                                        <%= link_to loc.food_rate, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Food Spoilage Premium </td>
-                                      <td>
-                                        <%= link_to loc.food_premium, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Theft Limit</td>
-                                      <td>
-                                        <%= link_to loc.theft_limit, "#" %>
-                                      </td>
-                                    </tr>
-                                    <% if false %>
-                                    <tr>
-                                      <td>Theft Rate</td>
-                                      <td>
-                                        <%= link_to loc.theft_rate, "#" %>
-                                      </td>
-                                    </tr>
-                                    <% end %>
-                                    <tr>
-                                      <td>Theft Premium</td>
-                                      <td>
-                                        <%= link_to loc.theft_premium, "#" %>
-                                      </td>
-                                    </tr>
-                                    <% if false %>
-                                    <tr>
-                                      <td>Enchancements Limit</td>
-                                      <td>
-                                        <%= link_to loc.enhc_limit, "#" %>
-                                      </td>
-                                    </tr>
-                                    <% end %>
-                                    <tr>
-                                      <td>Enhancements Rate</td>
-                                      <td>
-                                        <%= link_to loc.enhc_rate, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Enhancements Premium</td>
-                                      <td>
-                                        <%= link_to loc.enhc_premium, "#" %>
-                                      </td>
-                                    </tr>
-                                    <% if false %>
-                                    <tr>
-                                      <td>Mechanical Breakdown Limit</td>
-                                      <td>
-                                        <%= link_to loc.mech_limit, "#" %>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>Mechanical Breakdown Rate</td>
-                                      <td>
-                                        <%= link_to loc.mech_rate, "#" %>
-                                      </td>
-                                    </tr>
-                                    <% end %>
-                                    <tr>
-                                      <td>Mechanical Breakdown Premium</td>
-                                      <td>
-                                        <%= link_to loc.mech_premium, "#" %>
-                                      </td>
-                                    </tr>
-                                    <% loc.exposures.each do |exp| %>
-                                    <% if !exp.valuation.blank? %>
-                                    <tr>
-                                      <td>
-                                        <td><b><%= exp.name %></b></td>
-                                      </tr>
-                                      <tr>
-                                        <td>Valuation</td>
-                                        <td><%= link_to exp.valuation, "#" %></td>
-                                      </tr>
-                                      <tr>
-                                        <td>Limit</td>
-                                        <td><%= link_to exp.limit, "#" %></td>
-                                      </tr>
-                                      <tr>
-                                        <td>Rate</td>
-                                        <td><%= link_to exp.rate, "#" %></td>
-                                      </tr>
-                                      <tr>
-                                        <td>Deduction Factor</td>
-                                        <td><%= link_to exp.ded_factor, "#" %></td>
-                                      </tr>
-                                      <tr>
-                                        <td>Co Insurance Factor</td>
-                                        <td><%= link_to exp.co_ins_factor, "#" %></td>
-                                      </tr>
-                                      <tr>
-                                        <td>Premium</td>
-                                        <td><%= link_to exp.premium, "#" %></td>
-                                      </tr>
-                                      <% else %>
-                                      <tr>
-                                        <td>
-                                          <td><b><%= exp.name %></br> (empty)</td>
-                                          </tr>
-                                          <% end %>
-                                          <% end %>
-                                          <% end %>
-                                          <tr>
-                                            <td>
-                                              <b>Crime</b>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td>Exclude Safe</td>
-                                            <td>
-                                              <%= link_to @policy.crime.exclude_safe, "#" %>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td>Burglar Alarm</td>
-                                            <td>
-                                              <%= link_to @policy.crime.burglar_alarm, "#" %>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td>Deduction</td>
-                                            <td>
+                                    <%= link_to @policy.crime.exclude_safe, "#" %>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Burglar Alarm</td>
+                                  <td>
+                                    <%= link_to @policy.crime.burglar_alarm, "#" %>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Deduction</td>
+                                  <td>
                                               <%= link_to @policy.crime.ded, "#" %>
                                             </td>
                                           </tr>
@@ -671,7 +676,7 @@
                           <button type="button" class="btn btn-default">MANDATORY</button>
                           <p></p>
                           <button type="button" class="btn btn-default">CP0020(6/07)</button>
-                          <button type="button.active" class="btn btn-default">CP0030(6/07)</button>
+                          <button type="button" class="btn btn-default">CP0030(6/07)</button>
                           <button type="button" class="btn btn-default">CP0032(6/07)</button>
                           <button type="button" class="btn btn-default">CP0050(6/07)</button>
                           <button type="button" class="btn btn-default">CP0320(10/92)</button>
@@ -763,6 +768,8 @@
                     </tbody>
                   </table>
                 </div>
+                <div role="tabpanel" class="tab-pane fade in" id="tab3">
+                </div>
               </div>
             </div>
           </div><!-- Panel Body -->
@@ -782,4 +789,5 @@
     <%= javascript_include_tag 'bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %>
     <%= javascript_include_tag 'pages/form-x-editable.js' %>
     <%= javascript_include_tag 'dropzone/dropzone.min.js' %>
+
   <% end %>

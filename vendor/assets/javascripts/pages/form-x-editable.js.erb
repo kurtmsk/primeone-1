@@ -50,10 +50,10 @@ $(function(){
     },
 
     source: [
-      {value: 'Upcoming', text: 'Upcoming'},
-      {value: 'Generated', text: 'Generated'},
-      {value: 'Reviewed', text: 'Reviewed'},
-      {value: 'Issued', text: 'Issued'}
+      {value: 'UPCOMING', text: 'UPCOMING'},
+      {value: 'GENERATED', text: 'GENERATED'},
+      {value: 'REVIEWED', text: 'REVIEWED'},
+      {value: 'ISSUED', text: 'ISSUED'}
     ],
   });
 
@@ -286,6 +286,18 @@ $('#crime_forms').editable({
   ]
 
 });
+
+$('.prop.editable').editable({
+  params: function(params) {
+    var data = {};
+    data['policy'] = {};
+    data['policy']['property_attributes'] = [
+      {
+        params.name: params.value;
+      }
+    ]
+  }
+})
 
 $('.doc.editable').editable({
   params: function(params) {
