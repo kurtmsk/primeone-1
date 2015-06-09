@@ -220,55 +220,85 @@
                           <tr>
                             <td>Location Number </td>
                             <td>
-                              <%= link_to loc.number, "#" %>
+                              <%= link_to loc.number, "#",
+                              id: "#{@policy.property.id} #{loc.id} number", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Number", type:"number"} %>
                             </td>
                           </tr>
                           <tr>
                             <td>Location Premium </td>
                             <td>
-                              <%= link_to loc.premium, "#" %>
+                              <%= link_to loc.premium, "#",
+                              id: "#{@policy.property.id} #{loc.id} premium", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Premium", type:"number"} %>
                             </td>
                           </tr>
                           <tr>
                             <td>Location Co-Insurance </td>
                             <td>
-                              <%= link_to loc.co_ins, "#" %>
+                              <%= link_to loc.co_ins, "#",
+                              id: "#{@policy.property.id} #{loc.id} co_ins", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Co-Insurance", type:"number"} %>
                             </td>
                           </tr>
                           <tr>
                             <td>Location Co-Insurance Factor </td>
                             <td>
-                              <%= link_to loc.co_ins_factor, "#" %>
+                              <%= link_to loc.co_ins_factor, "#",
+                              id: "#{@policy.property.id} #{loc.id} co_ins_factor", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Co-Insurance Factor", type:"number"} %>
                             </td>
                           </tr>
                           <tr>
                             <td>Location Deductible </td>
                             <td>
-                              <%= link_to loc.ded, "#" %>
+                              <%= link_to loc.ded, "#",
+                              id: "#{@policy.property.id} #{loc.id} ded", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Deductible", type:"number"} %>
                             </td>
                           </tr>
                           <tr>
                             <td>Location Deductible Factor </td>
                             <td>
-                              <%= link_to loc.ded_factor, "#" %>
+                              <%= link_to loc.ded_factor, "#",
+                              id: "#{@policy.property.id} #{loc.id} ded_factor", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Deductible Factor", type:"number"} %>
                             </td>
                           </tr>
                           <tr>
                             <td>Location Address </td>
                             <td>
-                              <%= link_to "#{loc.street} <br /> #{loc.city}, #{loc.state}. #{loc.zip}".html_safe, "#" %>
+                              <%= link_to "#{loc.street} <br /> #{loc.city}, #{loc.state}. #{loc.zip}".html_safe,
+                              "#", id: "#{@policy.property.id} #{loc.id}",
+                              class:"prop locs address editable editable-click",
+                              data: { url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Address", type:"address",
+                              value: { street: loc.street, city: loc.city, state: loc.state,
+                              zip: loc.zip } } %>
                             </td>
                           </tr>
                           <tr>
                             <td>Location Business Type </td>
                             <td>
-                              <%= link_to loc.business_type, "#" %>
+                              <%= link_to loc.business_type, "#",
+                              id: "#{@policy.property.id} #{loc.id} business_type", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Business Type", type:"number"} %>
                             </td>
                           </tr>
                           <tr>
                             <td>Location Coverage Type </td>
                             <td>
-                              <%= link_to loc.coverage_type, "#" %>
+                              <%= link_to loc.coverage_type, "#",
+                              id: "#{@policy.property.id} #{loc.id} coverage_type", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Coverage Type", type:"number"} %>
                             </td>
                           </tr>
                           <tr>

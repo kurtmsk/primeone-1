@@ -12,7 +12,7 @@ class Policy < ActiveRecord::Base
 
   accepts_nested_attributes_for :docs
   accepts_nested_attributes_for :property
-  accepts_nested_attributes_for :gl
   accepts_nested_attributes_for :crime
+  accepts_nested_attributes_for :gl
   accepts_nested_attributes_for :auto
 end

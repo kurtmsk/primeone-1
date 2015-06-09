@@ -201,7 +201,10 @@ class PoliciesController < ApplicationController
       :status, :package_premium_total, :name, :business_type, :type, :mortgagee, :quoted_by,
       :street, :city, :state, :zip, :forms, :property_forms, :gl_forms, :crime_forms,
       :auto_forms, :broker_id, docs_attributes: [:id, :active, :var_1, :var_2, :var_3, :var_4, :var_5, :var_6],
-      property_attributes: [:id, :schedule_rating_pct, :premium_subtotal, :premium_total] )
+      property_attributes: [:id, :schedule_rating_pct, :premium_subtotal, :premium_total,
+        locations_attributes: [:id, :number, :premium, :co_ins, :co_ins_factor,
+          :ded, :ded_factor, :street, :city, :state, :zip, :business_type,
+          :coverage_type,  ] ])
     end
 
     # Find the forms necessary for this policy
