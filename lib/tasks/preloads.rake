@@ -85,7 +85,7 @@ namespace :preload do
   end
 
   desc 'Preload core information/data'
-  task :insurance => :environment do
+  task :core => :environment do
     file = File.read(File.join(Rails.root, "public", "data", "core.json"))
     data_hash = JSON.parse(file)
 

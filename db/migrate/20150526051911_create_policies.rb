@@ -17,7 +17,7 @@ class CreatePolicies < ActiveRecord::Migration
 
       t.integer :package_premium_total, default: 0
 
-      t.string, :A, default: ""
+      t.string :A, default: ""
       t.date :B, default: '1995-11-08'
       t.date :C, default: '1995-11-08'
       t.string :D, default: ""
