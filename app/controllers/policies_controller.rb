@@ -205,7 +205,8 @@ class PoliciesController < ApplicationController
         locations_attributes: [:id, :number, :premium, :co_ins, :co_ins_factor,
           :ded, :ded_factor, :street, :city, :state, :zip, :business_type,
           :coverage_type, :protection_class, :updates, :year_built, :stories, :square_feet,
-          :parking_lot ] ])
+          :parking_lot, :food_rate, :food_premium, :theft_limit, :theft_premium,
+          :enhc_rate, :enhc_premium, :mech_premium ] ])
     end
 
     # Find the forms necessary for this policy

@@ -372,19 +372,28 @@
                           <tr>
                             <td>Food Spoilage Rate </td>
                             <td>
-                              <%= link_to loc.food_rate, "#" %>
+                              <%= link_to loc.food_rate, "#",
+                              id: "#{@policy.property.id} #{loc.id} food_rate", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Food Spoilage Rate", type:"number" } %>
                             </td>
                           </tr>
                           <tr>
                             <td>Food Spoilage Premium </td>
                             <td>
-                              <%= link_to loc.food_premium, "#" %>
+                              <%= link_to loc.food_premium, "#",
+                              id: "#{@policy.property.id} #{loc.id} food_premium", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Food Spoilage Premium", type:"number" } %>
                             </td>
                           </tr>
                           <tr>
                             <td>Theft Limit</td>
                             <td>
-                              <%= link_to loc.theft_limit, "#" %>
+                              <%= link_to loc.theft_limit, "#",
+                              id: "#{@policy.property.id} #{loc.id} theft_limit", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Theft Limit", type:"number" } %>
                             </td>
                           </tr>
                           <% if false %>
@@ -398,7 +407,10 @@
                           <tr>
                             <td>Theft Premium</td>
                             <td>
-                              <%= link_to loc.theft_premium, "#" %>
+                              <%= link_to loc.theft_premium, "#",
+                              id: "#{@policy.property.id} #{loc.id} theft_premium", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Theft Premium", type:"number" } %>
                             </td>
                           </tr>
                           <% if false %>
@@ -412,13 +424,19 @@
                           <tr>
                             <td>Enhancements Rate</td>
                             <td>
-                              <%= link_to loc.enhc_rate, "#" %>
+                              <%= link_to loc.enhc_rate, "#",
+                              id: "#{@policy.property.id} #{loc.id} enhc_rate", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Enhancements Rate", type:"number" } %>
                             </td>
                           </tr>
                           <tr>
                             <td>Enhancements Premium</td>
                             <td>
-                              <%= link_to loc.enhc_premium, "#" %>
+                              <%= link_to loc.enhc_premium, "#",
+                              id: "#{@policy.property.id} #{loc.id} enhc_premium", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Enhancements Premium", type:"number" } %>
                             </td>
                           </tr>
                           <% if false %>
@@ -438,7 +456,10 @@
                           <tr>
                             <td>Mechanical Breakdown Premium</td>
                             <td>
-                              <%= link_to loc.mech_premium, "#" %>
+                              <%= link_to loc.mech_premium, "#",
+                              id: "#{@policy.property.id} #{loc.id} mech_premium", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Mechanical Breakdown Premium", type:"number" } %>
                             </td>
                           </tr>
                           <% loc.exposures.each do |exp| %>
