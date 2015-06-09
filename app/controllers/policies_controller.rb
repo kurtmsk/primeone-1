@@ -204,7 +204,8 @@ class PoliciesController < ApplicationController
       property_attributes: [:id, :schedule_rating_pct, :premium_subtotal, :premium_total,
         locations_attributes: [:id, :number, :premium, :co_ins, :co_ins_factor,
           :ded, :ded_factor, :street, :city, :state, :zip, :business_type,
-          :coverage_type,  ] ])
+          :coverage_type, :protection_class, :updates, :year_built, :stories, :square_feet,
+          :parking_lot ] ])
     end
 
     # Find the forms necessary for this policy
@@ -375,7 +376,7 @@ class PoliciesController < ApplicationController
 
         business_type: workbook.cell('L',10), coverage_type: workbook.cell('D',12),
         protection_class: workbook.cell('L',12), updates: workbook.cell('K',13),
-        year_built: workbook.cell('B',13), construction_type: workbook.cell('H',13),
+        year_built: workbook.cell('B',13).to_i.to_s, construction_type: workbook.cell('H',13),
         stories: workbook.cell('E',13).to_i, square_feet: workbook.cell('B',14).to_i,
         parking_lot: workbook.cell('H',14).to_i,
 

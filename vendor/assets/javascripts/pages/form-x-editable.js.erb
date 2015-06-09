@@ -310,6 +310,25 @@ $(function(){
     }
   });
 
+  $('#prop.locs.year_built.editable').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy'][params.name] = params.value
+      data['id'] = params.pk;
+
+      return data;
+    },
+
+    viewformat: 'MM/DD/YYYY',
+    template: 'D / MMMM / YYYY',
+    combodate: {
+      minYear: 1950,
+      maxYear: 2050,
+      minuteStep: 1
+    }
+  });
+
   $('.prop.locs.editable').editable({
     params: function(params) {
       var data = {};

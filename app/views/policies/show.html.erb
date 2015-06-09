@@ -289,7 +289,7 @@
                               <%= link_to loc.business_type, "#",
                               id: "#{@policy.property.id} #{loc.id} business_type", class:"prop locs editable editable-click",
                               data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
-                              title: "Enter Property's Location Business Type", type:"number"} %>
+                              title: "Enter Property's Location Business Type", type:"text"} %>
                             </td>
                           </tr>
                           <tr>
@@ -298,43 +298,64 @@
                               <%= link_to loc.coverage_type, "#",
                               id: "#{@policy.property.id} #{loc.id} coverage_type", class:"prop locs editable editable-click",
                               data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
-                              title: "Enter Property's Location Coverage Type", type:"number"} %>
+                              title: "Enter Property's Location Coverage Type", type:"text"} %>
                             </td>
                           </tr>
                           <tr>
                             <td>Location Protection Class </td>
                             <td>
-                              <%= link_to loc.protection_class, "#" %>
+                              <%= link_to loc.protection_class, "#",
+                              id: "#{@policy.property.id} #{loc.id} protection_class", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Protection Class", type:"text"} %>
                             </td>
                           </tr>
                           <tr>
                             <td>Location Updates </td>
                             <td>
-                              <%= link_to loc.updates, "#" %>
+                              <%= link_to loc.updates, "#",
+                              id: "#{@policy.property.id} #{loc.id} updates", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Updates", type:"text",
+                              inputclass: 'input-long'} %>
                             </td>
                           </tr>
                           <tr>
                             <td>Location Year Built </td>
                             <td>
-                              <%= link_to loc.year_built, "#" %>
+                              <%= link_to loc.year_built, "#",
+                              id: "#{@policy.property.id} #{loc.id} year_built", class:"prop locs year_built editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Year Built", type:"combodate",
+                              viewformat: 'YYYY', template: 'YYYY', format: 'YYYY',
+                              combodate: {minYear: 1850, maxYear: 2050, minuteStep: 1 }} %>
                             </td>
                           </tr>
                           <tr>
                             <td>Location Stories </td>
                             <td>
-                              <%= link_to loc.stories, "#" %>
+                              <%= link_to loc.stories, "#",
+                              id: "#{@policy.property.id} #{loc.id} stories", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Stories", type:"number" } %>
                             </td>
                           </tr>
                           <tr>
                             <td>Location Square Feet </td>
                             <td>
-                              <%= link_to loc.square_feet, "#" %>
+                              <%= link_to loc.square_feet, "#",
+                              id: "#{@policy.property.id} #{loc.id} square_feet", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Square Feet", type:"number" } %>
                             </td>
                           </tr>
                           <tr>
                             <td>Location Parking Lot Square Feet </td>
                             <td>
-                              <%= link_to loc.parking_lot, "#" %>
+                              <%= link_to loc.parking_lot, "#",
+                              id: "#{@policy.property.id} #{loc.id} parking_lot", class:"prop locs editable editable-click",
+                              data:{ url: "/policies/#{@policy.id}", pk: @policy.id,
+                              title: "Enter Property's Location Parking Lot Square Feet", type:"number" } %>
                             </td>
                           </tr>
                           <tr>
