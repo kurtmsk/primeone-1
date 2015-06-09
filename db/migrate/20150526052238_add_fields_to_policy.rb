@@ -1,8 +1,8 @@
 class AddFieldsToPolicy < ActiveRecord::Migration
   def change
     # Insured
-    add_column :policies, :name, :string, default: ""
-    add_column :policies, :expiration_date, :date, default: '1995-11-08'
+    #add_column :policies, :name, :string, default: ""
+    #add_column :policies, :expiration_date, :date, default: '1995-11-08'
     #add_column :policies, :quoted_by, :string, default: ""
     #add_column :policies, :business_type, :string, default: ""
     #add_column :policies, :mortgagee, :string, default: ""
