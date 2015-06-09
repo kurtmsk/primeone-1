@@ -34,10 +34,11 @@ class PoliciesController < ApplicationController
   # POST /policies.json
   def create
     @policy = Policy.new(policy_params)
-    @policy.build_property()
-    @policy.build_gl()
-    @policy.build_crime()
-    @policy.build_auto()
+
+    #@policy.build_property()
+    #@policy.build_gl()
+    #@policy.build_crime()
+    #@policy.build_auto()
 
     # add all documents
     @policy.docs.create!({
@@ -80,7 +81,6 @@ class PoliciesController < ApplicationController
       var_3: nil, var_4: nil, var_5: nil, var_6: nil
     })
 
-
     respond_to do |format|
       if @policy.save
         format.html { redirect_to @policy, notice: 'Policy was successfully created.' }
@@ -104,10 +104,10 @@ class PoliciesController < ApplicationController
   # Upload / Populate
   def populate
     if (params[:file] != nil)
-      readWorkbook()
+    #  readWorkbook()
     end
 
-    findForms()
+    #findForms()
 
 
     respond_to do |format|
@@ -153,18 +153,18 @@ class PoliciesController < ApplicationController
   # PATCH/PUT /policies/1.json
   def update
 
-    findForms()
+    #findForms()
 
     respond_to do |format|
       if @policy.update(policy_params)
 
-        if @policy.save
+        #if @policy.save
           format.html { render :show, notice: 'Policy was successfully updated' }
           format.json { render :show, status: :ok, location: @policy }
-        else
-          format.html { render :edit }
-          format.json { render json: @policy.errors, status: :unprocessable_entity }
-        end
+        #else
+        #  format.html { render :edit }
+        #  format.json { render json: @policy.errors, status: :unprocessable_entity }
+        #end
       else
         format.html { render :edit }
         format.json { render json: @policy.errors, status: :unprocessable_entity }
@@ -197,6 +197,19 @@ class PoliciesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def policy_params
+      params.require(:policy).permit(:policy_number, :client_code, :effective_date,
+      :expiration_date, :status, :package_premium_total, :A, :B, :C, :D, :E, :F, :G,
+      :H, :I, :J, :K, :L, :M, :N, :O, :P, :Q, :R, :S, :T, :U, :V, :W, :X, :Y, :Z,
+      :AA, :AB, :AC, :AD, :AE, :AF, :AG, :AH, :AI, :AJ, :AK, :AL, :AM, :AN, :AO, :AP,
+      :AQ, :AR, :AS, :AT, :AU, :AV, :AW, :AX, :AY, :AZ, :BA, :BB, :BC, :BD, :BE, :BF,
+      :BG, :BH, :BI, :BJ, :BK, :BL, :BM, :BN, :BO, :BP, :BQ, :BR, :BS, :BT, :BU, :BV,
+      :BW, :BX, :BY, :BZ, :CA, :CB, :CC, :CD, :CE, :CF, :CG, :CH, :CI, :CJ, :CK, :CL,
+      :CM, :CN, :CO, :CP, :CQ, :CR, :CS, :CT, :CU, :CV, :CW, :CX, :CY, :CZ, :DA, :DB,
+      :DC, :DD, :DE, :DF, :DG, :DH, :DI, :DJ, :DK, :DL, :DM, :DN, :DO, :DP, :DQ, :DR,
+      :DS, :DT, :DU, :DV, :DW, :DX, :DY, :DZ, :EA, :EB, :EC, :ED, :EE, :EF, :EG, :EH,
+      :EI, :EJ, :EK, :EL, :EM, :EN, :EO, :EP, :EQ, :ER, :ES, :ET )
+    end
+=begin
       params.require(:policy).permit(:policy_number, :client_code, :effective_date, :expiration_date,
       :status, :package_premium_total, :name, :business_type, :type, :mortgagee, :quoted_by,
       :street, :city, :state, :zip, :forms, :property_forms, :gl_forms, :crime_forms,
@@ -207,7 +220,7 @@ class PoliciesController < ApplicationController
           :coverage_type, :protection_class, :updates, :year_built, :stories, :square_feet,
           :parking_lot, :food_rate, :food_premium, :theft_limit, :theft_premium,
           :enhc_rate, :enhc_premium, :mech_premium ] ])
-    end
+=end
 
     # Find the forms necessary for this policy
     def findForms

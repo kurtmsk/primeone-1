@@ -16,7 +16,6 @@ class CreateDocs < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    #add_reference :docs, :policy, index: true, foreign_key: true
-    add_reference :docs, :insurance, index: true, foreign_key: true
+    add_reference :docs, :policy, index: true, foreign_key: true
   end
 end
