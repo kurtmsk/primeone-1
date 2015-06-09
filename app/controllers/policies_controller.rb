@@ -112,10 +112,11 @@ class PoliciesController < ApplicationController
 
     respond_to do |format|
       if @policy.save
-        redirect_to policies_path, notice: 'Policy was successfully populated'
+        #redirect_to policies_path, notice: 'Policy was successfully populated'
         #format.html { render :show, notice: 'Policy was successfully populated' }
-        #format.html { redirect_to policy_path(@policy), notice: 'Policy was successfully populated'}
+        format.html { redirect_to policy_path(@policy), notice: 'Policy was successfully populated'}
         #format.json { render :show, status: :ok, location: @policy }
+        format.json { render :show, status: :ok, location: @policy }
       else
         format.html { render :edit }
         format.json { render json: @policy.errors, status: :unprocessable_entity }
