@@ -90,7 +90,7 @@ namespace :preload do
     data_hash = JSON.parse(file)
 
     data_hash.each do |h|
-      p = Policy.find_by_policy_number(policy_number: h['1'])
+      p = Policy.find_by_policy_number(h['1'])
       #p = Policy.create!(
       p.update(
         A: h['1'],B: h['2'],C: h['3'],D: h['4'],E: h['5'],F: h['6'],G: h['7'],H: h['8'],

@@ -5,9 +5,10 @@ class CreatePolicies < ActiveRecord::Migration
       t.string :policy_number, default: ""
       t.string :status, default: ""
       t.string :client_code, default: ""
+      t.string :name, default: ""
 
       t.date :effective_date, default: '1995-11-08'
-      t.date :expiration_date, default: '1995-11-08'
+      #t.date :expiration_date, default: '1995-11-08'
 
       t.string :forms, default: ""
       t.string :property_forms, default: ""
@@ -15,7 +16,7 @@ class CreatePolicies < ActiveRecord::Migration
       t.string :crime_forms, default: ""
       t.string :auto_forms, default: ""
 
-      t.integer :package_premium_total, default: 0
+      #t.integer :package_premium_total, default: 0
 
       t.string :A, default: ""
       t.date :B, default: '1995-11-08'

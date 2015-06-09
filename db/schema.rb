@@ -340,6 +340,7 @@ ActiveRecord::Schema.define(version: 20150530171716) do
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
     t.integer  "broker_id"
+    t.string   "name",                  default: ""
   end
 
   add_index "policies", ["broker_id"], name: "index_policies_on_broker_id", using: :btree
