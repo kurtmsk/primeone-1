@@ -88,11 +88,14 @@ namespace :preload do
 
   desc 'Preload policy information/data'
   task :data => :environment do
-    file = File.read(File.join(Rails.root, "public", "data", "policies.json"))
+    file = File.read(File.join(Rails.root, "public", "data", "core.json"))
     data_hash = JSON.parse(file)
 
     data_hash.each do |h|
-      p = Policy.create!()
+      p = Policy.new(policy_number: h['1'], effective_date: h['2'], expiration_date: h['3'],
+      client_code: h['3.5']
+      )
+      puts p
     end
   end
 end
