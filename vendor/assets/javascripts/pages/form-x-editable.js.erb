@@ -294,7 +294,8 @@ $('.doc.editable').editable({
     data['policy'] = {};
     data['policy']['docs_attributes'] = [
       {
-        id: params.name, active: true,
+        id: params.name,
+        active: true,
         var_1: params.value.var_1,
         var_2: params.value.var_2,
         var_3: params.value.var_3,
@@ -319,6 +320,9 @@ $('.editable').editable({
     data[params.name] = params.value
 
     return data;
+  },
+  success: function(response, newValue) {
+    $('.policy_'+$(this)[0].id+'_display').text(newValue);
   }
 });
 

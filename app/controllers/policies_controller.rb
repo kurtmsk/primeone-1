@@ -109,10 +109,13 @@ class PoliciesController < ApplicationController
 
     findForms()
 
+
     respond_to do |format|
       if @policy.save
-        format.html { render :show, notice: 'Policy was successfully populated' }
-        format.json { render :show, status: :ok, location: @policy }
+        redirect_to policies_path, notice: 'Policy was successfully populated'
+        #format.html { render :show, notice: 'Policy was successfully populated' }
+        #format.html { redirect_to policy_path(@policy), notice: 'Policy was successfully populated'}
+        #format.json { render :show, status: :ok, location: @policy }
       else
         format.html { render :edit }
         format.json { render json: @policy.errors, status: :unprocessable_entity }
@@ -151,9 +154,12 @@ class PoliciesController < ApplicationController
   # PATCH/PUT /policies/1
   # PATCH/PUT /policies/1.json
   def update
+
+    findForms()
+
     respond_to do |format|
       if @policy.update(policy_params)
-        findForms()
+
         if @policy.save
           format.html { render :show, notice: 'Policy was successfully updated' }
           format.json { render :show, status: :ok, location: @policy }

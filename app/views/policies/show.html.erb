@@ -5,17 +5,7 @@
   <%= stylesheet_link_tag 'x-editable/inputs-ext/address/address.css' %>
   <%= stylesheet_link_tag 'select2/css/select2.min.css' %>
   <%= stylesheet_link_tag 'bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %>
-  <%= stylesheet_link_tag 'dropzone/dropzone.min.css' %>'
-  <style>
-    /* not sure why this is necessary */
-    main.page-content .page-inner {
-      top: -18px;
-    }
-
-    main.page-content div.navbar {
-      top: 0px;
-    }
-  </style>
+  <%= stylesheet_link_tag 'dropzone/dropzone.min.css' %>
 <% end %>
 
 <div class="page-inner">
@@ -28,7 +18,7 @@
   </div>
   <div class="page-title">
     <div class="container">
-      <h3>Policy: <span class="policy_number_display"><%= @policy.policy_number %></span></h3>
+      <h3><span class="policy_number_display"><%= @policy.policy_number %></span> || <span class="policy_name_display"><%= @policy.name %></span></h3>
     </div>
   </div>
   <div id="main-wrapper" class="container">
@@ -36,20 +26,22 @@
       <div class="col-md-12">
         <div class="panel panel-white">
           <div class="panel-body">
-            <%= form_tag populate_policy_path, class:'', multipart: true do %>
-              <%#= hidden_field_tag :id, @policy.id %>
+            <%= form_tag populate_policy_path, class:'dropzone', multipart: true do %>
               <div class="fallback">
-                <!--<input name="file" type="file" />-->
-                <%= file_field_tag :file %>
+                <input name="file" type="file" />
+                <%#= file_field_tag :file %>
               </div>
-              <div style="float: right; margin-bottom: 10px">
+              <div style="float: right;">
                 <%= submit_tag "Populate", class:"btn btn-success bg-success" %>
+                <%#= link_to policy_path(@policy) do %>
+                  <%#= button_tag "Populate", class:"btn btn-success bg-success" %>
+                <%# end %>
               </div>
 
             <% end %>
           </div>
         </div>
-      </div>
+      </div><!-- col-md-12 -->
     </div><!-- Row -->
   </div><!-- Main Wrapper -->
   <div id="main-wrapper" class="container">
@@ -140,7 +132,7 @@
                   <td>
                     <%= link_to @policy.name, "#", id:'name', class: "editable editable-click editable-generic",
                     data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
-                    title: "Enter Insured Name", type: "text" } %>
+                    title: "Enter Insured Name", type: "text", inputclass:'input-long' } %>
                   </td>
                 </tr>
                 <tr>

@@ -22,7 +22,7 @@ namespace :preload do
     end
   end
 
-  desc 'Preload policy data'
+  desc 'Preload policy container'
   task :policies => :environment do
     # open the speadsheet
     workbook = Roo::Spreadsheet.open('public/data/policies.xlsx', extension: :xlsx)
@@ -83,6 +83,16 @@ namespace :preload do
       })
 
       #puts fields
+    end
+  end
+
+  desc 'Preload policy information/data'
+  task :data => :environment do
+    file = File.read(File.join(Rails.root, "public", "data", "policies.json"))
+    data_hash = JSON.parse(file)
+
+    data_hash.each do |h|
+      p = Policy.create!()
     end
   end
 end

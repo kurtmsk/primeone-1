@@ -1,14 +1,16 @@
 <div class="overlay"></div>
 
-<%= form_tag find_policies_path, class:'search-form' do %>
+<%#= form_tag find_policies_path, class:'search-form' do %>
+<form class="search-form" action="/policies/find" method="POST">
   <div class="input-group">
     <input type="text" name="policy_number" class="form-control search-input" placeholder="Search a Policy Number...">
     <span class="input-group-btn">
       <button class="btn btn-default close-search waves-effect waves-button waves-classic" type="button"><i class="fa fa-times"></i></button>
     </span>
   </div><!-- Input Group -->
-<% end %>
-<!-- Search Form <form class="search-form" action="/policies/find_policy" method="POST"></form>-->
+</form>
+<%# end %>
+<!-- Search Form </form>-->
 
 
 <main class="page-content content-wrap">
@@ -16,7 +18,8 @@
     <div class="navbar-inner container">
       <div class="logo-box">
         <%= link_to root_path, class: 'logo-text' do %>
-          <span>Prime One Insurance Console</span>
+          <!--<span>Prime One Insurance Console</span>-->
+          <%= image_tag "prime_logo_color_small.png", width:"150px", height:"33px", alt:"Prime One Insurance" %>
         <% end %>
       </div><!-- Logo Box -->
       <div class="search-button">
