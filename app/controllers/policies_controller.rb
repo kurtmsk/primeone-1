@@ -146,7 +146,7 @@ class PoliciesController < ApplicationController
   # GET /policies/1/download
   def download
     @pdfForms = CombinePDF.new
-    @pdfForms << CombinePDF.load('app/assets/forms/package/all_forms.pdf')
+    @pdfForms << CombinePDF.load('app/assets/forms/all_forms.pdf')
 
     form_groups = [:property_forms, :gl_forms, :crime_forms, :auto_forms]
 
@@ -155,7 +155,7 @@ class PoliciesController < ApplicationController
         @policy[fg].split(" ").each do |f|
           f = f.gsub("/", "-")
           begin
-            @pdfForms << CombinePDF.load("app/assets/forms/#{fg.to_s}/#{f}.pdf")
+            @pdfForms << CombinePDF.load("app/assets/forms/#{f}.pdf")
           rescue
           end
         end
