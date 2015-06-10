@@ -115,7 +115,7 @@ class PoliciesController < ApplicationController
       @policy.save
 
       format.html { render :show }
-      format.js
+      format.js { render :show }
     end
   end
 
@@ -146,9 +146,9 @@ class PoliciesController < ApplicationController
   # GET /policies/1/download
   def download
     @pdfForms = CombinePDF.new
-    @pdfForms << CombinePDF.load('app/assets/forms/all_forms.pdf')
+    #@pdfForms << CombinePDF.load('app/assets/forms/all_forms.pdf')
 
-    form_groups = [:property_forms, :gl_forms, :crime_forms, :auto_forms]
+    form_groups = [:forms, :property_forms, :gl_forms, :crime_forms, :auto_forms]
 
     form_groups.each do |fg|
       if !@policy[fg].empty?
