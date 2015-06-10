@@ -94,11 +94,26 @@ class PoliciesController < ApplicationController
 
   def find
     @policy = Policy.find_by_policy_number(params[:policy_number])
+
     if @policy != nil
       redirect_to policy_path(@policy)
     else
       redirect_to policies_path
     end
+  end
+
+  def update_forms
+    @policy = Policy.find(params[:id])
+
+    if (params[:state] == 'add')
+      attrs = {}
+      attrs[params[:group]] = params[:forms]
+
+      @policy.update(attrs)
+      render :show
+    end
+
+
   end
 
   # Upload / Populate
@@ -108,7 +123,6 @@ class PoliciesController < ApplicationController
     end
 
     #findForms()
-
 
     respond_to do |format|
       if @policy.save
