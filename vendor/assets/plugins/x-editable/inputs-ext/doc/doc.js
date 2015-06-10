@@ -52,7 +52,8 @@ building: "15"
         return;
       }
       //var html = $('<div>').text(value.city).html() + ', ' + $('<div>').text(value.street).html() + ' st., bld. ' + $('<div>').text(value.building).html();
-      var html = $('<div>').text("Updated!").html();//$('<div>').text(value.street).html() + '<br />' + $('<div>').text(value.city).html() + ', ' + $('<div>').text(value.state).html() + '. ' + $('<div>').text(value.zip).html();
+      var html = $('<div>').text("Save changes above!").html();//$('<div>').text(value.street).html() + '<br />' + $('<div>').text(value.city).html() + ', ' + $('<div>').text(value.state).html() + '. ' + $('<div>').text(value.zip).html();
+      //var html = $("<a href=>'javascript:window.location.reload();'").text("S")
       $(element).html(html);
     },
 

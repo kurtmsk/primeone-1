@@ -93,7 +93,8 @@ namespace :preload do
       p = Policy.find_by_policy_number(h['1'])
       #p = Policy.create!(
       p.update(
-        A: h['1'],B: h['2'],C: h['3'],D: h['4'],E: h['5'],F: h['6'],G: h['7'],H: h['8'],
+        A: h['1'],B: Date.strptime(h['2'], '%m/%d/%y'),C: Date.strptime(h['3'], '%m/%d/%y'),
+        D: h['4'],E: h['5'],F: h['6'],G: h['7'],H: h['8'],
         I: h['9'],J: h['10'],K: h['11'],L: h['12'],M: h['13'],N: h['14'],O: h['15'],
         P: h['16'],Q: h['17'],R: h['18'],S: h['19'],T: h['20'],U: h['21'],V: h['22'],
         W: h['23'],X: h['24'],Y: h['25'],Z: h['26'],AA: h['27'],AB: h['28'],

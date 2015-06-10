@@ -2,92 +2,134 @@
 <%= content_for :head do %>
   <%= stylesheet_link_tag 'datatables/css/jquery.datatables.css' %>
   <%= stylesheet_link_tag 'datatables/css/jquery.datatables_themeroller.css' %>
+
+
+  <%= stylesheet_link_tag 'x-editable/bootstrap3-editable/css/bootstrap-editable.css' %>
+  <%= stylesheet_link_tag 'x-editable/inputs-ext/typeaheadjs/lib/typeahead.js-bootstrap.css' %>
+  <%= stylesheet_link_tag 'x-editable/inputs-ext/address/address.css' %>
+  <%= stylesheet_link_tag 'select2/css/select2.min.css' %>
+  <%= stylesheet_link_tag 'bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %>
+  <%= stylesheet_link_tag 'dropzone/dropzone.min.css' %>
 <% end %>
 
-
-    <div class="page-inner">
-      <div class="page-breadcrumb">
-        <ol class="breadcrumb container">
-          <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Policies", "#", class: 'active' %></li>
-          <li><%= link_to @policy.policy_number, policy_path(@policy), class: 'policy_number_display' %></li>
-          <li><%= link_to "Fillable Forms & Endorsements", "#", class: 'active' %></li>
-        </ol>
-      </div>
-      <div class="page-title">
-        <div class="container">
-          <h3>Forms & Endorsements</h3>
+<div class="page-inner">
+  <div class="page-breadcrumb">
+    <ol class="breadcrumb container">
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "Policies", "#", class: 'active' %></li>
+      <li><%= link_to @policy.policy_number, policy_path(@policy), class: 'policy_number_display' %></li>
+      <li><%= link_to "Fillable Forms & Endorsements", "#", class: 'active' %></li>
+    </ol>
+  </div>
+  <div class="page-title">
+    <div class="container">
+      <h3>Forms & Endorsements</h3>
+    </div>
+  </div>
+  <div id="main-wrapper" class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-white">
+          <div class="panel-heading clearfix">
+            <h4 class="panel-title"><%= "Policy "+@policy.policy_number+"\'s Forms & Endorsements" %></h4>
+          </div>
+          <div class="panel-body">
+            <div>
+              <%#= link_to "Edit Forms", forms_policy_path(@policy) %>
+            </div>
+            <div>
+              <%= link_to "Use this as a variable reference", image_url("form reference.png") %>
+            </div>
+            <div>
+              <%= link_to "javascript:window.location.reload();" do %>
+                <i class="fa fa-save"> Save Changes</i>
+              <% end %>
+            </div>
+            <div class="table-responsive">
+              <table id="policy" class="display table dataTable" style="width: 100%; cellspacing: 0;">
+                <thead>
+                  <tr>
+                    <th>Included?</th>
+                    <th>Form Code</th>
+                    <th>Description</th>
+                    <th>Var. 1</th>
+                    <th>Var. 2</th>
+                    <th>Var. 3</th>
+                    <th>Var. 4</th>
+                    <th>Var. 5</th>
+                    <th>Var. 6</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>Included?</th>
+                    <th>Form Code</th>
+                    <th>Description</th>
+                    <th>Var. 1</th>
+                    <th>Var. 2</th>
+                    <th>Var. 3</th>
+                    <th>Var. 4</th>
+                    <th>Var. 5</th>
+                    <th>Var. 6</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  <% @docs.each do |doc| %>
+                  <tr>
+                    <td>
+                      <% if doc.active %>
+                        <%= link_to "True (click to remove)", remove_form_policy_path(@policy, doc_id: doc.id) %>
+                      <% else %>
+                        <%= doc.active %>
+                      <% end %>
+                    </td>
+                    <td><%= link_to doc.form_code, policy_doc_path(@policy, doc) %></td>
+                    <td>
+                    <%= link_to doc.description, "#",
+                    id: doc.id, class: "doc editable editable-click",
+                    data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+                    title: "Fill in Variables", type: "address",
+                    value: { var_1: doc.var_1, var_2: doc.var_2, var_3: doc.var_3,
+                      var_4: doc.var_4, var_5: doc.var_5, var_6: doc.var_6,
+                      active: doc.active } } %>
+                    </td>
+                    <!--<td><%#= doc.description %></td>-->
+                    <td><%= doc.var_1 %></td>
+                    <td><%= doc.var_2 %></td>
+                    <td><%= doc.var_3 %></td>
+                    <td><%= doc.var_4 %></td>
+                    <td><%= doc.var_5 %></td>
+                    <td><%= doc.var_6 %></td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
-      <div id="main-wrapper" class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-white">
-              <div class="panel-heading clearfix">
-                <h4 class="panel-title"><%= "Policy "+@policy.policy_number+"\'s Forms & Endorsements" %></h4>
-              </div>
-              <div class="panel-body">
-                <div>
-                  <%= link_to "Edit Forms", forms_policy_path(@policy) %>
-                </div>
-                <div>
-                  <%= link_to "Use this as a variable reference", image_url("form reference.png") %>
-                </div>
-                <div class="table-responsive">
-                  <table id="example" class="display table dataTable" style="width: 100%; cellspacing: 0;">
-                    <thead>
-                      <tr>
-                        <th>Included?</th>
-                        <th>Form Code</th>
-                        <th>Description</th>
-                        <th>Var. 1</th>
-                        <th>Var. 2</th>
-                        <th>Var. 3</th>
-                        <th>Var. 4</th>
-                        <th>Var. 5</th>
-                        <th>Var. 6</th>
-                      </tr>
-                    </thead>
-                    <tfoot>
-                      <tr>
-                        <th>Included?</th>
-                        <th>Form Code</th>
-                        <th>Description</th>
-                        <th>Var. 1</th>
-                        <th>Var. 2</th>
-                        <th>Var. 3</th>
-                        <th>Var. 4</th>
-                        <th>Var. 5</th>
-                        <th>Var. 6</th>
-                      </tr>
-                    </tfoot>
-                    <tbody>
-                      <% @docs.each do |doc| %>
-                      <tr>
-                        <td><%= doc.active %></td>
-                        <td><%= link_to doc.form_code, policy_doc_path(@policy, doc) %></td>
-                        <td><%= doc.description %></td>
-                        <td><%= doc.var_1 %></td>
-                        <td><%= doc.var_2 %></td>
-                        <td><%= doc.var_3 %></td>
-                        <td><%= doc.var_4 %></td>
-                        <td><%= doc.var_5 %></td>
-                        <td><%= doc.var_6 %></td>
-                      </tr>
-                      <% end %>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div><!-- Row -->
-      </div><!-- Main Wrapper -->
+    </div><!-- Row -->
+  </div><!-- Main Wrapper -->
 
 <!-- Javascripts -->
 <%= content_for :js_includes do %>
   <%= javascript_include_tag 'moment/moment.js' %>
   <%= javascript_include_tag 'datatables/js/jquery.datatables.min.js' %>
   <%= javascript_include_tag 'pages/table-data.js' %>
+  <%= javascript_include_tag 'x-editable/inputs-ext/doc/doc.js' %>
+  <%= javascript_include_tag 'pages/form-x-editable.js' %>
+
+
+
+  <%= javascript_include_tag 'moment/moment.js' %>
+  <%= javascript_include_tag 'x-editable/bootstrap3-editable/js/bootstrap-editable.js' %>
+  <%= javascript_include_tag 'x-editable/inputs-ext/typeaheadjs/lib/typeahead.js' %>
+  <%= javascript_include_tag 'x-editable/inputs-ext/typeaheadjs/typeaheadjs.js' %>
+  <%#= javascript_include_tag 'x-editable/inputs-ext/address/address.js' %>
+  <%= javascript_include_tag 'x-editable/inputs-ext/doc/doc.js' %>
+  <%= javascript_include_tag 'select2/js/select2.full.min.js' %>
+  <%= javascript_include_tag 'bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %>
+  <%= javascript_include_tag 'pages/form-x-editable.js' %>
+
+  <%= javascript_include_tag 'dropzone/dropzone.min.js' %>
 <% end %>

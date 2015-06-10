@@ -355,24 +355,27 @@
                 .col-xs-2
                   %p.item= @policy.CR
                 .col-xs-1
-                  %p.item.text-center= number_to_currency(@policy.CS.to_i,precision:0,format:'%n')
+                  -#%p.item.text-center= number_to_currency(@policy.CS,precision:0,format:'%n')
+                  %p.item.text-center= @policy.CS
                 .col-xs-1
                   %p.item.text-center= @policy.CT
                 .col-xs-2
                   %p.item= @policy.CW
-              .row
-                .col-xs-1
-                  %p.item.text-center 1
-                .col-xs-4
-                  %p.item= @policy.CZ
-                .col-xs-2
-                  %p.item= @policy.DA
-                .col-xs-1
-                  %p.item.text-center= number_to_currency(@policy.DB.to_i,precision:0,format:'%n')
-                .col-xs-1
-                  %p.item.text-center= @policy.DC
-                .col-xs-2
-                  %p.item= @policy.DF
+              - if @policy.CZ.to_i != 0
+                .row
+                  .col-xs-1
+                    %p.item.text-center 1
+                  .col-xs-4
+                    %p.item= @policy.CZ
+                  .col-xs-2
+                    %p.item= @policy.DA
+                  .col-xs-1
+                    -#%p.item.text-center= number_to_currency(@policy.DB,precision:0,format:'%n')
+                    %p.item.text-center= @policy.DB
+                  .col-xs-1
+                    %p.item.text-center= @policy.DC
+                  .col-xs-2
+                    %p.item= @policy.DF
 
               -#
                 - @policy.gl.exposure_gls.each do |exp|
@@ -391,7 +394,7 @@
                       .col-xs-2
                         %p.item Included
           %section.section-small
-            %p.item Audit Period (if applicable)    --     Annually
+            %p.item Audit Period (if applicable) -- Annually
             %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
             .box.forms
               %p.item= @policy.gl_forms

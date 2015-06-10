@@ -174,7 +174,6 @@ class PoliciesController < ApplicationController
 
     respond_to do |format|
       if @policy.update(policy_params)
-
         #if @policy.save
           format.html { render :show, notice: 'Policy was successfully updated' }
           format.json { render :show, status: :ok, location: @policy }
@@ -202,7 +201,7 @@ class PoliciesController < ApplicationController
   def remove_form
     @policy.docs.find(params[:doc_id]).update(active: false)
 
-    redirect_to forms_policy_path(@policy)
+    redirect_to policy_docs_path(@policy)
   end
 
   private
@@ -225,7 +224,8 @@ class PoliciesController < ApplicationController
       :CM, :CN, :CO, :CP, :CQ, :CR, :CS, :CT, :CU, :CV, :CW, :CX, :CY, :CZ, :DA, :DB,
       :DC, :DD, :DE, :DF, :DG, :DH, :DI, :DJ, :DK, :DL, :DM, :DN, :DO, :DP, :DQ, :DR,
       :DS, :DT, :DU, :DV, :DW, :DX, :DY, :DZ, :EA, :EB, :EC, :ED, :EE, :EF, :EG, :EH,
-      :EI, :EJ, :EK, :EL, :EM, :EN, :EO, :EP, :EQ, :ER, :ES, :ET )
+      :EI, :EJ, :EK, :EL, :EM, :EN, :EO, :EP, :EQ, :ER, :ES, :ET,
+      docs_attributes: [:id, :active, :var_1, :var_2, :var_3, :var_4, :var_5, :var_6] )
     end
 =begin
       params.require(:policy).permit(:policy_number, :client_code, :effective_date, :expiration_date,

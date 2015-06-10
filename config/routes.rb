@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       post 'populate'
       post 'download'
       put 'update_forms'
-      #get 'remove_form'
+      get 'remove_form'
       #get 'forms'
     end
     collection do
