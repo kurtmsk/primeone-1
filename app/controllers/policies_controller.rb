@@ -105,15 +105,18 @@ class PoliciesController < ApplicationController
   def update_forms
     @policy = Policy.find(params[:id])
 
-    if (params[:state] == 'add')
-      attrs = {}
-      attrs[params[:group]] = params[:forms]
-
-      @policy.update(attrs)
-      render :show
+    if (@policy[params[:group]].include?(params[:forms]))
+      @policy[params[:group]].slice!(params[:forms])
+    else
+      @policy[params[:group]] += params[:forms]
     end
 
+    respond_to do |format|
+      @policy.save
 
+      format.html { render :show }
+      format.js
+    end
   end
 
   # Upload / Populate
