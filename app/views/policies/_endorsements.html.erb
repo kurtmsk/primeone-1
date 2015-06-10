@@ -10,6 +10,7 @@
   </thead>
   <tbody>
     <tr>
+      <!-- Package -->
       <td width="20%" valign="top">
         <% temp = 'IL0003(9/08) IL0017(11/98) IL0286(9/08) IL0030(1/06) IL0031(1/06) ' %>
         <%= link_to update_forms_policy_path(@policy, group: 'forms',
@@ -19,6 +20,7 @@
           </button>
         <% end %>
       </td>
+      <!-- Property -->
       <td width="20%" valign="top">
         <% temp = 'CP0010(6/07) CP0090(7/88) CP0120(1/08) CP0140(7/06) CP1032(8/08) IL0935(7/02) IL0953(1/08) CP1270(9/96) ' %>
         <%= link_to update_forms_policy_path(@policy, group: 'property_forms',
@@ -28,38 +30,24 @@
           </button>
         <% end %>
         <p></p>
-        <button type="button" class="btn btn-default">CP0020(6/07)</button>
-        <button type="button" class="btn btn-default">CP0030(6/07)</button>
-        <button type="button" class="btn btn-default">CP0032(6/07)</button>
-        <button type="button" class="btn btn-default">CP0050(6/07)</button>
-        <button type="button" class="btn btn-default">CP0320(10/92)</button>
-        <button type="button" class="btn btn-default">CP0321(6/07)</button>
-        <button type="button" class="btn btn-default">CP0438(6/07)</button>
-        <button type="button" class="btn btn-default">CP0439(10/90)</button>
-        <button type="button" class="btn btn-default">CP0440(6/95)</button>
-        <button type="button" class="btn btn-default">CP0450(7/88)</button>
-        <button type="button" class="btn btn-default">CP1010(6/07)</button>
-        <button type="button" class="btn btn-default">CP1020(6/07)</button>
-        <button type="button" class="btn btn-default">CP1030(6/07)</button>
-        <button type="button" class="btn btn-default">CP1033(6/95)</button>
-        <button type="button" class="btn btn-default">CP1054(6/07)</button>
-        <button type="button" class="btn btn-default">CP1055(6/07)</button>
-        <button type="button" class="btn btn-default">CP1056(6/07)</button>
-        <button type="button" class="btn btn-default">CP1120(6/07)</button>
-        <button type="button" class="btn btn-default">CP1121(6/95)</button>
-        <button type="button" class="btn btn-default">CP1199(6/07)</button>
-        <button type="button" class="btn btn-default">CP1211(10/00)</button>
-        <button type="button" class="btn btn-default">CP1218(6/95)</button>
-        <button type="button" class="btn btn-default">CP1430(10/00)</button>
-        <button type="button" class="btn btn-default">CP1440(6/07)</button>
-        <button type="button" class="btn btn-default">IL0415(04/98)</button>
-        <button type="button" class="btn btn-default">PO-PRP-1(2/10)</button>
-        <button type="button" class="btn btn-default">PO-PRP-2(12/13)</button>
-        <button type="button" class="btn btn-default">PO-PRP-3(12/13)</button>
-        <button type="button" class="btn btn-default">EBs</button>
+        <% temp = [ "CP0020(6/07) ", "CP0030(6/07) ", "CP0032(6/07) ", "CP0050(6/07) ",
+          "CP0320(10/92) ", "CP0321(6/07) ", "CP0438(6/07) ", "CP0439(10/90) ",
+          "CP0440(6/95) ", "CP0450(7/88) ", "CP1010(6/07) ", "CP1020(6/07) ",
+          "CP1030(6/07) ", "CP1033(6/95) ", "CP1054(6/07) ", "CP1055(6/07) ",
+          "CP1056(6/07) ", "CP1120(6/07) ", "CP1121(6/95) ", "CP1199(6/07) ",
+          "CP1211(10/00) ", "CP1218(6/95) ", "CP1430(10/00) ", "CP1440(6/07) ",
+          "IL0415(04/98) ", "PO-PRP-1(2/10) ", "PO-PRP-2(12/13) ", "PO-PRP-3(12/13) ",
+          "EB0020(8/08) EB0108(9/07) " ] %>
+        <% temp.each do |f| %>
+          <%= link_to update_forms_policy_path(@policy, group: 'property_forms',
+          forms: f), method: :put, remote: true do %>
+            <button type="button" class="btn btn-default <%= (@policy.property_forms.include?(f) ? 'active' : '') %>"><%= f %></button>
+          <% end %>
+        <% end %>
       </td>
+      <!-- General Liability -->
       <td width="20%" valign="top">
-        <% temp = 'CG0001(12/07) CG0068(5/09) CG0099(11/85) CG0168(12/4) CG2101(11/85) CG2146(7/98) CG2147(12/07) CG2149(9/99) CG2167(12/04) CG2175(6/08) CG2190(1/06) CG2231(7/98) CG2258(11/85) CG2407(1/96) IL0021(9/08) PO-GL-5(5/12) PO-GL-6(5/12) ' %>
+        <% temp = 'CG0001(12/07) CG0068(5/09) CG0099(11/85) CG0168(12/4) CG2101(11/85) CG2144(7/98) CG2146(7/98) CG2147(12/07) CG2149(9/99) CG2167(12/04) CG2175(6/08) CG2190(1/06) CG2231(7/98) CG2258(11/85) CG2407(1/96) IL0021(9/08) PO-PRP-GL-1(8/13) PO-GL-5(5/12) PO-GL-6(5/12) ' %>
         <%= link_to update_forms_policy_path(@policy, group: 'gl_forms',
         forms: temp), method: :put, remote: true do %>
           <button type="button" class="btn btn-default <%= (@policy.gl_forms.include?(temp) ? 'active' : '') %>">
@@ -67,48 +55,19 @@
           </button>
         <% end %>
         <p></p>
-        <button type="button" class="btn btn-default">CG0001(12/07)</button>
-        <button type="button" class="btn btn-default">CG0068(5/09)</button>
-        <button type="button" class="btn btn-default">CG0099(11/85)</button>
-        <button type="button" class="btn btn-default">CG0168(12/4)</button>
-        <button type="button" class="btn btn-default">CG2101(11/85)</button>
-        <button type="button" class="btn btn-default">CG2144(7/98)</button>
-        <button type="button" class="btn btn-default">CG2146(7/98)</button>
-        <button type="button" class="btn btn-default">CG2147(12/07)</button>
-        <button type="button" class="btn btn-default">CG2149(9/99)</button>
-        <button type="button" class="btn btn-default">CG2167(12/04)</button>
-        <button type="button" class="btn btn-default">CG2175(6/08)</button>
-        <button type="button" class="btn btn-default">CG2190(1/06)</button>
-        <button type="button" class="btn btn-default">CG2231(7/98)</button>
-        <button type="button" class="btn btn-default">CG2258(11/85)</button>
-        <button type="button" class="btn btn-default">CG2407(1/96)</button>
-        <button type="button" class="btn btn-default">IL0021(9/08)</button>
-        <button type="button" class="btn btn-default">PO-PRP-GL-1(8/13)</button>
-        <button type="button" class="btn btn-default">PO-GL-5(5/12)</button>
-        <button type="button" class="btn btn-default">PO-GL-6(5/12)</button>
-        <button type="button" class="btn btn-default">CG0300(1/96)</button>
-        <button type="button" class="btn btn-default">CG2002(11/85)</button>
-        <button type="button" class="btn btn-default">CG2011(1/96)</button>
-        <button type="button" class="btn btn-default">CG2018(11/85)</button>
-        <button type="button" class="btn btn-default">CG2026(7/04)</button>
-        <button type="button" class="btn btn-default">CG2027(11/85)</button>
-        <button type="button" class="btn btn-default">CG2028(7/04)</button>
-        <button type="button" class="btn btn-default">CG2104(11/85)</button>
-        <button type="button" class="btn btn-default">CG2116(7/98)</button>
-        <button type="button" class="btn btn-default">CG2135(10/01)</button>
-        <button type="button" class="btn btn-default">CG2138(11/85)</button>
-        <button type="button" class="btn btn-default">CG2145(7/98)</button>
-        <button type="button" class="btn btn-default">CG2166(12/04)</button>
-        <button type="button" class="btn btn-default">CG2408(10/93)</button>
-        <button type="button" class="btn btn-default">PO-GL-2(1/10)</button>
-        <button type="button" class="btn btn-default">PO-GL-3</button>
-        <button type="button" class="btn btn-default">PO-GL-4(11/09)</button>
-        <button type="button" class="btn btn-default">PO-GL-7(5/12)</button>
-        <button type="button" class="btn btn-default">PO-GL-9(03/14)</button>
-        <button type="button" class="btn btn-default">PO-GL-10(03/14)</button>
-        <button type="button" class="btn btn-default">PO_GL_WIG(12/13)</button>
+        <% temp = [ "CG0300(1/96) ", "CG2002(11/85) ", "CG2011(1/96) ", "CG2018(11/85) ",
+          "CG2026(7/04) ", "CG2027(11/85) ", "CG2028(7/04) ", "CG2104(11/85) ",
+          "CG2116(7/98) ", "CG2135(10/01) ", "CG2138(11/85) ", "CG2145(7/98) ",
+          "CG2166(12/04) ", "CG2408(10/93) ", "PO-GL-2(1/10) ", "PO-GL-3 ", "PO-GL-4(11/09) ",
+          "PO-GL-7(5/12) ", "PO-GL-9(03/14) ", "PO-GL-10(03/14) ", "PO_GL_WIG(12/13) " ] %>
+        <% temp.each do |f| %>
+          <%= link_to update_forms_policy_path(@policy, group: 'gl_forms',
+          forms: f), method: :put, remote: true do %>
+            <button type="button" class="btn btn-default <%= (@policy.gl_forms.include?(f) ? 'active' : '') %>"><%= f %></button>
+          <% end %>
+        <% end %>
       </td>
-
+      <!-- Auto -->
       <td width="20%" valign="top">
         <% temp = 'CA0110(11/06) CA0217(3/94) CA0001(3/06) CA2384(1/06) PO-CA-1(5/12) ' %>
         <%= link_to update_forms_policy_path(@policy, group: 'auto_forms',
@@ -118,7 +77,7 @@
           </button>
         <% end %>
       </td>
-
+      <!-- Crime -->
       <td width="20%" valign="top">
         <% temp = 'CR0021(5/06) CR0110(8/07) CR0246(8/07) CR0730(3/06) CR0731(3/06) IL0935(7/02) IL0953(1/08) ' %>
         <%= link_to update_forms_policy_path(@policy, group: 'crime_forms',
@@ -128,14 +87,14 @@
           </button>
         <% end %>
         <p></p>
-        <button type="button" class="btn btn-default">CR0029(5/06)</button>
-        <button type="button" class="btn btn-default">CR0405(8/07)</button>
-        <button type="button" class="btn btn-default">CR0407(8/07)</button>
-        <button type="button" class="btn btn-default">CR3510(8/07)</button>
-        <button type="button" class="btn btn-default">CR3531(8/07)</button>
-        <button type="button" class="btn btn-default">CR3532(8/07)</button>
-        <button type="button" class="btn btn-default">CR0407(8/07)</button>
-        <button type="button" class="btn btn-default">PO-CR-1(10/10)</button>
+        <% temp = [ "CR0029(5/06) ", "CR0405(8/07) ", "CR0407(8/07) ", "CR3510(8/07) ",
+          "CR3531(8/07) ", "CR3532(8/07) ", "CR0407(8/07) ", "PO-CR-1(10/10) " ] %>
+        <% temp.each do |f| %>
+          <%= link_to update_forms_policy_path(@policy, group: 'crime_forms',
+          forms: f), method: :put, remote: true do %>
+            <button type="button" class="btn btn-default <%= (@policy.crime_forms.include?(f) ? 'active' : '') %>"><%= f %></button>
+          <% end %>
+        <% end %>
       </td>
     </tr>
   </tbody>
