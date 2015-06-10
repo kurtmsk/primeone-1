@@ -13,26 +13,27 @@
     .row.container-fluid
       .col-xs-5.box.names
         %p.tag NAMED INSURED AND MAILING ADDRESS:
-        %p.item= @policy.name
+        %p.item= @policy.G
         .address
-          %p.item= @policy.street
+          %p.item= @policy.H
+          %span.item= @policy.J + ", MI. " + @policy.L
           -#%span.item= @policy.city
           -#,
           -#%span.item= @policy.state
-          %span.item= @policy.city + ", " + @policy.state + " " + @policy.zip
+
       .col-xs-5.box.names.pull-right
         %p.tag PRODUCER:
-        %p.item= @broker.try(:name)
+        %p.item= @broker.name
         %p.item= @broker.street
+        %span.item= @broker.city + ", " + @broker.state + " " + @broker.zip
         -#%span.item= @broker.city
         -#,
         -#%span.item= @policy.state
-        %span.item= @broker.try(:city) + ", " + @broker.try(:state) + " " + @broker.try(:zip)
 
   %section.section-small
     %p.text-center
       The policy period is from
-      %u.strong= @policy.effective_date
+      %u.strong= @policy.B
       to
-      %u.strong= @policy.expiration_date
+      %u.strong= @policy.C
       12:01 A.M. Standard Time at the mailing address shown.

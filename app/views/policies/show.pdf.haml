@@ -14,11 +14,16 @@
         %section.section-large.descript
           .box
             %span.tag BUSINESS DESCRIPTION:
-            %span.item= @policy.business_type
+            %span.item= @policy.I
           .box
             %p.tag
               INSURED IS:
-              %span.item.text-center= @policy.insured_type
+              - if @policy.F.include?('LLC') || @policy.G.include?('LLC')
+                %span.item.text-center LLC
+              - elsif @policy.F.include?('INC') || @policy.G.include?('INC')
+                %span.item.text-center LLC
+              - else
+                %span.item.text-center
 
           .box
             %p.strong THIS POLICY CONSISTS OF THE FOLLOWING COVERAGE PARTS FOR WHICH A |
@@ -39,36 +44,36 @@
               .col-xs-1.col-xs-offset-1
                 %p.item $
               .col-xs-1.col-xs-offset-1
-                %p.item.text-right= displayPropertyPremium(@policy.gl.premium_total)
+                %p.item.text-right= displayPropertyPremium(@policy.EE)
             .row
               .col-xs-6.col-xs-offset-1.text-left
                 %p.item COMMERCIAL PROPERTY
               .col-xs-1.col-xs-offset-1
                 %p.item $
               .col-xs-1.col-xs-offset-1
-                %p.item.text-right= displayPropertyPremium(@policy.property.premium_total)
+                %p.item.text-right= #displayPropertyPremium(@policy.)
             .row
               .col-xs-6.col-xs-offset-1.text-left
                 %p.item COMMERCIAL CRIME
               .col-xs-1.col-xs-offset-1
                 %p.item $
               .col-xs-1.col-xs-offset-1
-                %p.item.text-right= displayPropertyPremium(@policy.crime.premium_total)
+                %p.item.text-right= displayPropertyPremium(@policy.CD)
             .row
               .col-xs-6.col-xs-offset-1.text-left
                 %p.item COMMERCIAL INLAND MARINE
               .col-xs-1.col-xs-offset-1
                 %p.item $
               .col-xs-1.col-xs-offset-1
-                -# commercial inland marine is always excluded
                 %p.item.text-right Excluded
+                -# commercial inland marine is always excluded
             .row
               .col-xs-6.col-xs-offset-1.text-left
                 %p.item COMMERCIAL AUTO
               .col-xs-1.col-xs-offset-1
                 %p.item $
               .col-xs-1.col-xs-offset-1
-                %p.item.text-right= displayPropertyPremium(@policy.auto.premium_total)
+                %p.item.text-right= displayPropertyPremium(@policy.EN)
           .box
             .row
               .col-xs-6.col-xs-offset-2.text-right
@@ -76,7 +81,7 @@
               .col-xs-1
                 %p.item $
               .col-xs-1.col-xs-offset-1
-                %p.tag.text-right= displayPropertyPremium(@policy.package_premium_total)
+                %p.tag.text-right= displayPropertyPremium(@policy.EO)
           .box
 
           %p Commercial Filing Exemption- This policy is exempt from the filing |
@@ -94,7 +99,7 @@
         = render partial: 'pdf_footer.html', locals: {page: 1, name:"SUM"}
 
     -# COMMERCIAL PROPERTY DECLARATIONS
-    -if @policy.property.premium_total.to_i != 0
+    - if true#@policy.property.premium_total.to_i != 0
       .property-page
         = render partial: 'pdf_header.html', locals: {title: "COMMERCIAL PROPERTY DECLARATIONS"}
         .page
@@ -106,12 +111,16 @@
                 %th LOC
                 %th BLDG
                 %th Occupancy and Location
-              - @policy.property.locations.each_with_index do |loc, i|
-                %tr
-                  %td= i+1
-                  %td= i+1
-                  %td= "#{loc.street}, #{loc.city}, #{loc.state}. #{loc.zip} occupied as #{loc.business_type}"
-
+              %tr
+                %td 1
+                %td 1
+                %td= @policy.M + " " + @policy.O + ", MI. " + @policy.Q + " occupied as " + @policy.N
+              -#
+                - @policy.property.locations.each_with_index do |loc, i|
+                  %tr
+                    %td= i+1
+                    %td= i+1
+                    %td= "#{loc.street}, #{loc.city}, #{loc.state}. #{loc.zip} occupied as #{loc.business_type}"
           %section.section-small
             %table#exposures.table-striped
               %tr
@@ -123,36 +132,131 @@
                 %th THEFT
                 %th DEDUCTIBLE
                 %th PREMIUM
-              - @policy.property.locations.first.exposures.each do |exp|
-                %tr
-                  -if exp.premium != 0
-                    %td.text-left= exp.name
-                    %td.text-right= number_to_currency(exp.limit,precision:0)
-                    %td.text-center= exp.valuation
-                    %td.text-center= number_to_percentage(@policy.property.locations.first.co_ins*100, precision:0)
-                    %td.text-center= @policy.property.locations.first.coverage_type
-                    %td.text-left= @policy.property.locations.first.theft_limit
-                    %td.text-right= number_to_currency(@policy.property.locations.first.ded,precision:0)
-                    %td.text-center Included
-                  -else
-                    %td.text-left -
-                    %td.text-right -
-                    %td.text-center -
-                    %td.text-center -
-                    %td.text-center -
-                    %td.text-left
-                    %td.text-right -
-                    %td.text-center -
+              %tr
+                - if @policy.AU != 0
+                  %td.text-left Building
+                  %td.text-right= @policy.AU
+                  %td.text-center= @policy.AT
+                  %td.text-center= @policy.Z
+                  %td.text-center
+                  %td.text-left= @policy.AH
+                  %td.text-right= @policy.AA
+                  %td.text-center= @policy.AY
+                -else
+                  %td.text-left -
+                  %td.text-right -
+                  %td.text-center -
+                  %td.text-center -
+                  %td.text-center -
+                  %td.text-left
+                  %td.text-right -
+                  %td.text-center -
+              %tr
+                - if @policy.BA != 0
+                  %td.text-left BPP
+                  %td.text-right= @policy.BA
+                  %td.text-center= @policy.AT
+                  %td.text-center= @policy.Z
+                  %td.text-center
+                  %td.text-left= @policy.AH
+                  %td.text-right= @policy.AA
+                  %td.text-center= @policy.BE
+                -else
+                  %td.text-left -
+                  %td.text-right -
+                  %td.text-center -
+                  %td.text-center -
+                  %td.text-center -
+                  %td.text-left
+                  %td.text-right -
+                  %td.text-center -
+              %tr
+                - if @policy.BG != 0
+                  %td.text-left Earning
+                  %td.text-right= @policy.BG
+                  %td.text-center
+                  %td.text-center
+                  %td.text-center
+                  %td.text-left= @policy.AH
+                  %td.text-right
+                  %td.text-center= @policy.BK
+                -else
+                  %td.text-left -
+                  %td.text-right -
+                  %td.text-center -
+                  %td.text-center -
+                  %td.text-center -
+                  %td.text-left
+                  %td.text-right -
+                  %td.text-center -
+              %tr
+                - if @policy.BM != 0
+                  %td.text-left Sign
+                  %td.text-right= @policy.BM
+                  %td.text-center= @policy.AT
+                  %td.text-center= @policy.Z
+                  %td.text-center
+                  %td.text-left= @policy.AH
+                  %td.text-right= @policy.AA
+                  %td.text-center= @policy.BQ
+                -else
+                  %td.text-left -
+                  %td.text-right -
+                  %td.text-center -
+                  %td.text-center -
+                  %td.text-center -
+                  %td.text-left
+                  %td.text-right -
+                  %td.text-center -
+              %tr
+                - if @policy.BS != 0
+                  %td.text-left Pumps
+                  %td.text-right= @policy.BS
+                  %td.text-center= @policy.AT
+                  %td.text-center= @policy.Z
+                  %td.text-center
+                  %td.text-left= @policy.AH
+                  %td.text-right= @policy.AA
+                  %td.text-center= @policy.BW
+                -else
+                  %td.text-left -
+                  %td.text-right -
+                  %td.text-center -
+                  %td.text-center -
+                  %td.text-center -
+                  %td.text-left
+                  %td.text-right -
+                  %td.text-center -
+              %tr
+                - if @policy.BY != 0
+                  %td.text-left Canopies
+                  %td.text-right= @policy.BY
+                  %td.text-center= @policy.AT
+                  %td.text-center= @policy.Z
+                  %td.text-center
+                  %td.text-left= @policy.AH
+                  %td.text-right= @policy.AA
+                  %td.text-center= @policy.CC
+                -else
+                  %td.text-left -
+                  %td.text-right -
+                  %td.text-center -
+                  %td.text-center -
+                  %td.text-center -
+                  %td.text-left
+                  %td.text-right -
+                  %td.text-center -
+
             .container
               %p.pull-left MONTHLY LIMIT OF INDEMNITY
-              %p.pull-left.col-xs-offset-1 -
+              %p.pull-left.col-xs-offset-1 1/6
               %p.pull-right *Applies to Business Income Only * Ext. Period of Indemnity
 
           %section.section-small.descript
             .box
               %p.tag MORTGAGE HOLDER(S) AND MAILING ADDRESS
             .box.forms
-              %p.item= @policy.mortgagee
+              %p.item=# @policy.mortgagee
             .box
 
           %section
@@ -167,7 +271,7 @@
           = render partial: 'pdf_footer.html', locals: {page: 2, name: "CP"}
 
     -# GENERAL LIABILITY DECLARATIONS
-    -if @policy.gl.premium_total.to_i != 0
+    -if @policy.EE.to_i != 0
       .gl-page
         = render partial: 'pdf_header.html', locals: {title: "GENERAL LIABILITY DECLARATIONS"}
         .page
@@ -179,32 +283,32 @@
                 .col-xs-7
                   %p.item General Aggregate Limit
                 .col-xs-1.text-right
-                  %p.item= number_to_currency(@policy.gl.gen_agg, precision: 0)
+                  %p.item= number_to_currency(@policy.CF, precision: 0)
               .row
                 .col-xs-7
                   %p.item Products/Completed Operations Aggregate Limit
                 .col-xs-1.text-right
-                  %p.item= number_to_currency(@policy.gl.products_completed_operations, precision: 0)
+                  %p.item= number_to_currency(@policy.CG, precision: 0)
               .row
                 .col-xs-7
                   %p.item Each Occurrence Limit
                 .col-xs-1.text-right
-                  %p.item= number_to_currency(@policy.gl.each_occurence, precision: 0)
+                  %p.item= number_to_currency(@policy.CI, precision: 0)
               .row
                 .col-xs-7
                   %p.item Personal & Advertising Injury Limit
                 .col-xs-1.text-right
-                  %p.item= number_to_currency(@policy.gl.personal_advertising_injury, precision: 0)
+                  %p.item= number_to_currency(@policy.CH, precision: 0)
               .row
                 .col-xs-7
                   %p.item Fire Damage Limit (Damage To Premises Rented To You Limit)
                 .col-xs-1.text-right
-                  %p.item= number_to_currency(@policy.gl.fire_damage, precision: 0)
+                  %p.item= number_to_currency(@policy.CJ, precision: 0)
               .row
                 .col-xs-7
                   %p.item Medical Expense Limit
                 .col-xs-1.text-right
-                  %p.item= number_to_currency(@policy.gl.medical_expense, precision: 0)
+                  %p.item= number_to_currency(@policy.CK, precision: 0)
 
           %section.section-small
             .limits-top
@@ -216,12 +320,18 @@
                 .col-xs-6
                   %p.tag Address of all Premises you Own, Rent, or Occupy
             .limits-base
-              - @policy.property.locations.each_with_index do |loc, i|
-                .row
-                  .col-xs-1
-                    %p.item.text-center= i+1
-                  .col-xs-6
-                    %p.item= "#{loc.street}, #{loc.city}, #{loc.state}. #{loc.zip} "
+              .row
+                .col-xs-1
+                  %p.item.text-center 1
+                .col-xs-6
+                  %p.item= "#{@policy.M}, #{@policy.O}, MI. #{@policy.Q}"
+              -#
+                - @policy.property.locations.each_with_index do |loc, i|
+                  .row
+                    .col-xs-1
+                      %p.item.text-center= i+1
+                    .col-xs-6
+                      %p.item= "#{loc.street}, #{loc.city}, #{loc.state}. #{loc.zip}"
 
           %section
             .exposures-top
@@ -237,24 +347,51 @@
                 .col-xs-2.col-xs-offset-1
                   %p.tag Premium
             .exposures-base
-              - @policy.gl.exposure_gls.each do |exp|
-                -if exp.cov == "GenAgg"
-                  .row
-                    .col-xs-1
-                      %p.item.text-center= exp.loc_number.to_i
-                    .col-xs-4
-                      %p.item= exp.description
-                    .col-xs-2
-                      %p.item= exp.code.to_i
-                    .col-xs-1.col-xs-offset-1
-                      %p.item.text-center= number_to_currency(exp.premium_basis,precision:0,format:'%n')
-                    .col-xs-1
-                      %p.item.text-center= exp.sales_type
-                    .col-xs-2
-                      %p.item Included
+              .row
+                .col-xs-1
+                  %p.item.text-center 1
+                .col-xs-4
+                  %p.item= @policy.CQ
+                .col-xs-2
+                  %p.item= @policy.CR
+                .col-xs-1.col-xs-offset-1
+                  %p.item.text-center= number_to_currency(@policy.CS,precision:0,format:'%n')
+                .col-xs-1
+                  %p.item.text-center= @policy.CT
+                .col-xs-2
+                  %p.item= @policy.CW
+              .row
+                .col-xs-1
+                  %p.item.text-center 1
+                .col-xs-4
+                  %p.item= @policy.CZ
+                .col-xs-2
+                  %p.item= @policy.DA
+                .col-xs-1.col-xs-offset-1
+                  %p.item.text-center= number_to_currency(@policy.DB,precision:0,format:'%n')
+                .col-xs-1
+                  %p.item.text-center= @policy.DC
+                .col-xs-2
+                  %p.item= @policy.DF
 
+              -#
+                - @policy.gl.exposure_gls.each do |exp|
+                  -if exp.cov == "GenAgg"
+                    .row
+                      .col-xs-1
+                        %p.item.text-center= exp.loc_number.to_i
+                      .col-xs-4
+                        %p.item= exp.description
+                      .col-xs-2
+                        %p.item= exp.code.to_i
+                      .col-xs-1.col-xs-offset-1
+                        %p.item.text-center= number_to_currency(exp.premium_basis,precision:0,format:'%n')
+                      .col-xs-1
+                        %p.item.text-center= exp.sales_type
+                      .col-xs-2
+                        %p.item Included
           %section.section-small
-            %p.item Audit Period (if applicable)
+            %p.item Audit Period (if applicable) -- Annually
             %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
             .box.forms
               %p.item= @policy.gl_forms
@@ -266,7 +403,7 @@
           = render partial: 'pdf_footer.html', locals: {page: 3, name: "GL"}
 
     -# COMMERCIAL CRIME DECLARATIONS
-    -if @policy.crime.premium_total.to_i != 0
+    -if @policy.CD.to_i != 0
       .crime-page.ca-page
         = render partial: 'pdf_header.html', locals: {title: "COMMERCIAL CRIME DECLARATIONS"}
         .page
@@ -282,18 +419,18 @@
                 .col-xs-2.col-xs-offset-1.text-center
                   %p.tag Premium
             .limits-base
-              - @policy.crime.exposures.each do |exp|
-
-                .row
-                  - a = (exp.premium.to_i != 0 ? "Included" : "Excluded")
-                  .col-xs-4
-                    %p.item= exp.name
-                  .col-xs-2.col-xs-offset-1.text-center
-                    %p.item= a == "Excluded" ? "-" : number_to_currency(exp.limit, precision:0)
-                  .col-xs-2.text-center
-                    %p.item= a == "Excluded" ? "-" : number_to_currency(exp.ded_factor, precision:0)
-                  .col-xs-2.col-xs-offset-1.text-center
-                    %p.item= a
+              -#
+                - @policy.crime.exposures.each do |exp|
+                  .row
+                    - a = (exp.premium.to_i != 0 ? "Included" : "Excluded")
+                    .col-xs-4
+                      %p.item= exp.name
+                    .col-xs-2.col-xs-offset-1.text-center
+                      %p.item= a == "Excluded" ? "-" : number_to_currency(exp.limit, precision:0)
+                    .col-xs-2.text-center
+                      %p.item= a == "Excluded" ? "-" : number_to_currency(exp.ded_factor, precision:0)
+                    .col-xs-2.col-xs-offset-1.text-center
+                      %p.item= a
               -#
                 .row
                   - a = (@policy.crime[:forgery_alteration][:premium].to_i != 0 ? "Included" : "Excluded")
@@ -358,7 +495,7 @@
           = render partial: 'pdf_footer.html', locals: {page: 4, name: "CR"}
 
     -# COMMERCIAL AUTO DECLARATIONS
-    -if @policy.auto.premium_total.to_i != 0
+    -if @policy.EN.to_i != 0
       .auto-page.ca-page
         = render partial: 'pdf_header.html', locals: {title: "COMMERCIAL AUTO DECLARATIONS"}
         .page
@@ -378,11 +515,11 @@
                 .col-xs-4
                   %p.item Liability
                 .col-xs-1.text-center
-                  %p.item ??
+                  %p.item 8, 9
                 .col-xs-5.text-center
-                  %p.item= #@policy.commercial_auto[:facticity]
+                  %p.item= @policy.EJ
                 .col-xs-2.text-center
-                  %p.item= @policy.auto.total_auto_premium.to_i != 0 ? "Included" : "N/A"
+                  %p.item= @policy.EN
               - a = [["Personal Injury Protection (PIP) (or equivalent No-Fault Coverage)", "Separately Stated in each PIP Endorsement(s) minus $"],
                 ["Added PIP (or equivalent No-Fault Coverage)", "Separately in each added PIP Endorsement(s)"],
                 ["Property Protection Insurance (PPI) (Michigan Only)", "Separately Stated in each PPI Endorsement minus Deductible for each Accident"],

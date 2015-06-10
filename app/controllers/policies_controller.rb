@@ -215,8 +215,9 @@ class PoliciesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def policy_params
       params.require(:policy).permit(:policy_number, :client_code, :effective_date,
-      :expiration_date, :status, :package_premium_total, :A, :B, :C, :D, :E, :F, :G,
-      :H, :I, :J, :K, :L, :M, :N, :O, :P, :Q, :R, :S, :T, :U, :V, :W, :X, :Y, :Z,
+      :expiration_date, :status, :package_premium_total, :broker_id,
+      :A, :B, :C, :D, :E, :F, :G, :H, :I, :J, :K, :L, :M,
+      :N, :O, :P, :Q, :R, :S, :T, :U, :V, :W, :X, :Y, :Z,
       :AA, :AB, :AC, :AD, :AE, :AF, :AG, :AH, :AI, :AJ, :AK, :AL, :AM, :AN, :AO, :AP,
       :AQ, :AR, :AS, :AT, :AU, :AV, :AW, :AX, :AY, :AZ, :BA, :BB, :BC, :BD, :BE, :BF,
       :BG, :BH, :BI, :BJ, :BK, :BL, :BM, :BN, :BO, :BP, :BQ, :BR, :BS, :BT, :BU, :BV,
