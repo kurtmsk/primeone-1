@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META http-equiv="X-UA-Compatible" content="IE=8">
+<title><%= title(@title) %></title>
+<STYLE type="text/css">
+
+body {margin-top: 0px;margin-left: 0px;}
+
+#page_1 {position:relative; overflow: hidden;margin: 71px 0px 28px 71px;padding: 0px;border: none;width: 745px;}
+
+#page_1 #dimg1 {position:absolute;top:285px;left:0px;z-index:-1;width:673px;height:272px;}
+#page_1 #dimg1 #img1 {width:673px;height:272px;}
+
+
+
+
+.ft0{font: 13px 'Arial';line-height: 15px;}
+.ft1{font: bold 13px 'Arial';line-height: 15px;}
+.ft2{font: 1px 'Arial';line-height: 1px;}
+.ft3{font: bold 13px 'Arial';line-height: 16px;}
+.ft4{font: bold 16px 'Arial';line-height: 19px;}
+.ft5{font: bold 24px 'Arial';line-height: 26px;}
+.ft6{font: bold 24px 'Arial';line-height: 29px;}
+.ft7{font: 13px 'Arial';line-height: 16px;}
+.ft8{font: 13px 'Arial';margin-left: 7px;line-height: 16px;}
+.ft9{font: 13px 'Wingdings';line-height: 13px;}
+
+.p0{text-align: left;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p1{text-align: right;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p2{text-align: left;padding-left: 37px;margin-top: 14px;margin-bottom: 0px;}
+.p3{text-align: left;padding-left: 115px;margin-top: 54px;margin-bottom: 0px;}
+.p4{text-align: left;padding-left: 170px;margin-top: 3px;margin-bottom: 0px;}
+.p5{text-align: left;padding-left: 1px;margin-top: 12px;margin-bottom: 0px;}
+.p6{text-align: left;padding-left: 21px;margin-top: 19px;margin-bottom: 0px;}
+.p7{text-align: left;padding-left: 301px;margin-top: 13px;margin-bottom: 0px;}
+.p8{text-align: left;padding-left: 5px;margin-top: 19px;margin-bottom: 0px;}
+.p9{text-align: left;padding-left: 79px;margin-top: 41px;margin-bottom: 0px;}
+.p10{text-align: left;padding-left: 5px;margin-top: 159px;margin-bottom: 0px;}
+.p11{text-align: justify;padding-left: 1px;padding-right: 424px;margin-top: 40px;margin-bottom: 0px;}
+.p12{text-align: justify;padding-left: 1px;margin-top: 8px;margin-bottom: 0px;}
+.p13{text-align: justify;padding-left: 21px;padding-right: 424px;margin-top: 4px;margin-bottom: 0px;text-indent: -20px;}
+
+.td0{padding: 0px;margin: 0px;width: 438px;vertical-align: bottom;}
+.td1{padding: 0px;margin: 0px;width: 227px;vertical-align: bottom;}
+.td2{padding: 0px;margin: 0px;width: 254px;vertical-align: bottom;}
+.td3{padding: 0px;margin: 0px;width: 347px;vertical-align: bottom;}
+.td4{padding: 0px;margin: 0px;width: 98px;vertical-align: bottom;}
+.td5{padding: 0px;margin: 0px;width: 12px;vertical-align: bottom;}
+
+.tr0{height: 16px;}
+.tr1{height: 18px;}
+.tr2{height: 19px;}
+
+.t0{width: 665px;margin-left: 1px;font: 13px 'Arial';}
+.t1{width: 711px;margin-left: 1px;margin-top: 195px;font: bold 13px 'Arial';}
+
+</STYLE>
+</HEAD>
+
+<BODY>
+<DIV id="page_1">
+<DIV id="dimg1">
+<IMG src="CG2026_images/CG20261x1.jpg" id="img1">
+</DIV>
+
+
+<TABLE cellpadding=0 cellspacing=0 class="t0">
+<TR>
+	<TD class="tr0 td0"><P class="p0 ft0">POLICY NUMBER: <NOBR><%= @policy.policy_number %></NOBR></P></TD>
+	<TD class="tr0 td1"><P class="p1 ft1">COMMERCIAL GENERAL LIABILITY</P></TD>
+</TR>
+<TR>
+	<TD class="tr1 td0"><P class="p0 ft2">&nbsp;</P></TD>
+	<TD class="tr1 td1"><P class="p1 ft3">CG 20 26 07 04</P></TD>
+</TR>
+</TABLE>
+<P class="p2 ft4">THIS ENDORSEMENT CHANGES THE POLICY. PLEASE READ IT CAREFULLY.</P>
+<P class="p3 ft5">ADDITIONAL INSURED – DESIGNATED</P>
+<P class="p4 ft6">PERSON OR ORGANIZATION</P>
+<P class="p5 ft7">This endorsement modifies insurance provided under the following:</P>
+<P class="p6 ft7">COMMERCIAL GENERAL LIABILITY COVERAGE PART</P>
+<P class="p7 ft3">SCHEDULE</P>
+<P class="p8 ft3">Name Of Additional Insured Person(s) Or Organization(s)</P>
+<P class="p9 ft3"><%= @doc.var_2 %></P>
+<P class="p10 ft7">Information required to complete this Schedule, if not shown above, will be shown in the Declarations.</P>
+<P class="p11 ft1">Section II – Who Is An Insured <SPAN class="ft0">is amended to in- clude as an additional insured the person(s) or organi- zation(s) shown in the Schedule, but only with respect to liability for "bodily injury", "property damage" or "personal and advertising injury" caused, in whole or in part, by your acts or omissions or the acts or omis- sions of those acting on your behalf:</SPAN></P>
+<P class="p12 ft7"><SPAN class="ft3">A.</SPAN><SPAN class="ft8">In the performance of your ongoing operations; or</SPAN></P>
+<P class="p13 ft7"><SPAN class="ft3">B.</SPAN><SPAN class="ft8">In connection with your premises owned by or rented to you.</SPAN></P>
+<TABLE cellpadding=0 cellspacing=0 class="t1">
+<TR>
+	<TD class="tr2 td2"><P class="p0 ft3">CG 20 26 07 04</P></TD>
+	<TD class="tr2 td3"><P class="p0 ft7">© ISO Properties, Inc., 2004</P></TD>
+	<TD class="tr2 td4"><P class="p0 ft3">Page 1 of 1</P></TD>
+	<TD class="tr2 td5"><P class="p0 ft9"></P></TD>
+</TR>
+</TABLE>
+</DIV>
+</BODY>
+</HTML>
