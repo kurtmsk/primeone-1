@@ -146,7 +146,6 @@ class PoliciesController < ApplicationController
   # GET /policies/1/download
   def download
     @pdfForms = CombinePDF.new
-
     @pdfForms << CombinePDF.load('app/assets/forms/package/all_forms.pdf')
 
     form_groups = [:property_forms, :gl_forms, :crime_forms, :auto_forms]
@@ -162,14 +161,12 @@ class PoliciesController < ApplicationController
         end
       end
     end
-
     send_data @pdfForms.to_pdf, filename: "Forms_#{@policy.policy_number}.pdf", format: 'pdf'
   end
 
   # PATCH/PUT /policies/1
   # PATCH/PUT /policies/1.json
   def update
-
     #findForms()
 
     respond_to do |format|

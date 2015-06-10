@@ -49,7 +49,7 @@
               <table id="policy" class="display table dataTable" style="width: 100%; cellspacing: 0;">
                 <thead>
                   <tr>
-                    <th>Included?</th>
+                    <th>Form Page</th>
                     <th>Form Code</th>
                     <th>Description</th>
                     <th>Var. 1</th>
@@ -62,7 +62,7 @@
                 </thead>
                 <tfoot>
                   <tr>
-                    <th>Included?</th>
+                    <th>Form Page</th>
                     <th>Form Code</th>
                     <th>Description</th>
                     <th>Var. 1</th>
@@ -77,13 +77,9 @@
                   <% @docs.each do |doc| %>
                   <tr>
                     <td>
-                      <% if doc.active %>
-                        <%= link_to "True (click to remove)", remove_form_policy_path(@policy, doc_id: doc.id) %>
-                      <% else %>
-                        <%= doc.active %>
-                      <% end %>
+                      <%= link_to 'View', policy_doc_path(@policy, doc) %>
                     </td>
-                    <td><%= link_to doc.form_code, policy_doc_path(@policy, doc) %></td>
+                    <td><%= doc.form_code %><%#= link_to doc.form_code, policy_doc_path(@policy, doc) %></td>
                     <td>
                     <%= link_to doc.description, "#",
                     id: doc.id, class: "doc editable editable-click",
@@ -116,20 +112,10 @@
   <%= javascript_include_tag 'moment/moment.js' %>
   <%= javascript_include_tag 'datatables/js/jquery.datatables.min.js' %>
   <%= javascript_include_tag 'pages/table-data.js' %>
-  <%= javascript_include_tag 'x-editable/inputs-ext/doc/doc.js' %>
   <%= javascript_include_tag 'pages/form-x-editable.js' %>
 
-
-
-  <%= javascript_include_tag 'moment/moment.js' %>
   <%= javascript_include_tag 'x-editable/bootstrap3-editable/js/bootstrap-editable.js' %>
-  <%= javascript_include_tag 'x-editable/inputs-ext/typeaheadjs/lib/typeahead.js' %>
-  <%= javascript_include_tag 'x-editable/inputs-ext/typeaheadjs/typeaheadjs.js' %>
-  <%#= javascript_include_tag 'x-editable/inputs-ext/address/address.js' %>
-  <%= javascript_include_tag 'x-editable/inputs-ext/doc/doc.js' %>
   <%= javascript_include_tag 'select2/js/select2.full.min.js' %>
-  <%= javascript_include_tag 'bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %>
-  <%= javascript_include_tag 'pages/form-x-editable.js' %>
+  <%= javascript_include_tag 'x-editable/inputs-ext/doc/doc.js' %>
 
-  <%= javascript_include_tag 'dropzone/dropzone.min.js' %>
 <% end %>

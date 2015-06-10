@@ -3,6 +3,7 @@ class DocsController < ApplicationController
 
   def show
     @doc = @policy.docs.find(params[:id])
+    @title = @doc.file
 
     render :show, layout: false
   end

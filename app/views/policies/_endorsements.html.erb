@@ -37,7 +37,7 @@
           "CP1056(6/07) ", "CP1120(6/07) ", "CP1121(6/95) ", "CP1199(6/07) ",
           "CP1211(10/00) ", "CP1218(6/95) ", "CP1430(10/00) ", "CP1440(6/07) ",
           "IL0415(04/98) ", "PO-PRP-1(2/10) ", "PO-PRP-2(12/13) ", "PO-PRP-3(12/13) ",
-          "EB0020(8/08) EB0108(9/07) " ] %>
+          "EB0020(8/08) EB0108(9/07) ", "IL0415(04/98) ", "CP1218(6/95)	", "CP0440(6/95) " ] %>
         <% temp.each do |f| %>
           <%= link_to update_forms_policy_path(@policy, group: 'property_forms',
           forms: f), method: :put, remote: true do %>
@@ -59,7 +59,9 @@
           "CG2026(7/04) ", "CG2027(11/85) ", "CG2028(7/04) ", "CG2104(11/85) ",
           "CG2116(7/98) ", "CG2135(10/01) ", "CG2138(11/85) ", "CG2145(7/98) ",
           "CG2166(12/04) ", "CG2408(10/93) ", "PO-GL-2(1/10) ", "PO-GL-3 ", "PO-GL-4(11/09) ",
-          "PO-GL-7(5/12) ", "PO-GL-9(03/14) ", "PO-GL-10(03/14) ", "PO_GL_WIG(12/13) " ] %>
+          "PO-GL-7(5/12) ", "PO-GL-9(03/14) ", "PO-GL-10(03/14) ", "PO_GL_WIG(12/13) ",
+          "CG2028(7/04) ", "CG2026(7/04) ", "CG2018(11/85) ", "CG2011(1/96) ",
+          "CG2144(7/98) " ] %>
         <% temp.each do |f| %>
           <%= link_to update_forms_policy_path(@policy, group: 'gl_forms',
           forms: f), method: :put, remote: true do %>
