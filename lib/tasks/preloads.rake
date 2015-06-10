@@ -31,7 +31,7 @@ namespace :preload do
 
     (2..workbook.last_row).each do |i|
       p = Policy.new( status: (workbook.row(i)[0] || ""), client_code: (workbook.row(i)[1] || ""),
-        name: (workbook.row(i)[2] || ""), effective_date: (workbook.row(i)[3] || ""),
+        name: (workbook.row(i)[2] || ""), B: (workbook.row(i)[3] || ""),
         policy_number: (workbook.row(i)[4] || "") )
 
       #p.build_property()
