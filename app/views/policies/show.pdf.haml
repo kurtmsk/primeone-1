@@ -133,7 +133,7 @@
                 %th DEDUCTIBLE
                 %th PREMIUM
               %tr
-                - if @policy.AU != 0
+                - if @policy.AU.to_i != 0
                   %td.text-left Building
                   %td.text-right= @policy.AU
                   %td.text-center= @policy.AT
@@ -152,7 +152,7 @@
                   %td.text-right -
                   %td.text-center -
               %tr
-                - if @policy.BA != 0
+                - if @policy.BA.to_i != 0
                   %td.text-left BPP
                   %td.text-right= @policy.BA
                   %td.text-center= @policy.AT
@@ -171,7 +171,7 @@
                   %td.text-right -
                   %td.text-center -
               %tr
-                - if @policy.BG != 0
+                - if @policy.BG.to_i != 0
                   %td.text-left Earning
                   %td.text-right= @policy.BG
                   %td.text-center
@@ -190,7 +190,7 @@
                   %td.text-right -
                   %td.text-center -
               %tr
-                - if @policy.BM != 0
+                - if @policy.BM.to_i != 0
                   %td.text-left Sign
                   %td.text-right= @policy.BM
                   %td.text-center= @policy.AT
@@ -209,7 +209,7 @@
                   %td.text-right -
                   %td.text-center -
               %tr
-                - if @policy.BS != 0
+                - if @policy.BS.to_i != 0
                   %td.text-left Pumps
                   %td.text-right= @policy.BS
                   %td.text-center= @policy.AT
@@ -228,7 +228,7 @@
                   %td.text-right -
                   %td.text-center -
               %tr
-                - if @policy.BY != 0
+                - if @policy.BY.to_i != 0
                   %td.text-left Canopies
                   %td.text-right= @policy.BY
                   %td.text-center= @policy.AT
@@ -242,8 +242,8 @@
                   %td.text-right -
                   %td.text-center -
                   %td.text-center -
-                  %td.text-center -
-                  %td.text-left
+                  %td.text-center
+                  %td.text-left -
                   %td.text-right -
                   %td.text-center -
 
@@ -354,8 +354,8 @@
                   %p.item= @policy.CQ
                 .col-xs-2
                   %p.item= @policy.CR
-                .col-xs-1.col-xs-offset-1
-                  %p.item.text-center= number_to_currency(@policy.CS,precision:0,format:'%n')
+                .col-xs-1
+                  %p.item.text-center= number_to_currency(@policy.CS.to_i,precision:0,format:'%n')
                 .col-xs-1
                   %p.item.text-center= @policy.CT
                 .col-xs-2
@@ -367,8 +367,8 @@
                   %p.item= @policy.CZ
                 .col-xs-2
                   %p.item= @policy.DA
-                .col-xs-1.col-xs-offset-1
-                  %p.item.text-center= number_to_currency(@policy.DB,precision:0,format:'%n')
+                .col-xs-1
+                  %p.item.text-center= number_to_currency(@policy.DB.to_i,precision:0,format:'%n')
                 .col-xs-1
                   %p.item.text-center= @policy.DC
                 .col-xs-2
@@ -391,7 +391,7 @@
                       .col-xs-2
                         %p.item Included
           %section.section-small
-            %p.item Audit Period (if applicable) -- Annually
+            %p.item Audit Period (if applicable)    --     Annually
             %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
             .box.forms
               %p.item= @policy.gl_forms

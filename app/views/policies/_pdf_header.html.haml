@@ -14,22 +14,18 @@
       .col-xs-5.box.names
         %p.tag NAMED INSURED AND MAILING ADDRESS:
         %p.item= @policy.F
-        %p.item= @policy.G != @policy.H ? @policy.G : ''
-        .address
-          %p.item= @policy.H
-          %span.item= @policy.J + ", MI. " + @policy.L
-          -#%span.item= @policy.city
-          -#,
-          -#%span.item= @policy.state
+        %p.item= @policy.G != @policy.F ? @policy.G : ''
+        %p.item= @policy.H
+        %span.item= @policy.J + ", MI. " + @policy.L
+        -#%span.item= @policy.city
+        -#,
+        -#%span.item= @policy.state
 
       .col-xs-5.box.names.pull-right
         %p.tag PRODUCER:
         %p.item= @broker.name
         %p.item= @broker.street
         %span.item= @broker.city + ", " + @broker.state + " " + @broker.zip
-        -#%span.item= @broker.city
-        -#,
-        -#%span.item= @policy.state
 
   %section.section-small
     %p.text-center

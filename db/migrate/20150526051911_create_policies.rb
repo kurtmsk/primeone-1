@@ -28,7 +28,7 @@ class CreatePolicies < ActiveRecord::Migration
       t.string :H, default: ""
       t.string :I, default: ""
       t.string :J, default: ""
-      t.string :K, default: 0
+      t.string :K, default: ""
       t.string :L, default: ""
       t.string :M, default: ""
       t.string :N, default: ""
@@ -36,133 +36,133 @@ class CreatePolicies < ActiveRecord::Migration
       t.string :P, default: ""
       t.string :Q, default: ""
       t.string :R, default: ""
-      t.string :S, default: 0
-      t.string :T, default: 0
-      t.string :U, default: 0
+      t.string :S, default: ""
+      t.string :T, default: ""
+      t.string :U, default: ""
       t.string :V, default: ""
       t.string :W, default: ""
-      t.string :X, default: 0
-      t.string :Y, default: 0
-      t.string :Z, default: 0
-      t.string :AA, default: 0
-      t.string :AB, default: 0
-      t.string :AC, default: 0
-      t.string :AD, default: 0
+      t.string :X, default: ""
+      t.string :Y, default: ""
+      t.string :Z, default: ""
+      t.string :AA, default: ""
+      t.string :AB, default: ""
+      t.string :AC, default: ""
+      t.string :AD, default: ""
       t.string :AE, default: ""
       t.string :AF, default: ""
       t.string :AG, default: ""
       t.string :AH, default: ""
       t.string :AI, default: ""
-      t.string :AJ, default: 0
+      t.string :AJ, default: ""
       t.string :AK, default: ""
       t.string :AL, default: ""
-      t.string :AM, default: 0
+      t.string :AM, default: ""
       t.string :AN, default: ""
-      t.string :AO, default: 0
+      t.string :AO, default: ""
       t.string :AP, default: ""
-      t.string :AQ, default: 0
-      t.string :AR, default: 0
-      t.string :AS, default: 0
+      t.string :AQ, default: ""
+      t.string :AR, default: ""
+      t.string :AS, default: ""
       t.string :AT, default: ""
-      t.string :AU, default: 0
-      t.string :AV, default: 0
-      t.string :AW, default: 0
-      t.string :AX, default: 0
-      t.string :AY, default: 0
+      t.string :AU, default: ""
+      t.string :AV, default: ""
+      t.string :AW, default: ""
+      t.string :AX, default: ""
+      t.string :AY, default: ""
       t.string :AZ, default: ""
-      t.string :BA, default: 0
-      t.string :BB, default: 0
-      t.string :BC, default: 0
-      t.string :BD, default: 0
-      t.string :BE, default: 0
-      t.string :BF, default: 0
-      t.string :BG, default: 0
-      t.string :BH, default: 0
-      t.string :BI, default: 0
-      t.string :BJ, default: 0
-      t.string :BK, default: 0
+      t.string :BA, default: ""
+      t.string :BB, default: ""
+      t.string :BC, default: ""
+      t.string :BD, default: ""
+      t.string :BE, default: ""
+      t.string :BF, default: ""
+      t.string :BG, default: ""
+      t.string :BH, default: ""
+      t.string :BI, default: ""
+      t.string :BJ, default: ""
+      t.string :BK, default: ""
       t.string :BL, default: ""
       t.string :BM, default: ""
-      t.string :BN, default: 0
-      t.string :BO, default: 0
-      t.string :BP, default: 0
+      t.string :BN, default: ""
+      t.string :BO, default: ""
+      t.string :BP, default: ""
       t.string :BQ, default: ""
-      t.string :BR, default: 0
+      t.string :BR, default: ""
       t.string :BS, default: ""
-      t.string :BT, default: 0
-      t.string :BU, default: 0
-      t.string :BV, default: 0
+      t.string :BT, default: ""
+      t.string :BU, default: ""
+      t.string :BV, default: ""
       t.string :BW, default: ""
-      t.string :BX, default: 0
+      t.string :BX, default: ""
       t.string :BY, default: ""
-      t.string :BZ, default: 0
-      t.string :CA, default: 0
-      t.string :CB, default: 0
+      t.string :BZ, default: ""
+      t.string :CA, default: ""
+      t.string :CB, default: ""
       t.string :CC, default: ""
       t.string :CD, default: ""
-      t.string :CE, default: 0
-      t.string :CF, default: 0
-      t.string :CG, default: 0
-      t.string :CH, default: 0
-      t.string :CI, default: 0
-      t.string :CJ, default: 0
-      t.string :CK, default: 0
+      t.string :CE, default: ""
+      t.string :CF, default: ""
+      t.string :CG, default: ""
+      t.string :CH, default: ""
+      t.string :CI, default: ""
+      t.string :CJ, default: ""
+      t.string :CK, default: ""
       t.string :CL, default: ""
-      t.string :CM, default: 0
+      t.string :CM, default: ""
       t.string :CN, default: ""
-      t.string :CO, default: 0
+      t.string :CO, default: ""
       t.string :CP, default: ""
       t.string :CQ, default: ""
-      t.string :CR, default: 0
-      t.string :CS, default: 0
+      t.string :CR, default: ""
+      t.string :CS, default: ""
       t.string :CT, default: ""
-      t.string :CU, default: 0
-      t.string :CV, default: 0
-      t.string :CW, default: 0
-      t.string :CX, default: 0
+      t.string :CU, default: ""
+      t.string :CV, default: ""
+      t.string :CW, default: ""
+      t.string :CX, default: ""
       t.string :CY, default: ""
       t.string :CZ, default: ""
-      t.string :DA, default: 0
-      t.string :DB, default: 0
+      t.string :DA, default: ""
+      t.string :DB, default: ""
       t.string :DC, default: ""
-      t.string :DD, default: 0
-      t.string :DE, default: 0
-      t.string :DF, default: 0
-      t.string :DG, default: 0
-      t.string :DH, default: 0
-      t.string :DI, default: 0
-      t.string :DJ, default: 0
-      t.string :DK, default: 0
-      t.string :DL, default: 0
-      t.string :DM, default: 0
-      t.string :DN, default: 0
+      t.string :DD, default: ""
+      t.string :DE, default: ""
+      t.string :DF, default: ""
+      t.string :DG, default: ""
+      t.string :DH, default: ""
+      t.string :DI, default: ""
+      t.string :DJ, default: ""
+      t.string :DK, default: ""
+      t.string :DL, default: ""
+      t.string :DM, default: ""
+      t.string :DN, default: ""
       t.string :DO, default: ""
-      t.string :DP, default: 0
-      t.string :DQ, default: 0
-      t.string :DR, default: 0
-      t.string :DS, default: 0
-      t.string :DT, default: 0
-      t.string :DU, default: 0
-      t.string :DV, default: 0
-      t.string :DW, default: 0
+      t.string :DP, default: ""
+      t.string :DQ, default: ""
+      t.string :DR, default: ""
+      t.string :DS, default: ""
+      t.string :DT, default: ""
+      t.string :DU, default: ""
+      t.string :DV, default: ""
+      t.string :DW, default: ""
       t.string :DX, default: ""
-      t.string :DY, default: 0
-      t.string :DZ, default: 0
+      t.string :DY, default: ""
+      t.string :DZ, default: ""
       t.string :EA, default: ""
-      t.string :EB, default: 0
-      t.string :EC, default: 0
+      t.string :EB, default: ""
+      t.string :EC, default: ""
       t.string :ED, default: ""
-      t.string :EE, default: 0
-      t.string :EF, default: 0
-      t.string :EG, default: 0
-      t.string :EH, default: 0
-      t.string :EI, default: 0
+      t.string :EE, default: ""
+      t.string :EF, default: ""
+      t.string :EG, default: ""
+      t.string :EH, default: ""
+      t.string :EI, default: ""
       t.string :EJ, default: ""
-      t.string :EK, default: 0
+      t.string :EK, default: ""
       t.string :EL, default: ""
       t.string :EM, default: ""
       t.string :EN, default: ""
-      t.string :EO, default: 0
+      t.string :EO, default: ""
       t.string :EP, default: ""
       t.string :EQ, default: ""
       t.string :ER, default: ""
