@@ -13,7 +13,8 @@
     .row.container-fluid
       .col-xs-5.box.names
         %p.tag NAMED INSURED AND MAILING ADDRESS:
-        %p.item= @policy.G
+        %p.item= @policy.F
+        %p.item= @policy.G != @policy.H ? @policy.G : ''
         .address
           %p.item= @policy.H
           %span.item= @policy.J + ", MI. " + @policy.L
